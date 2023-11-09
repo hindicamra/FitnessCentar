@@ -5,6 +5,10 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fitnessCentar", "fitnessCentar\fitnessCentar.csproj", "{7CC6A6E4-7546-45EA-900A-8BCF0D2109E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fitnessCentar.Model", "fitnessCentar.Model\fitnessCentar.Model.csproj", "{BC4AA0FA-FF84-4EB8-B921-84DD1606EA2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fitnessCentar.Services", "fitnessCentar.Services\fitnessCentar.Services.csproj", "{C7AEF736-6DF6-4733-86A2-8280506C5D5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{7CC6A6E4-7546-45EA-900A-8BCF0D2109E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CC6A6E4-7546-45EA-900A-8BCF0D2109E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CC6A6E4-7546-45EA-900A-8BCF0D2109E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC4AA0FA-FF84-4EB8-B921-84DD1606EA2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC4AA0FA-FF84-4EB8-B921-84DD1606EA2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC4AA0FA-FF84-4EB8-B921-84DD1606EA2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC4AA0FA-FF84-4EB8-B921-84DD1606EA2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7AEF736-6DF6-4733-86A2-8280506C5D5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7AEF736-6DF6-4733-86A2-8280506C5D5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7AEF736-6DF6-4733-86A2-8280506C5D5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7AEF736-6DF6-4733-86A2-8280506C5D5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
