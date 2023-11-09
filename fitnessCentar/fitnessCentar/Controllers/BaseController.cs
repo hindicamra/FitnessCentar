@@ -1,4 +1,5 @@
-﻿using fitnessCentar.Services;
+﻿using fitnessCentar.Model;
+using fitnessCentar.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 
@@ -17,7 +18,7 @@ namespace fitnessCentar.Controllers
         }
 
         [HttpGet()]
-        public async Task<IEnumerable<T>> Get([FromQuery] TSearch search)
+        public async Task<PagedResult<T>> Get([FromQuery] TSearch search)
         {
             return await _service.Get(search);
         }

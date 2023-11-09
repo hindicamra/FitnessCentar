@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace fitnessCentar.Model.SearchObjects
 {
-    internal class KorisnikSearchObject
+    public class KorisnikSearchObject : BaseSearchObject
     {
+        public bool? IsUlogeIncluded { get; set; }
+
+
     }
 }

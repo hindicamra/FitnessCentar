@@ -16,13 +16,7 @@ namespace fitnessCentar.Controllers
             _service = service;
         }
 
-        [HttpGet()]
-        public async Task<IEnumerable<Model.Korisnik>> Get()
-        {
-            return await _service.Get();
-        }
-
-
+     
         [HttpPost]
         public Model.Korisnik Insert(KorisnikInsertRequest request)
         {

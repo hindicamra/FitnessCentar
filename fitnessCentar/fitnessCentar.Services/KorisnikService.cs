@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using fitnessCentar.Model.Requests;
+using fitnessCentar.Model.SearchObjects;
 using fitnessCentar.Services.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -12,23 +13,13 @@ using System.Threading.Tasks;
 
 namespace fitnessCentar.Services
 {
-    public class KorisnikService:IKorisnikService
+    public class KorisnikService:BaseService<Model.Korisnik, Database.Korisnik, KorisnikSearchObject>, IKorisnikService 
     {
-        FitnessCentarContext _context;
-
-        public IMapper _mapper { get; set; }
 
         public KorisnikService(FitnessCentarContext context, IMapper mapper)
+            :base(context, mapper) 
         {
-            _context = context;
-            _mapper = mapper;
-        }
-
-        public async Task<List<Model.Korisnik>> Get()
-        {
-            var entityList = await _context.Korisniks.ToListAsync();
-
-            return _mapper.Map<List<Model.Korisnik>>(entityList);
+            
         }
 
         public Model.Korisnik Insert(KorisnikInsertRequest request)
