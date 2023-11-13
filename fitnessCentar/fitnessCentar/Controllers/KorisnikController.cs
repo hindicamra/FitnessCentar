@@ -1,32 +1,18 @@
-﻿using fitnessCentar.Model.Requests;
+﻿using fitnessCentar.Model;
+using fitnessCentar.Model.Requests;
 using fitnessCentar.Services;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace fitnessCentar.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class KorisnikController
+    public class KorisnikController : BaseCRUDController<Model.Korisnik, Model.SearchObjects.KorisnikSearchObject, KorisnikInsertRequest, KorisnikUpdateRequest>
     {
-        private readonly IKorisnikService _service;
-        private readonly ILogger<WeatherForecast> _logger;
-        public KorisnikController(ILogger<WeatherForecast> logger, IKorisnikService service)
+        public KorisnikController(ILogger<BaseController<Model.Korisnik, Model.SearchObjects.KorisnikSearchObject>> logger, IKorisnikService service) : base(logger, service)
         {
-            _logger = logger;
-            _service = service;
         }
 
-     
-        [HttpPost]
-        public Model.Korisnik Insert(KorisnikInsertRequest request)
-        {
-            return _service.Insert(request);
-        }
-
-        [HttpPut("{id}")]
-        public Model.Korisnik Update(int id, KorisnikUpdateRequest request)
-        {
-            return _service.Update(id, request);
-        }
     }
 }

@@ -23,8 +23,8 @@ namespace fitnessCentar.Model.Requests
         public string? Telefon { get; set; }
 
         public string? Addresa { get; set; }
-       
-        public byte[]? Slika { get; set; }
+
+        //public byte[]? Slika { get; set; } = null;
        
         public bool? Status { get; set; }
     }

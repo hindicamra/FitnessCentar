@@ -14,7 +14,7 @@ namespace fitnessCentar.Services
 {
     public class BaseService<T, TDb, TSearch>:IService<T, TSearch> where T: class where TDb : class where TSearch : BaseSearchObject
     {
-        public FitnessCentarContext _context;
+        protected FitnessCentarContext _context;
 
         public IMapper _mapper { get; set; }
 

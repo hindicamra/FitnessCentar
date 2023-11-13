@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using fitnessCentar.Model;
 using fitnessCentar.Model.Requests;
 using fitnessCentar.Model.SearchObjects;
 using fitnessCentar.Services.Database;
@@ -13,29 +14,19 @@ using System.Threading.Tasks;
 
 namespace fitnessCentar.Services
 {
-    public class KorisnikService:BaseService<Model.Korisnik, Database.Korisnik, KorisnikSearchObject>, IKorisnikService 
+    public class KorisnikService:BaseCRUDService<Model.Korisnik, Database.Korisnik, KorisnikSearchObject, KorisnikInsertRequest, KorisnikUpdateRequest>, IKorisnikService 
     {
 
         public KorisnikService(FitnessCentarContext context, IMapper mapper)
             :base(context, mapper) 
         {
-            
         }
 
-        public Model.Korisnik Insert(KorisnikInsertRequest request)
+        public override async Task BeforeInsert(Database.Korisnik entity, KorisnikInsertRequest insert)
         {
-            var entity = new Korisnik();
-            _mapper.Map(request, entity);
-
             entity.PasswordSalt = GenerateSalt();
-            entity.PasswordHash = GenerateHash(entity.PasswordSalt, request.Password);
-
-            _context.Korisniks.Add(entity);
-            _context.SaveChanges();
-
-            return _mapper.Map<Model.Korisnik>(entity);
+            entity.PasswordHash = GenerateHash(entity.PasswordSalt, insert.Password);
         }
-
         public static string GenerateSalt()
         {
             RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
@@ -59,14 +50,6 @@ namespace fitnessCentar.Services
             return Convert.ToBase64String(inArray);
         }
 
-        public Model.Korisnik Update(int id, KorisnikUpdateRequest request)
-        {
-            var entity = _context.Korisniks.Find(id);
-
-            _mapper.Map(request, entity);
-            _context.SaveChanges();
-
-            return _mapper.Map<Model.Korisnik>(entity);
-        }
+     
     }
 }
