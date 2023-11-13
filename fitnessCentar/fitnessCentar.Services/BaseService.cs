@@ -59,7 +59,7 @@ namespace fitnessCentar.Services
         }
         public async Task<T> GetById(int id)
         {
-            var entity = _context.Set<TDb>().FindAsync();
+            var entity = await _context.Set<TDb>().FindAsync(id);
 
             return _mapper.Map<T>(entity);
 
