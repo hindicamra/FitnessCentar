@@ -22,6 +22,9 @@ builder.Services.AddTransient<IKorisnikService, KorisnikService>();
 builder.Services.AddTransient<IRecenzijaService, RecenzijaService>();
 builder.Services.AddTransient<ITreningService, TreningService>();
 builder.Services.AddTransient<IRezervacijaService, RezervacijaService>();
+builder.Services.AddTransient<IVrstaTreningaService, VrstaTreningaService>();
+builder.Services.AddTransient<ITreningKorisnikService, TreningKorisnikService>();
+builder.Services.AddTransient<IUlogaService, UlogaService>();
 
 builder.Services.AddAutoMapper(typeof(IKorisnikService));
 

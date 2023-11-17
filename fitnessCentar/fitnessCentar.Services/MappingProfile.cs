@@ -25,6 +25,19 @@ namespace fitnessCentar.Services
             CreateMap<Model.Requests.TreningInsertRequest, Database.Trening>();
             CreateMap<Model.Requests.TreningUpdateRequest, Database.Trening>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<Database.VrstaTreninga, Model.VrstaTreninga>();
+            CreateMap<Model.Requests.VrstaTreningaInsertRequest, Database.VrstaTreninga>();
+            CreateMap<Model.Requests.VrstaTreningaUpdateRequest, Database.VrstaTreninga>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<Database.TreningKorisnik, Model.TreningKorisnik>();
+            CreateMap<Model.Requests.TreningKorisnikInsertRequest, Database.TreningKorisnik>();
+            CreateMap<Model.Requests.TreningUpdateRequest, Database.TreningKorisnik>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<Database.Uloga, Model.Uloga>();
+
         }
     }
 }
