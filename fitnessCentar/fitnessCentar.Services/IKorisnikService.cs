@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace fitnessCentar.Services
 {
-    public interface IKorisnikService:ICRUDService<Model.Korisnik, Model.SearchObjects.KorisnikSearchObject, KorisnikInsertRequest, KorisnikUpdateRequest>
+    public interface IKorisnikService : ICRUDService<Model.Korisnik, Model.SearchObjects.KorisnikSearchObject, KorisnikInsertRequest, KorisnikUpdateRequest>
     {
-       
-
     }
 }

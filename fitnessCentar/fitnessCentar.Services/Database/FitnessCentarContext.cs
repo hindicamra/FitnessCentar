@@ -178,7 +178,7 @@ public partial class FitnessCentarContext : DbContext
             entity.ToTable("Rezervacija");
 
             entity.Property(e => e.RezervacijaId).HasColumnName("RezervacijaID");
-            entity.Property(e => e.DatumVreme).HasColumnType("datetime");
+            entity.Property(e => e.Datum).HasColumnType("datetime");
             entity.Property(e => e.KorisnikId).HasColumnName("KorisnikID");
             entity.Property(e => e.Status)
                 .HasMaxLength(20)

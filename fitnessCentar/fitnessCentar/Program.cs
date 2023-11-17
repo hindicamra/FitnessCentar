@@ -1,3 +1,4 @@
+using fitnessCentar.Filters;
 using fitnessCentar.Services;
 using fitnessCentar.Services.Database;
 using Microsoft.EntityFrameworkCore;
@@ -6,7 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(x =>
+{
+    x.Filters.Add<ErrorFilter>();
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -15,7 +19,9 @@ builder.Services.AddDbContext<FitnessCentarContext>(options =>
 options.UseSqlServer(connectionString));
 
 builder.Services.AddTransient<IKorisnikService, KorisnikService>();
-
+builder.Services.AddTransient<IRecenzijaService, RecenzijaService>();
+builder.Services.AddTransient<ITreningService, TreningService>();
+builder.Services.AddTransient<IRezervacijaService, RezervacijaService>();
 
 builder.Services.AddAutoMapper(typeof(IKorisnikService));
 

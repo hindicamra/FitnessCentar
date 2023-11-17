@@ -20,6 +20,7 @@ namespace fitnessCentar.Services
         {
 
         }
+
         public virtual async Task<T> Insert(TInsert insert)
         {
             var set = _context.Set<TDb>();
@@ -44,6 +45,18 @@ namespace fitnessCentar.Services
             return _mapper.Map<T>(entity);
         }
 
+        public virtual async Task Delete(int id)
+        {
+            var set = _context.Set<TDb>();
 
+            var entity = await set.FindAsync(id);
+
+            if(entity != null)
+            {
+                set.Remove(entity);
+
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

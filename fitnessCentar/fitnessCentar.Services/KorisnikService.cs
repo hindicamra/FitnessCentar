@@ -14,11 +14,11 @@ using System.Threading.Tasks;
 
 namespace fitnessCentar.Services
 {
-    public class KorisnikService:BaseCRUDService<Model.Korisnik, Database.Korisnik, KorisnikSearchObject, KorisnikInsertRequest, KorisnikUpdateRequest>, IKorisnikService 
+    public class KorisnikService : BaseCRUDService<Model.Korisnik, Database.Korisnik, KorisnikSearchObject, KorisnikInsertRequest, KorisnikUpdateRequest>, IKorisnikService 
     {
 
         public KorisnikService(FitnessCentarContext context, IMapper mapper)
-            :base(context, mapper) 
+            : base(context, mapper) 
         {
         }
 
@@ -27,6 +27,7 @@ namespace fitnessCentar.Services
             entity.PasswordSalt = GenerateSalt();
             entity.PasswordHash = GenerateHash(entity.PasswordSalt, insert.Password);
         }
+
         public static string GenerateSalt()
         {
             RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
@@ -49,7 +50,5 @@ namespace fitnessCentar.Services
             byte[] inArray = algorithm.ComputeHash(dst);
             return Convert.ToBase64String(inArray);
         }
-
-     
     }
 }

@@ -11,7 +11,7 @@ public partial class Rezervacija
 
     public int? KorisnikId { get; set; }
 
-    public DateTime? DatumVreme { get; set; }
+    public DateTime? Datum { get; set; }
 
     public string? Status { get; set; }
 

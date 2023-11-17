@@ -8,9 +8,9 @@ namespace fitnessCentar.Model.Requests
 {
     public class KorisnikUpdateRequest
     {
-        public string Ime { get; set; } = null!;
+        public string? Ime { get; set; } = null!;
 
-        public string Prezime { get; set; } = null!;
+        public string? Prezime { get; set; } = null!;
        
         public string? Email { get; set; }
 

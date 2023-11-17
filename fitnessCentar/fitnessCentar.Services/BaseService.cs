@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace fitnessCentar.Services
 {
-    public class BaseService<T, TDb, TSearch>:IService<T, TSearch> where T: class where TDb : class where TSearch : BaseSearchObject
+    public class BaseService<T, TDb, TSearch>:IService<T, TSearch> where T : class where TDb : class where TSearch : BaseSearchObject
     {
         protected FitnessCentarContext _context;
 
@@ -41,14 +41,12 @@ namespace fitnessCentar.Services
             }
             var list = await query.ToListAsync();
 
-           
-            var tmp = _mapper.Map<List<T>>(list);
-            result.Result = tmp;
+            result.Result = _mapper.Map<List<T>>(list);
             return result;
 
         }
         
-        public virtual IQueryable<TDb> AddInclude(IQueryable<TDb> query,TSearch? search = null)
+        public virtual IQueryable<TDb> AddInclude(IQueryable<TDb> query, TSearch? search = null)
         {
             return query;
         }
@@ -57,12 +55,12 @@ namespace fitnessCentar.Services
         {
             return query;
         }
+
         public async Task<T> GetById(int id)
         {
             var entity = await _context.Set<TDb>().FindAsync(id);
 
             return _mapper.Map<T>(entity);
-
         }
     }
 }
