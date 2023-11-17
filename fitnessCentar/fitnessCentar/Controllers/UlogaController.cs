@@ -8,7 +8,7 @@ namespace fitnessCentar.Controllers
     [ApiController]
     public class UlogaController : BaseController<Uloga, UlogaSearchObject>
     {
-        public UlogaController(ILogger<BaseController<Uloga, UlogaSearchObject>> logger, IService<Uloga, UlogaSearchObject> service) : base(logger, service)
+        public UlogaController(ILogger<BaseController<Uloga, UlogaSearchObject>> logger, IUlogaService service) : base(logger, service)
         {
         }
     }
