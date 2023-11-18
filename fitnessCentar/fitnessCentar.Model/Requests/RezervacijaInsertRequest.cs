@@ -1,16 +1,18 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Xunit;
 
 namespace fitnessCentar.Model.Requests
 {
 	public class RezervacijaInsertRequest
 	{
-        [Required]
+        [Required(ErrorMessage = "TreningId je obavezno polje.")]
         public int? TreningId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "KorisnikId je obavezno polje.")]
         public int? KorisnikId { get; set; }
 
+        [Required(ErrorMessage = "Datum je obavezno polje.")]
         public DateTime? Datum { get; set; } = DateTime.Now;
     }
 }
