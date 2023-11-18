@@ -36,6 +36,32 @@ namespace fitnessCentar.Services
             CreateMap<Model.Requests.TreningUpdateRequest, Database.TreningKorisnik>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
+            CreateMap<Database.Clanarina, Model.Clanarina>();
+            CreateMap<Model.Requests.ClanarinaInsertRequest, Database.Clanarina>();
+            CreateMap<Model.Requests.ClanarinaUpdateRequest, Database.Clanarina>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<Database.TipClanarine, Model.TipClanarina>();
+            CreateMap<Model.Requests.TipClanarinaInsertRequest, Database.TipClanarine>();
+            CreateMap<Model.Requests.TipClanarinaUpdateRequest, Database.TipClanarine>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<Database.PlanIshrane, Model.PlanIshrane>();
+            CreateMap<Model.Requests.PlanIshraneInsertRequest, Database.PlanIshrane>();
+            CreateMap<Model.Requests.PlanIshraneUpdateRequest, Database.PlanIshrane>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<Database.PlanIshraneKorisnik, Model.PlanIshraneKorisnik>();
+            CreateMap<Model.Requests.PlanIshraneKorisnikInsertRequest, Database.PlanIshraneKorisnik>();
+            CreateMap<Model.Requests.PlanIshraneKorisnikUpdateRequest, Database.PlanIshraneKorisnik>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+
+            CreateMap<Database.Placanja, Model.Placanja>();
+            CreateMap<Model.Requests.PlacanjaInsertRequest, Database.Placanja>();
+            CreateMap<Model.Requests.PlacanjaUpdateRequest, Database.Placanja>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
             CreateMap<Database.Uloga, Model.Uloga>();
 
         }

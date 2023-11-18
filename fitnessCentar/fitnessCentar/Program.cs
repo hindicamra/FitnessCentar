@@ -24,6 +24,12 @@ builder.Services.AddTransient<ITreningService, TreningService>();
 builder.Services.AddTransient<IRezervacijaService, RezervacijaService>();
 builder.Services.AddTransient<IVrstaTreningaService, VrstaTreningaService>();
 builder.Services.AddTransient<ITreningKorisnikService, TreningKorisnikService>();
+builder.Services.AddTransient<IClanarinaService, ClanarinaService>();
+builder.Services.AddTransient<ITipClanarineService, TipClanarineService>();
+builder.Services.AddTransient<IPlanIshraneService, PlanIshraneService>();
+builder.Services.AddTransient<IPlanIshraneKorisnikService, PlanIshraneKorisnikService>();
+builder.Services.AddTransient<IPlacanjaService, PlacanjaService>();
+
 builder.Services.AddTransient<IUlogaService, UlogaService>();
 
 builder.Services.AddAutoMapper(typeof(IKorisnikService));
