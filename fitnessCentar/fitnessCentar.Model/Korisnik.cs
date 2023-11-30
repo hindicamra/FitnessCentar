@@ -25,5 +25,7 @@ namespace fitnessCentar.Model
         public byte[]? Slika { get; set; }
 
         public string? Status { get; set; }
+
+        public int UlogaId { get; set; }
     }
 }

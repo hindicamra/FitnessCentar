@@ -9,5 +9,6 @@ namespace fitnessCentar.Services
 {
     public interface IKorisnikService : ICRUDService<Model.Korisnik, Model.SearchObjects.KorisnikSearchObject, KorisnikInsertRequest, KorisnikUpdateRequest>
     {
+        public Task<Model.Korisnik> Login(string username, string password);
     }
 }

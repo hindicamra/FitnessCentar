@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Xunit.Abstractions;
 
 namespace fitnessCentar.Model.Requests
 {

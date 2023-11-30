@@ -50,5 +50,22 @@ namespace fitnessCentar.Services
             byte[] inArray = algorithm.ComputeHash(dst);
             return Convert.ToBase64String(inArray);
         }
+
+        public async Task<Model.Korisnik> Login(string username, string password)
+        {
+            var entity = await _context.Korisniks.FirstOrDefaultAsync(x => x.KorisnickoIme == username);
+
+            if (entity != null)
+            {
+                var hash = GenerateHash(entity.PasswordSalt, password);
+
+                if (hash == entity.PasswordSalt)
+                {
+                    return _mapper.Map<Model.Korisnik>(entity);
+                }
+            }
+
+            return null;
+        }
     }
 }
