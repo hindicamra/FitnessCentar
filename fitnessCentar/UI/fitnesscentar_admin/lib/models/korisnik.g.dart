@@ -6,7 +6,7 @@ part of 'korisnik.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Korsnik _$KorsnikFromJson(Map<String, dynamic> json) => Korsnik(
+Korisnik _$KorsnikFromJson(Map<String, dynamic> json) => Korisnik(
       json['korisnikId'] as int?,
       json['ime'] as String?,
       json['prezime'] as String?,
@@ -18,7 +18,7 @@ Korsnik _$KorsnikFromJson(Map<String, dynamic> json) => Korsnik(
       json['ulogaId'] as int?,
     );
 
-Map<String, dynamic> _$KorsnikToJson(Korsnik instance) => <String, dynamic>{
+Map<String, dynamic> _$KorsnikToJson(Korisnik instance) => <String, dynamic>{
       'korisnikId': instance.korisnikId,
       'ime': instance.ime,
       'prezime': instance.prezime,

@@ -1,3 +1,4 @@
+import 'package:fitnesscentar_admin/providers/korisnik_provider.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -8,6 +9,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  late KorisnikProvider _korisnikProvider = KorisnikProvider();
 
   final _username = TextEditingController();
   final _password = TextEditingController();
