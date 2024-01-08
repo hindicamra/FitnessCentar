@@ -7,11 +7,9 @@ public partial class Clanarina
 {
     public int ClanarinaId { get; set; }
 
-    public int? KorisnikId { get; set; }
+    public int KorisnikId { get; set; }
 
-    public int? TipClanarineId { get; set; }
-
-    public int? PlacanjeId { get; set; }
+    public int TipClanarineId { get; set; }
 
     public string Naziv { get; set; } = null!;
 

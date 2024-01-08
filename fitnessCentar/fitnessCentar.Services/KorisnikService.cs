@@ -26,6 +26,7 @@ namespace fitnessCentar.Services
         {
             entity.PasswordSalt = GenerateSalt();
             entity.PasswordHash = GenerateHash(entity.PasswordSalt, insert.Password);
+            entity.UlogaId=2;
         }
 
         public static string GenerateSalt()
@@ -49,6 +50,12 @@ namespace fitnessCentar.Services
             HashAlgorithm algorithm = HashAlgorithm.Create("SHA1");
             byte[] inArray = algorithm.ComputeHash(dst);
             return Convert.ToBase64String(inArray);
+        }
+
+        public override IQueryable<Database.Korisnik> AddInclude(IQueryable<Database.Korisnik> query, KorisnikSearchObject? search = null)
+        {
+            query=query.Include("Uloga");
+            return base.AddInclude(query, search);
         }
 
         public async Task<Model.Korisnik> Login(string username, string password)

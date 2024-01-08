@@ -9,11 +9,11 @@ namespace fitnessCentar.Model.Requests
 {
     public class TipClanarinaUpdateRequest
     {
-        [Required(ErrorMessage = "Naziv je obavezno polje.")]
-        public string Naziv { get; set; }
 
-        [Required(ErrorMessage = "Cijena je obavezno polje.")]
+        public string? Naziv { get; set; }
+
+
         [Range(0.01, double.MaxValue, ErrorMessage = "Cijena mora biti veća od 0.")]
-        public decimal Cijena { get; set; }
+        public float? Cijena { get; set; }
     }
 }

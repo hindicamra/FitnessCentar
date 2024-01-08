@@ -11,5 +11,9 @@ namespace fitnessCentar.Model.Requests
     {
         [Required(AllowEmptyStrings = false, ErrorMessage = "Naziv je obavezno polje.")]
         public string Naziv { get; set; }
+
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Opis je obavezno polje.")]
+        public string Opis { get; set; } = null!;
     }
 }

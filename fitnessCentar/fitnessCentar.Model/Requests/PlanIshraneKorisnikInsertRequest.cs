@@ -9,10 +9,10 @@ namespace fitnessCentar.Model.Requests
 {
     public class PlanIshraneKorisnikInsertRequest
     {
-        public int? PlanIshraneId { get; set; }
-        public int? KorisnikId { get; set; }
+        public int PlanIshraneId { get; set; }
+        public int KorisnikId { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Opis je obavezno polje.")]
-        public string Opis { get; set; }
+        
+       
     }
 }

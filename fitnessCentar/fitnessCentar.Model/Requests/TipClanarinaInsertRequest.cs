@@ -14,6 +14,6 @@ namespace fitnessCentar.Model.Requests
 
         [Required(ErrorMessage = "Cijena je obavezno polje.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Cijena mora biti veća od 0.")]
-        public decimal Cijena { get; set; }
+        public float Cijena { get; set; }
     }
 }

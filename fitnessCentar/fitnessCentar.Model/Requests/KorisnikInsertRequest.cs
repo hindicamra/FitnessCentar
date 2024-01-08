@@ -39,6 +39,6 @@ namespace fitnessCentar.Model.Requests
 
         //public byte[]? Slika { get; set; } = null;
        
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
     }
 }
