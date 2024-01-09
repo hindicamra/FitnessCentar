@@ -2,6 +2,10 @@
 using fitnessCentar.Model;
 using fitnessCentar.Model.SearchObjects;
 using fitnessCentar.Services.Database;
+using Microsoft.EntityFrameworkCore;using AutoMapper;
+using fitnessCentar.Model;
+using fitnessCentar.Model.SearchObjects;
+using fitnessCentar.Services.Database;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
