@@ -11,7 +11,11 @@ namespace fitnessCentar.Services
     {
         public MappingProfile() 
         {
-            CreateMap<Database.Korisnik, Model.Korisnik>();
+           
+
+
+            CreateMap<Database.Korisnik, Model.Korisnik>().ForMember(dest => dest.Uloga, opt => opt.MapFrom(src => src.Uloga.Naziv));
+            //CreateMap<Database.Korisnik, Model.Korisnik>();
             CreateMap<Model.Requests.KorisnikInsertRequest, Database.Korisnik>();
             CreateMap<Model.Requests.KorisnikUpdateRequest, Database.Korisnik>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
@@ -26,15 +30,9 @@ namespace fitnessCentar.Services
             CreateMap<Model.Requests.TreningUpdateRequest, Database.Trening>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
-            CreateMap<Database.VrstaTreninga, Model.VrstaTreninga>();
-            CreateMap<Model.Requests.VrstaTreningaInsertRequest, Database.VrstaTreninga>();
-            CreateMap<Model.Requests.VrstaTreningaUpdateRequest, Database.VrstaTreninga>()
-                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+           
 
-            CreateMap<Database.TreningKorisnik, Model.TreningKorisnik>();
-            CreateMap<Model.Requests.TreningKorisnikInsertRequest, Database.TreningKorisnik>();
-            CreateMap<Model.Requests.TreningUpdateRequest, Database.TreningKorisnik>()
-                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+            
 
             CreateMap<Database.Clanarina, Model.Clanarina>();
             CreateMap<Model.Requests.ClanarinaInsertRequest, Database.Clanarina>();
