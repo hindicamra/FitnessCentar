@@ -9,7 +9,7 @@ public partial class TipClanarine
 
     public string Naziv { get; set; } = null!;
 
-    public decimal Cena { get; set; }
+    public float Cijena { get; set; }
 
     public virtual ICollection<Clanarina> Clanarinas { get; set; } = new List<Clanarina>();
 }

@@ -10,9 +10,8 @@ namespace fitnessCentar.Model.Requests
     public class ClanarinaInsertRequest
     {
        
-        public int? KorisnikId { get; set; }
-        public int? TipClanarineId { get; set; }
-        public int? PlacanjeId { get; set; }
+        public int KorisnikId { get; set; }
+        public int TipClanarineId { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Naziv je obavezno polje.")]
         public string Naziv { get; set; }

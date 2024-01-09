@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 namespace fitnessCentar.Model.Requests
 {
     public class PlacanjaUpdateRequest
-    {
-        [Required(ErrorMessage = "Iznos je obavezno polje.")]
-        [Range(0.01, double.MaxValue, ErrorMessage = "Iznos mora biti veći od 0.")]
-        public decimal Iznos { get; set; }
+    {        [Range(0.01, double.MaxValue, ErrorMessage = "Iznos mora biti veći od 0.")]
+        public float? Iznos { get; set; }
         public int? ClanarinaId { get; set; }
+
+        public DateTime Datum { get; set; }
+
     }
 }

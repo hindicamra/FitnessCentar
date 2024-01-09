@@ -6,8 +6,8 @@ namespace fitnessCentar.Controllers
     [Route("[controller]")]
     public class BaseCRUDController<T, TSearch, TInsert, TUpdate> : BaseController<T, TSearch> where T : class where TSearch : class
     {
-        protected readonly ICRUDService<T, TSearch, TInsert, TUpdate> _service;
-        protected readonly ILogger<BaseController<T, TSearch>> _logger;
+        protected new readonly ICRUDService<T, TSearch, TInsert, TUpdate> _service;
+        protected new readonly ILogger<BaseController<T, TSearch>> _logger;
 
         public BaseCRUDController(ILogger<BaseController<T, TSearch>> logger, ICRUDService<T, TSearch, TInsert, TUpdate> service) : base(logger, service)
         {

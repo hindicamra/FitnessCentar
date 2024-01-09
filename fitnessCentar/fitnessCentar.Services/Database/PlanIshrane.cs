@@ -9,5 +9,7 @@ public partial class PlanIshrane
 
     public string Naziv { get; set; } = null!;
 
+    public string Opis { get; set; } = null!;
+
     public virtual ICollection<PlanIshraneKorisnik> PlanIshraneKorisniks { get; set; } = new List<PlanIshraneKorisnik>();
 }

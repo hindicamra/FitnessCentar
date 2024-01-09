@@ -7,7 +7,7 @@ namespace fitnessCentar.Model.Requests
 	{
         [Required(ErrorMessage = "Datum je obavezno polje.")]
 
-        public DateTime? Datum { get; set; }
+        public DateTime Datum { get; set; }
     }
 }
 

@@ -9,10 +9,10 @@ namespace fitnessCentar.Model.Requests
 {
     public class KorisnikUpdateRequest
     {
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Ime je obavezno polje.")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "Ime je obavezno polje.")]
         public string? Ime { get; set; } = null!;
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Prezime je obavezno polje.")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "Prezime je obavezno polje.")]
         public string? Prezime { get; set; } = null!;
 
         [EmailAddress(ErrorMessage = "Email adresa nije validna.")]

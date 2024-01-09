@@ -5,7 +5,7 @@ namespace fitnessCentar.Model
 	{
         public int TreningId { get; set; }
 
-        public int? VrstaTreningaId { get; set; }
+        public string Naziv { get; set; } = string.Empty;
 
         public string Opis { get; set; } = null!;
     }

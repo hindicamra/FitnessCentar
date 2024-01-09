@@ -7,11 +7,11 @@ namespace fitnessCentar.Model
 
         public int? TreningId { get; set; }
 
-        public int? KorisnikId { get; set; }
+        public string Korisnik{ get; set; } = null!;
 
-        public DateTime? Datum { get; set; }
+        public DateTime Datum { get; set; }
 
-        public string? Status { get; set; }
+        public string Status { get; set; } = null!;
     }
 }
 

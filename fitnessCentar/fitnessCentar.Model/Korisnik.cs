@@ -26,6 +26,8 @@ namespace fitnessCentar.Model
 
         public string? Status { get; set; }
 
-        public int UlogaId { get; set; }
+        public string Uloga { get; set; } = null!;
+
+        
     }
 }

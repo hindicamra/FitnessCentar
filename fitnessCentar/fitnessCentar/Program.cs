@@ -43,8 +43,7 @@ builder.Services.AddTransient<IKorisnikService, KorisnikService>();
 builder.Services.AddTransient<IRecenzijaService, RecenzijaService>();
 builder.Services.AddTransient<ITreningService, TreningService>();
 builder.Services.AddTransient<IRezervacijaService, RezervacijaService>();
-builder.Services.AddTransient<IVrstaTreningaService, VrstaTreningaService>();
-builder.Services.AddTransient<ITreningKorisnikService, TreningKorisnikService>();
+
 builder.Services.AddTransient<IClanarinaService, ClanarinaService>();
 builder.Services.AddTransient<ITipClanarineService, TipClanarineService>();
 builder.Services.AddTransient<IPlanIshraneService, PlanIshraneService>();
