@@ -14,7 +14,6 @@ namespace fitnessCentar.Model
 
         public string TipClanarine { get; set; } = null!;
 
-
         public string Naziv { get; set; } = null!;
 
         public string? Opis { get; set; }

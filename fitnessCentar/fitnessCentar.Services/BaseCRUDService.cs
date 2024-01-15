@@ -23,14 +23,23 @@ namespace fitnessCentar.Services
 
         public virtual async Task<T> Insert(TInsert insert)
         {
-            var set = _context.Set<TDb>();
+            try
+            {
+                var set = _context.Set<TDb>();
 
-            TDb entity = _mapper.Map<TDb>(insert);
+                TDb entity = _mapper.Map<TDb>(insert);
 
-            set.Add(entity);
-            await BeforeInsert(entity, insert);
-            await _context.SaveChangesAsync();
-            return _mapper.Map<T>(entity);
+                set.Add(entity);
+                await BeforeInsert(entity, insert);
+                await _context.SaveChangesAsync();
+                return _mapper.Map<T>(entity);
+            }
+                
+            catch(Exception ex)
+            {
+
+            }
+            return null;
         }
 
         public virtual async Task<T> Update(int id, TUpdate update)

@@ -2,6 +2,7 @@
 using fitnessCentar.Model.Requests;
 using fitnessCentar.Model.SearchObjects;
 using fitnessCentar.Services.Database;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,13 @@ namespace fitnessCentar.Services
     {
         public PlanIshraneKorisnikService(FitnessCentarContext context, IMapper mapper) : base(context, mapper)
         {
+        }
+
+        public override IQueryable<Database.PlanIshraneKorisnik> AddInclude(IQueryable<Database.PlanIshraneKorisnik> query, PlanIshraneKorisnikSearchObject? search = null)
+        {
+            query = query.Include("Korisnik")
+                         .Include("PlanIshrane");
+            return base.AddInclude(query, search);
         }
     }
 }

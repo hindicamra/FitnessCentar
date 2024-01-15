@@ -18,6 +18,8 @@ builder.Services.AddControllers(x =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API", Version = "v1" });
+
     c.AddSecurityDefinition("basicAuth", new Microsoft.OpenApi.Models.OpenApiSecurityScheme()
     {
         Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,

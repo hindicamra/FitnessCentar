@@ -3,6 +3,7 @@ using AutoMapper;
 using fitnessCentar.Model.Requests;
 using fitnessCentar.Model.SearchObjects;
 using fitnessCentar.Services.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace fitnessCentar.Services
 {
@@ -12,6 +13,12 @@ namespace fitnessCentar.Services
 			: base(context, mapper)
 		{
 		}
-	}
+
+        public override IQueryable<Database.Rezervacija> AddInclude(IQueryable<Database.Rezervacija> query, RezervacijaSearchObject? search = null)
+        {
+            query = query.Include("Korisnik");
+            return base.AddInclude(query, search);
+        }
+    }
 }
 

@@ -2,11 +2,7 @@
 using fitnessCentar.Model.Requests;
 using fitnessCentar.Model.SearchObjects;
 using fitnessCentar.Services.Database;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace fitnessCentar.Services
 {
@@ -14,6 +10,13 @@ namespace fitnessCentar.Services
     {
         public ClanarinaService(FitnessCentarContext context, IMapper mapper) : base(context, mapper)
         {
+        }
+
+        public override IQueryable<Database.Clanarina> AddInclude(IQueryable<Database.Clanarina> query, ClanarinaSearchObject? search = null)
+        {
+            query = query.Include("Korisnik")
+                         .Include("TipClanarine");
+            return base.AddInclude(query, search);
         }
     }
 }

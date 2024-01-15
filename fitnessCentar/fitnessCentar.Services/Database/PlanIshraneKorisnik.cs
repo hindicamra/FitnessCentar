@@ -11,8 +11,6 @@ public partial class PlanIshraneKorisnik
 
     public int? KorisnikId { get; set; }
 
-   
-
     public virtual Korisnik? Korisnik { get; set; }
 
     public virtual PlanIshrane? PlanIshrane { get; set; }

@@ -20,7 +20,8 @@ namespace fitnessCentar.Services
             CreateMap<Model.Requests.KorisnikUpdateRequest, Database.Korisnik>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
-            CreateMap<Database.Recenzija, Model.Recenzija>();
+            CreateMap<Database.Recenzija, Model.Recenzija>()
+                .ForMember(dest => dest.Korisnik, opt => opt.MapFrom(src => src.Korisnik.Ime + " " + src.Korisnik.Prezime));
             CreateMap<Model.Requests.RecenzijaInsertRequest, Database.Recenzija>();
             CreateMap<Model.Requests.RecenzijaUpdateRequest, Database.Recenzija>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
@@ -30,11 +31,9 @@ namespace fitnessCentar.Services
             CreateMap<Model.Requests.TreningUpdateRequest, Database.Trening>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
-           
-
-            
-
-            CreateMap<Database.Clanarina, Model.Clanarina>();
+            CreateMap<Database.Clanarina, Model.Clanarina>()
+                .ForMember(dest => dest.Korisnik, opt => opt.MapFrom(src => src.Korisnik.Ime + " " + src.Korisnik.Prezime))
+                .ForMember(dest => dest.TipClanarine, opt => opt.MapFrom(src => src.TipClanarine.Naziv));
             CreateMap<Model.Requests.ClanarinaInsertRequest, Database.Clanarina>();
             CreateMap<Model.Requests.ClanarinaUpdateRequest, Database.Clanarina>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
@@ -49,15 +48,22 @@ namespace fitnessCentar.Services
             CreateMap<Model.Requests.PlanIshraneUpdateRequest, Database.PlanIshrane>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
-            CreateMap<Database.PlanIshraneKorisnik, Model.PlanIshraneKorisnik>();
+            CreateMap<Database.PlanIshraneKorisnik, Model.PlanIshraneKorisnik>()
+                .ForMember(dest => dest.Korisnik, opt => opt.MapFrom(src => src.Korisnik.Ime + " " + src.Korisnik.Prezime))
+                .ForMember(dest => dest.PlanIshrane, opt => opt.MapFrom(src => src.PlanIshrane.Opis));
             CreateMap<Model.Requests.PlanIshraneKorisnikInsertRequest, Database.PlanIshraneKorisnik>();
             CreateMap<Model.Requests.PlanIshraneKorisnikUpdateRequest, Database.PlanIshraneKorisnik>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
-
             CreateMap<Database.Placanja, Model.Placanja>();
             CreateMap<Model.Requests.PlacanjaInsertRequest, Database.Placanja>();
             CreateMap<Model.Requests.PlacanjaUpdateRequest, Database.Placanja>()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<Database.Rezervacija, Model.Rezervacija>()
+                                .ForMember(dest => dest.Korisnik, opt => opt.MapFrom(src => src.Korisnik.Ime + " " + src.Korisnik.Prezime));
+            CreateMap<Model.Requests.RezervacijaInsertRequest, Database.Rezervacija>();
+            CreateMap<Model.Requests.RezervacijaUpdateRequest, Database.Rezervacija>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<Database.Uloga, Model.Uloga>();

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace fitnessCentar.Model.Requests
 {
@@ -35,7 +30,7 @@ namespace fitnessCentar.Model.Requests
         [Phone(ErrorMessage = "Telefon nije validan.")]
         public string? Telefon { get; set; }
 
-        public string? Addresa { get; set; }
+        public string? Addresa { get; set; } = string.Empty;
 
         //public byte[]? Slika { get; set; } = null;
        
