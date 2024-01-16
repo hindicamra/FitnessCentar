@@ -11,5 +11,6 @@ namespace fitnessCentar.Model
         public int TipClanarineId { get; set; }
         public string Naziv { get; set; } = null!;
         public float Cijena { get; set; }
+        public int Trajanje { get; set; }
     }
 }

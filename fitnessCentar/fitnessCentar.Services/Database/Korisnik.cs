@@ -37,7 +37,5 @@ public partial class Korisnik
 
     public virtual ICollection<Rezervacija> Rezervacijas { get; set; } = new List<Rezervacija>();
 
-    
-
     public virtual Uloga Uloga { get; set; }
 }

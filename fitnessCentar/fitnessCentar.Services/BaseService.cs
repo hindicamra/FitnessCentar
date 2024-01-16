@@ -34,8 +34,6 @@ namespace fitnessCentar.Services
 
             PagedResult<T> result = new PagedResult<T>();
 
-           
-
             query = AddFilter(query, search);
             query = AddInclude(query, search);
 

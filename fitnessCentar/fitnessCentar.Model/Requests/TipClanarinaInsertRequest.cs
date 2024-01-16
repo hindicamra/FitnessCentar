@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace fitnessCentar.Model.Requests
 {
@@ -15,5 +10,9 @@ namespace fitnessCentar.Model.Requests
         [Required(ErrorMessage = "Cijena je obavezno polje.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Cijena mora biti veća od 0.")]
         public float Cijena { get; set; }
+
+        [Required(ErrorMessage = "Trajanje je obavezno polje.")]
+        [Range(1, 365, ErrorMessage = "Trajanje mora biti veće od 1")]
+        public int Trajanje { get; set; }
     }
 }

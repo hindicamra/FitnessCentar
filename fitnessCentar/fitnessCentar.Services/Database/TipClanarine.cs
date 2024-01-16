@@ -11,5 +11,7 @@ public partial class TipClanarine
 
     public float Cijena { get; set; }
 
+    public int Trajanje { get; set; }
+
     public virtual ICollection<Clanarina> Clanarinas { get; set; } = new List<Clanarina>();
 }

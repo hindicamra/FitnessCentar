@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using fitnessCentar.Model.SearchObjects;
 using fitnessCentar.Services.Database;
+using fitnessCentar.Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,23 +24,14 @@ namespace fitnessCentar.Services
 
         public virtual async Task<T> Insert(TInsert insert)
         {
-            try
-            {
-                var set = _context.Set<TDb>();
+            var set = _context.Set<TDb>();
 
-                TDb entity = _mapper.Map<TDb>(insert);
+            TDb entity = _mapper.Map<TDb>(insert);
 
-                set.Add(entity);
-                await BeforeInsert(entity, insert);
-                await _context.SaveChangesAsync();
-                return _mapper.Map<T>(entity);
-            }
-                
-            catch(Exception ex)
-            {
-
-            }
-            return null;
+            set.Add(entity);
+            await BeforeInsert(entity, insert);
+            await _context.SaveChangesAsync();
+            return _mapper.Map<T>(entity);
         }
 
         public virtual async Task<T> Update(int id, TUpdate update)
@@ -47,6 +39,10 @@ namespace fitnessCentar.Services
             var set = _context.Set<TDb>();
 
             var entity = await set.FindAsync(id);
+            if (entity is null)
+            {
+                throw new UserException("Entitet sa proslijedjenim Id ne postoji");
+            }
 
             _mapper.Map(update, entity);
 
@@ -60,7 +56,12 @@ namespace fitnessCentar.Services
 
             var entity = await set.FindAsync(id);
 
-            if(entity != null)
+            if (entity is null)
+            {
+                throw new UserException("Entitet sa proslijedjenim Id ne postoji");
+            }
+
+            if (entity != null)
             {
                 set.Remove(entity);
 

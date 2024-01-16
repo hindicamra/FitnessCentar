@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using fitnessCentar.Model.Status;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,7 @@ namespace fitnessCentar.Services
                 .ForMember(dest => dest.Korisnik, opt => opt.MapFrom(src => src.Korisnik.Ime + " " + src.Korisnik.Prezime))
                 .ForMember(dest => dest.TipClanarine, opt => opt.MapFrom(src => src.TipClanarine.Naziv));
             CreateMap<Model.Requests.ClanarinaInsertRequest, Database.Clanarina>();
+            CreateMap<Model.Clanarina, Model.Requests.ClanarinaUpdateRequest>();
             CreateMap<Model.Requests.ClanarinaUpdateRequest, Database.Clanarina>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
@@ -64,6 +66,7 @@ namespace fitnessCentar.Services
                                 .ForMember(dest => dest.Korisnik, opt => opt.MapFrom(src => src.Korisnik.Ime + " " + src.Korisnik.Prezime));
             CreateMap<Model.Requests.RezervacijaInsertRequest, Database.Rezervacija>();
             CreateMap<Model.Requests.RezervacijaUpdateRequest, Database.Rezervacija>()
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => Enum.GetName(typeof(StatusRezervacije), src.Status)))
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
             CreateMap<Database.Uloga, Model.Uloga>();

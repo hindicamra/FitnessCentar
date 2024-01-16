@@ -15,7 +15,7 @@ public partial class Clanarina
 
     public string? Opis { get; set; }
 
-    public int Trajanje { get; set; }
+    public DateTime VaziDo { get; set; }
 
     public virtual Korisnik? Korisnik { get; set; }
 

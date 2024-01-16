@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Mvc.Filters;
-using fitnessCentar.Exceptions;
+using fitnessCentar.Services.Exceptions;
 
 namespace fitnessCentar.Filters
 {

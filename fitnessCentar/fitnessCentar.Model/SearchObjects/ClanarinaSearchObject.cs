@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace fitnessCentar.Model.SearchObjects
 {
-    public class ClanarinaSearchObject:BaseSearchObject
+    public class ClanarinaSearchObject : BaseSearchObject
     {
+        public int KorisnikId { get; set; }
     }
 }

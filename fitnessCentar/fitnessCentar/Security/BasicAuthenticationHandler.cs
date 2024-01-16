@@ -12,7 +12,6 @@ namespace fitnessCentar.Security
     public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
         IKorisnikService _korisnikService;
-        //IUlogaService _ulogaService;
 
         public BasicAuthenticationHandler(
             IKorisnikService korisnikService,
@@ -24,7 +23,6 @@ namespace fitnessCentar.Security
             : base(options, logger, encoder, clock)
         {
             _korisnikService = korisnikService;
-            //_ulogaService = ulogaService;
         }
 
 
@@ -50,18 +48,13 @@ namespace fitnessCentar.Security
             }
             else
             {
-
-
                 var claims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Name, user.Ime),
                     new Claim(ClaimTypes.NameIdentifier, user.KorisnickoIme)
                 };
 
-
-
                 claims.Add(new Claim(ClaimTypes.Role, user.Uloga));
-
 
                 var identity = new ClaimsIdentity(claims, Scheme.Name);
 

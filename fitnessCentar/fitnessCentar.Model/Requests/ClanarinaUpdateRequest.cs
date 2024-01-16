@@ -11,11 +11,25 @@ namespace fitnessCentar.Model.Requests
     {
         public int? KorisnikId { get; set; }
         public int? TipClanarineId { get; set; }
-        public int? PlacanjeId { get; set; }
         public string? Naziv { get; set; }
         public string? Opis { get; set; }
 
-        [Range(1, int.MaxValue, ErrorMessage = "Trajanje mora biti veće od 0.")]
-        public int Trajanje { get; set; }
+        [Required(ErrorMessage = "VaziDo je obavezno polje.")]
+        [FutureDate(ErrorMessage = "The date must be in the future.")]
+        public DateTime VaziDo { get; set; }
+    }
+
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+    public class FutureDateAttribute : ValidationAttribute
+    {
+        public override bool IsValid(object value)
+        {
+            if (value is DateTime date)
+            {
+                return date > DateTime.Now;
+            }
+
+            return false;
+        }
     }
 }

@@ -10,6 +10,10 @@ namespace fitnessCentar.Model
     {
         public int ClanarinaId { get; set; }
 
+        public int TipClanarineId { get; set; }
+
+        public int KorisnikId { get; set; }
+
         public string Korisnik { get; set; } = null!;
 
         public string TipClanarine { get; set; } = null!;
@@ -18,6 +22,6 @@ namespace fitnessCentar.Model
 
         public string? Opis { get; set; }
 
-        public int Trajanje { get; set; }
+        public DateTime VaziDo { get; set; }
     }
 }
