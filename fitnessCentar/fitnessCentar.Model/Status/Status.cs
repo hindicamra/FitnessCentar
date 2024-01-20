@@ -7,5 +7,12 @@ namespace fitnessCentar.Model.Status
 		Odobrena,
 		Odbijena
 	}
+
+	public enum Uloga
+	{
+		Admin,
+		Uposlenik,
+		Korisnik
+	}
 }
 

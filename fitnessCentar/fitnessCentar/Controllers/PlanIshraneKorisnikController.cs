@@ -1,5 +1,7 @@
-﻿using fitnessCentar.Model.Requests;
+﻿using System.Data;
+using fitnessCentar.Model.Requests;
 using fitnessCentar.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace fitnessCentar.Controllers
