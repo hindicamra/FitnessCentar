@@ -396,3 +396,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+fitnessCentar/UI/fitness_mobile/build/ios/Debug-iphonesimulator/App.framework/flutter_assets/assets/images/logo.png
+fitnessCentar/UI/fitness_mobile/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/assets/images/logo.png
+fitnessCentar/UI/fitness_mobile/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/assets/images/logo.png
+fitnessCentar/UI/fitness_mobile/lib/app/models/user_model.g.dart
