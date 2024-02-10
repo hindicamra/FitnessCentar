@@ -17,11 +17,11 @@ class LoginController extends GetxController {
     /// For testing now without backend data
     if (formKey.currentState!.validate()) {
       context.loaderOverlay.show();
-      await Future.delayed(const Duration(seconds: 4));
+      await Future.delayed(const Duration(seconds: 2));
       userModel = UserModel('TEST', 'TEST 123', 34, 186, 90);
 
       context.loaderOverlay.hide();
-      Get.offAndToNamed(AppRoutes.home);
+      Get.offAndToNamed(AppRoutes.home, arguments: userModel);
 
       // context.loaderOverlay.show();
       // final dio = Dio();
