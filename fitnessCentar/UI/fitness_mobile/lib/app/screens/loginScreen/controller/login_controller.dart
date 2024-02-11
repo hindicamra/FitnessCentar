@@ -1,3 +1,4 @@
+import 'package:fitness_mobile/app/models/training_model.dart';
 import 'package:fitness_mobile/app/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -18,7 +19,30 @@ class LoginController extends GetxController {
     if (formKey.currentState!.validate()) {
       context.loaderOverlay.show();
       await Future.delayed(const Duration(seconds: 2));
-      userModel = UserModel('TEST', 'TEST 123', 34, 186, 90);
+      userModel = UserModel(
+        1,
+        'TEST',
+        'TEST 123',
+        34,
+        186,
+        90,
+        [
+          TrainingModel(
+            1,
+            '12/12/2024',
+            2,
+            'Trainer 1',
+            'Arms',
+          ),
+          TrainingModel(
+            2,
+            '05/05/2024',
+            5,
+            'Trainer 5',
+            'Legs',
+          ),
+        ],
+      );
 
       context.loaderOverlay.hide();
       Get.offAndToNamed(AppRoutes.home, arguments: userModel);
@@ -42,8 +66,7 @@ class LoginController extends GetxController {
       //       actions: [
       //         TextButton(
       //           onPressed: () {
-      //             Navigator.of(context)
-      //                 .pop(); // Close the alert
+      //             Get.back();
       //           },
       //           child: const Text('OK'),
       //         )
