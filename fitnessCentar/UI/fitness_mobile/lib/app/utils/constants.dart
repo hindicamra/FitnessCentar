@@ -1,3 +1,3 @@
 class AppConstants {
-  final baseUrl = '';
+  static const baseUrl = '/';
 }

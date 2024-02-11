@@ -1,22 +1,17 @@
-import 'package:fitness_mobile/app/models/training_model.dart';
 import 'package:fitness_mobile/app/models/user_model.dart';
+import 'package:fitness_mobile/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
-import '../../../routes/app_routes.dart';
-
-class LoginController extends GetxController {
+class LoginProvider extends ChangeNotifier {
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+
   UserModel? userModel;
 
   sendLoginApiCall(BuildContext context) async {
     /// For testing now without backend data
-    if (formKey.currentState!.validate()) {
+    if (username.text.isNotEmpty && password.text.length > 3) {
       context.loaderOverlay.show();
       await Future.delayed(const Duration(seconds: 2));
       userModel = UserModel(
@@ -27,34 +22,36 @@ class LoginController extends GetxController {
         186,
         90,
         [
-          TrainingModel(
-            1,
-            '12/12/2024',
-            2,
-            'Trainer 1',
-            'Arms',
-          ),
-          TrainingModel(
-            2,
-            '05/05/2024',
-            5,
-            'Trainer 5',
-            'Legs',
-          ),
+          // TrainingModel(
+          //   1,
+          //   '12/12/2024',
+          //   2,
+          //   'Trainer 1',
+          //   'Arms',
+          // ),
+          // TrainingModel(
+          //   2,
+          //   '05/05/2024',
+          //   5,
+          //   'Trainer 5',
+          //   'Legs',
+          // ),
         ],
       );
 
       context.loaderOverlay.hide();
-      Get.offAndToNamed(AppRoutes.home, arguments: userModel);
+      Navigator.of(context)
+          .popAndPushNamed(AppRoutes.home, arguments: userModel);
 
       // context.loaderOverlay.show();
-      // final dio = Dio();
-      // Response response = await dio.get('${AppConstants().baseUrl}login');
+      // var url = Uri.https(AppConstants.baseUrl, 'login');
+      // var response =
+      //     await http.post(url, body: {'username': username.text, 'password': password.text});
       //
       // if (Utils().isValidResponse(response)) {
       //   UserModel userModel = UserModel.fromJson(response.data);
       //   context.loaderOverlay.hide();
-      //   Get.offAndToNamed(AppRoutes.home);
+      // Navigator.of(context).popAndPushNamed(AppRoutes.home, arguments: userModel);
       // } else {
       //   // ignore: use_build_context_synchronously
       //   showDialog(
@@ -66,7 +63,7 @@ class LoginController extends GetxController {
       //       actions: [
       //         TextButton(
       //           onPressed: () {
-      //             Get.back();
+      //             Navigator.of(context).pop();
       //           },
       //           child: const Text('OK'),
       //         )
@@ -74,6 +71,22 @@ class LoginController extends GetxController {
       //     ),
       //   );
       // }
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text('Upozorenje'),
+          content: const Text("Neispravno korisničko ime ili lozinka!"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            )
+          ],
+        ),
+      );
     }
   }
 }

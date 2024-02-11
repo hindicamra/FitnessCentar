@@ -1,9 +1,40 @@
-import 'package:dio/dio.dart';
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:http/http.dart';
+import 'package:intl/intl.dart';
 
 class Utils {
+  HttpClient? httpClient;
+
+  Image imageFromBase64String(String base64String) {
+    return Image.memory(base64Decode(base64String));
+  }
+
+  Uint8List dataFromBase64String(String base64String) {
+    return base64Decode(base64String);
+  }
+
+  String base64String(Uint8List data) {
+    return base64Encode(data);
+  }
+
+  String formatDate(DateTime date) => DateFormat("dd/MM/yyyy").format(date);
+
+  HttpClient getHttpClient() {
+    if (httpClient == null) {
+      return HttpClient();
+    } else {
+      return httpClient!;
+    }
+  }
+
   bool isValidResponse(Response response) {
     if (response.statusCode == 200) {
-      if (response.data != null) {
+      if (response.body != "") {
         return true;
       } else {
         return false;

@@ -1,16 +1,24 @@
-import 'package:fitness_mobile/app/screens/homeScreen/controller/home_controller.dart';
+import 'package:fitness_mobile/app/models/user_model.dart';
+import 'package:fitness_mobile/app/providers/home_provider.dart';
 import 'package:fitness_mobile/app/screens/homeScreen/widget/home_screen_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(
-      builder: (controller) => Obx(() {
-        return SafeArea(
+    UserModel userModel =
+        ModalRoute.of(context)!.settings.arguments as UserModel;
+    HomeProvider homeProvider = context.read<HomeProvider>();
+    homeProvider.setUserModelData(userModel);
+    return SafeArea(
+        child: ValueListenableBuilder(
+      valueListenable: homeProvider.currentPageIndex,
+      builder: (context, value, _) {
+        return Provider<int>.value(
+          value: value,
           child: Scaffold(
             bottomNavigationBar: NavigationBarTheme(
               data: NavigationBarThemeData(
@@ -25,10 +33,10 @@ class HomeScreen extends StatelessWidget {
               child: NavigationBar(
                 backgroundColor: Colors.blue,
                 onDestinationSelected: (int index) {
-                  controller.changeTabIndex(index);
+                  homeProvider.changeTabIndex(index);
                 },
                 indicatorColor: Colors.white,
-                selectedIndex: controller.currentPageIndex.value,
+                selectedIndex: homeProvider.currentPageIndex.value,
                 destinations: const <Widget>[
                   NavigationDestination(
                     selectedIcon: Icon(Icons.home, color: Colors.blue),
@@ -62,7 +70,7 @@ class HomeScreen extends StatelessWidget {
             ),
             body: <Widget>[
               /// Home page widget
-              HomeScreenWidget(controller),
+              const HomeScreenWidget(),
 
               /// Termini page widget
               const Card(
@@ -115,10 +123,10 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-            ][controller.currentPageIndex.value],
+            ][homeProvider.currentPageIndex.value],
           ),
         );
-      }),
-    );
+      },
+    ));
   }
 }
