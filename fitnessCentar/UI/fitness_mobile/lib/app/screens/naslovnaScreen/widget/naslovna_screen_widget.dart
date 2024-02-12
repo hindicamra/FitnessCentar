@@ -1,18 +1,18 @@
-import 'package:fitness_mobile/app/providers/home_provider.dart';
+import 'package:fitness_mobile/app/providers/naslovna_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreenWidget extends StatefulWidget {
-  const HomeScreenWidget({super.key});
+class NaslovnaScreenWidget extends StatefulWidget {
+  const NaslovnaScreenWidget({super.key});
 
   @override
-  State<HomeScreenWidget> createState() => _HomeScreenWidgetState();
+  State<NaslovnaScreenWidget> createState() => _NaslovnaScreenWidgetState();
 }
 
-class _HomeScreenWidgetState extends State<HomeScreenWidget> {
+class _NaslovnaScreenWidgetState extends State<NaslovnaScreenWidget> {
   @override
   Widget build(BuildContext context) {
-    HomeProvider homeProvider = context.read<HomeProvider>();
+    NaslovnaProvider homeProvider = context.read<NaslovnaProvider>();
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Column(
@@ -122,7 +122,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 children: [
                                                   Expanded(
                                                     child: Text(
-                                                      'Trainer: - ${homeProvider.userModel!.listOfActiveTrainings[index].trainer}',
+                                                      'Trainer: ${homeProvider.userModel!.listOfActiveTrainings[index].trainer}',
                                                       style: const TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 16,
@@ -131,7 +131,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                   ),
                                                   Expanded(
                                                     child: Text(
-                                                      'Datum: - ${homeProvider.userModel!.listOfActiveTrainings[index].date}',
+                                                      'Datum: ${homeProvider.userModel!.listOfActiveTrainings[index].date}',
                                                       style: const TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 16,
@@ -147,7 +147,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                                                 children: [
                                                   Expanded(
                                                     child: Text(
-                                                      'Trajanje: - ${homeProvider.userModel!.listOfActiveTrainings[index].duration} h',
+                                                      'Trajanje: ${homeProvider.userModel!.listOfActiveTrainings[index].duration} h',
                                                       style: const TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 16,

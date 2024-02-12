@@ -1,17 +1,17 @@
 import 'package:fitness_mobile/app/models/user_model.dart';
-import 'package:fitness_mobile/app/providers/home_provider.dart';
-import 'package:fitness_mobile/app/screens/homeScreen/widget/home_screen_widget.dart';
+import 'package:fitness_mobile/app/providers/naslovna_provider.dart';
+import 'package:fitness_mobile/app/screens/naslovnaScreen/widget/naslovna_screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class NaslovnaScreen extends StatelessWidget {
+  const NaslovnaScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     UserModel userModel =
         ModalRoute.of(context)!.settings.arguments as UserModel;
-    HomeProvider homeProvider = context.read<HomeProvider>();
+    NaslovnaProvider homeProvider = context.read<NaslovnaProvider>();
     homeProvider.setUserModelData(userModel);
     return SafeArea(
         child: ValueListenableBuilder(
@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                   NavigationDestination(
                     selectedIcon: Icon(Icons.home, color: Colors.blue),
                     icon: Icon(Icons.home_outlined),
-                    label: 'Home',
+                    label: 'Naslovna',
                   ),
                   NavigationDestination(
                     icon: Icon(Icons.calendar_today),
@@ -70,7 +70,7 @@ class HomeScreen extends StatelessWidget {
             ),
             body: <Widget>[
               /// Home page widget
-              const HomeScreenWidget(),
+              const NaslovnaScreenWidget(),
 
               /// Termini page widget
               const Card(

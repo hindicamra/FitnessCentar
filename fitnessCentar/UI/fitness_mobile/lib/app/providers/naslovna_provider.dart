@@ -2,7 +2,7 @@ import 'package:fitness_mobile/app/models/training_model.dart';
 import 'package:fitness_mobile/app/models/user_model.dart';
 import 'package:flutter/material.dart';
 
-class HomeProvider extends ChangeNotifier {
+class NaslovnaProvider extends ChangeNotifier {
   ValueNotifier<int> currentPageIndex = ValueNotifier(0);
   ValueNotifier<bool> refreshing = ValueNotifier(false);
   UserModel? userModel;

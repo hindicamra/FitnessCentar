@@ -41,7 +41,7 @@ class LoginProvider extends ChangeNotifier {
 
       context.loaderOverlay.hide();
       Navigator.of(context)
-          .popAndPushNamed(AppRoutes.home, arguments: userModel);
+          .popAndPushNamed(AppRoutes.naslovna, arguments: userModel);
 
       // context.loaderOverlay.show();
       // var url = Uri.https(AppConstants.baseUrl, 'login');
