@@ -26,6 +26,7 @@ class NaslovnaProvider extends ChangeNotifier {
         2,
         'Trainer 5',
         'Neck',
+        500,
       ),
     );
     refreshing.value = false;

@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:fitness_mobile/app/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart';
-import 'package:intl/intl.dart';
 
 class Utils {
   HttpClient? httpClient;
@@ -22,7 +22,7 @@ class Utils {
     return base64Encode(data);
   }
 
-  String formatDate(DateTime date) => DateFormat("dd/MM/yyyy").format(date);
+  String formatDate(DateTime date) => AppConstants.dateFormat.format(date);
 
   HttpClient getHttpClient() {
     if (httpClient == null) {
