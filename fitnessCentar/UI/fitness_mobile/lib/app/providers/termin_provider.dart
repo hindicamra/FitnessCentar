@@ -1,7 +1,10 @@
+import 'package:fitness_mobile/app/models/cart_model.dart';
 import 'package:fitness_mobile/app/models/training_model.dart';
+import 'package:fitness_mobile/app/providers/cart_provider.dart';
 import 'package:fitness_mobile/app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class TerminProvider extends ChangeNotifier {
   final formKey = GlobalKey<FormBuilderState>();
@@ -10,6 +13,7 @@ class TerminProvider extends ChangeNotifier {
   String? endDate;
   ValueNotifier<bool> refreshing = ValueNotifier(false);
   List<TrainingModel> listOfTrainings = [];
+  CartProvider? cartProvider;
 
   resetDate() {
     formKey.currentState!.fields[formName]?.reset();
@@ -40,7 +44,7 @@ class TerminProvider extends ChangeNotifier {
     //TODO make api call and send data
   }
 
-  showDialogToBuy(BuildContext context, int index) {
+  showDialogToBuy(BuildContext context, TrainingModel trainingModel) {
     showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
@@ -50,10 +54,21 @@ class TerminProvider extends ChangeNotifier {
           TextButton(
             onPressed: () {
               //TODO Add to cart, add this later
-              //TODO Show user that he added in cart
+              //TODO Show user that he added in cart and he cant add same thing again
               refreshing.value = true;
-              listOfTrainings.removeAt(index);
+              listOfTrainings.remove(trainingModel);
+              cartProvider?.addItemToCart(
+                CartModel(trainingModel.trainingId, trainingModel.price,
+                    '${trainingModel.trainer} - ${trainingModel.typeOfTraining} - ${trainingModel.date}'),
+              );
               refreshing.value = false;
+              Fluttertoast.showToast(
+                  msg: "Trening dodat u korpu",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  backgroundColor: Colors.green,
+                  textColor: Colors.black,
+                  fontSize: 16.0);
               Navigator.of(context).pop();
             },
             child: const Text('Da'),
@@ -67,5 +82,9 @@ class TerminProvider extends ChangeNotifier {
         ],
       ),
     );
+  }
+
+  setCartProvider(CartProvider setCartProvider) {
+    cartProvider = setCartProvider;
   }
 }

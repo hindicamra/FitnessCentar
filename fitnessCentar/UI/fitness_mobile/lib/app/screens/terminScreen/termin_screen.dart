@@ -1,3 +1,4 @@
+import 'package:fitness_mobile/app/providers/cart_provider.dart';
 import 'package:fitness_mobile/app/providers/termin_provider.dart';
 import 'package:fitness_mobile/app/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,8 @@ class TerminScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TerminProvider terminProvider = context.read<TerminProvider>();
+    CartProvider cartProvider = context.read<CartProvider>();
+    terminProvider.setCartProvider(cartProvider);
     terminProvider.searchWithDate(true);
     return Padding(
       padding: const EdgeInsets.all(15),
@@ -146,7 +149,8 @@ class TerminScreen extends StatelessWidget {
                                 itemBuilder: (BuildContext context, int index) {
                                   return GestureDetector(
                                     onTap: () => terminProvider.showDialogToBuy(
-                                        context, index),
+                                        context,
+                                        terminProvider.listOfTrainings[index]),
                                     child: Card(
                                       elevation: 5,
                                       margin: const EdgeInsets.only(top: 20),
