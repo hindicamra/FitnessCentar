@@ -430,3 +430,5 @@ fitnessCentar/UI/fitness_mobile/build/ios/iphonesimulator/Runner.app/Frameworks/
 fitnessCentar/UI/fitness_mobile/build/ios/iphonesimulator/Runner.app/Frameworks/Toast.framework/_CodeSignature/CodeResources
 fitnessCentar/UI/fitness_mobile/lib/app/models/cart_model.g.dart
 fitnessCentar/UI/fitness_mobile/lib/app/models/shop_item_model.g.dart
+fitnessCentar/UI/fitness_mobile/build/ios/Pods.build/Release-iphonesimulator/fluttertoast.build/dgph
+fitnessCentar/UI/fitness_mobile/build/ios/Pods.build/Release-iphonesimulator/Toast.build/dgph
