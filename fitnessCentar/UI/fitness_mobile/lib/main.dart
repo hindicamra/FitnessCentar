@@ -2,6 +2,7 @@ import 'package:fitness_mobile/app/providers/cart_provider.dart';
 import 'package:fitness_mobile/app/providers/login_provider.dart';
 import 'package:fitness_mobile/app/providers/naslovna_provider.dart';
 import 'package:fitness_mobile/app/providers/proizvodi_provider.dart';
+import 'package:fitness_mobile/app/providers/recenzije_provider.dart';
 import 'package:fitness_mobile/app/providers/termin_provider.dart';
 import 'package:fitness_mobile/app/routes/app_routes.dart';
 import 'package:fitness_mobile/app/screens/login_screen.dart';
@@ -36,6 +37,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => ProizvodiProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => RecenzijeProvider(),
         ),
       ],
       child: MaterialApp(

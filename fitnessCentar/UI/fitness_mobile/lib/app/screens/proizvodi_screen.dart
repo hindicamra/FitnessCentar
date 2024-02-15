@@ -16,6 +16,7 @@ class _ProizvodiScreenState extends State<ProizvodiScreen> {
 
   @override
   void initState() {
+    super.initState();
     proizvodiProvider = context.read<ProizvodiProvider>();
     cartProvider = context.read<CartProvider>();
     proizvodiProvider.setCartProvider(cartProvider);
@@ -82,7 +83,6 @@ class _ProizvodiScreenState extends State<ProizvodiScreen> {
                                 child: ListView.builder(
                                   itemCount:
                                       proizvodiProvider.listOfItems.length,
-                                  padding: const EdgeInsets.only(top: 30),
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return GestureDetector(
@@ -93,7 +93,6 @@ class _ProizvodiScreenState extends State<ProizvodiScreen> {
                                       ),
                                       child: Card(
                                         elevation: 5,
-                                        margin: const EdgeInsets.only(top: 20),
                                         color: Colors.blue,
                                         child: Padding(
                                           padding: const EdgeInsets.all(15),

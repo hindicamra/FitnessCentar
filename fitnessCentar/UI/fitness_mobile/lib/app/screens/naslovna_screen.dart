@@ -34,6 +34,8 @@ class _NaslovnaScreenState extends State<NaslovnaScreen> {
         return Provider<int>.value(
           value: value,
           child: Scaffold(
+            //TODO set floating action button for screens, handle on witch screen it can be seen
+            // floatingActionButton: ,
             appBar: AppBar(
               title: Text(
                 homeProvider.getTitle(),
