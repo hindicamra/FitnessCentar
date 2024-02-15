@@ -5,7 +5,6 @@ import 'package:fitness_mobile/app/providers/proizvodi_provider.dart';
 import 'package:fitness_mobile/app/providers/termin_provider.dart';
 import 'package:fitness_mobile/app/routes/app_routes.dart';
 import 'package:fitness_mobile/app/screens/login_screen.dart';
-import 'package:fitness_mobile/app/screens/naslovna_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
@@ -47,8 +46,6 @@ class MyApp extends StatelessWidget {
           // When navigating to the "/" route, build the FirstScreen widget.
           AppRoutes.login: (context) =>
               const LoaderOverlay(child: LoginScreen()),
-          // When navigating to the "/second" route, build the SecondScreen widget.
-          AppRoutes.naslovna: (context) => const NaslovnaScreen(),
         },
       ),
     );

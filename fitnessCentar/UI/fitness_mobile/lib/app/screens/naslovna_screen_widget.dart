@@ -2,12 +2,24 @@ import 'package:fitness_mobile/app/providers/naslovna_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class NaslovnaScreenWidget extends StatelessWidget {
+class NaslovnaScreenWidget extends StatefulWidget {
   const NaslovnaScreenWidget({super.key});
 
   @override
+  State<NaslovnaScreenWidget> createState() => _NaslovnaScreenWidgetState();
+}
+
+class _NaslovnaScreenWidgetState extends State<NaslovnaScreenWidget> {
+  late NaslovnaProvider homeProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    homeProvider = context.read<NaslovnaProvider>();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    NaslovnaProvider homeProvider = context.read<NaslovnaProvider>();
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Column(

@@ -3,15 +3,27 @@ import 'package:fitness_mobile/app/providers/proizvodi_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ProizvodiScreen extends StatelessWidget {
+class ProizvodiScreen extends StatefulWidget {
   const ProizvodiScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    ProizvodiProvider proizvodiProvider = context.read<ProizvodiProvider>();
-    CartProvider cartProvider = context.read<CartProvider>();
+  State<ProizvodiScreen> createState() => _ProizvodiScreenState();
+}
+
+class _ProizvodiScreenState extends State<ProizvodiScreen> {
+  late ProizvodiProvider proizvodiProvider;
+  late CartProvider cartProvider;
+
+  @override
+  void initState() {
+    proizvodiProvider = context.read<ProizvodiProvider>();
+    cartProvider = context.read<CartProvider>();
     proizvodiProvider.setCartProvider(cartProvider);
     proizvodiProvider.getAllListItems();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.all(15),
         child: Column(

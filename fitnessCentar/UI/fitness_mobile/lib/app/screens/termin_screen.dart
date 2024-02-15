@@ -5,15 +5,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 
-class TerminScreen extends StatelessWidget {
+class TerminScreen extends StatefulWidget {
   const TerminScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    TerminProvider terminProvider = context.read<TerminProvider>();
-    CartProvider cartProvider = context.read<CartProvider>();
+  State<TerminScreen> createState() => _TerminScreenState();
+}
+
+class _TerminScreenState extends State<TerminScreen> {
+  late TerminProvider terminProvider;
+  late CartProvider cartProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    terminProvider = context.read<TerminProvider>();
+    cartProvider = context.read<CartProvider>();
     terminProvider.setCartProvider(cartProvider);
     terminProvider.searchWithDate(true);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Column(

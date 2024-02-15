@@ -1,5 +1,5 @@
 import 'package:fitness_mobile/app/models/user_model.dart';
-import 'package:fitness_mobile/app/routes/app_routes.dart';
+import 'package:fitness_mobile/app/screens/naslovna_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -40,8 +40,13 @@ class LoginProvider extends ChangeNotifier {
       );
 
       context.loaderOverlay.hide();
-      Navigator.of(context)
-          .popAndPushNamed(AppRoutes.naslovna, arguments: userModel);
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => NaslovnaScreen(
+            userModel: userModel!,
+          ),
+        ),
+      );
 
       // context.loaderOverlay.show();
       // var url = Uri.https(AppConstants.baseUrl, 'login');

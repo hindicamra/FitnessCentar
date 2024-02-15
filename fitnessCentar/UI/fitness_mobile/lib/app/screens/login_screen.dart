@@ -2,12 +2,24 @@ import 'package:fitness_mobile/app/providers/login_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  late LoginProvider loginProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    loginProvider = context.read<LoginProvider>();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    LoginProvider loginProvider = context.read<LoginProvider>();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
