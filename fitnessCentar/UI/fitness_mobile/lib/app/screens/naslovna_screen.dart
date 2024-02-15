@@ -1,8 +1,8 @@
 import 'package:fitness_mobile/app/models/user_model.dart';
 import 'package:fitness_mobile/app/providers/naslovna_provider.dart';
-import 'package:fitness_mobile/app/screens/naslovnaScreen/naslovna_screen_widget.dart';
-import 'package:fitness_mobile/app/screens/proizvodiScreen/proizvodi_screen.dart';
-import 'package:fitness_mobile/app/screens/terminScreen/termin_screen.dart';
+import 'package:fitness_mobile/app/screens/naslovna_screen_widget.dart';
+import 'package:fitness_mobile/app/screens/proizvodi_screen.dart';
+import 'package:fitness_mobile/app/screens/termin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
