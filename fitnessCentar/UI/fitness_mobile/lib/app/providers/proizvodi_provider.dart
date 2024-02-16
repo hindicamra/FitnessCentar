@@ -1,13 +1,15 @@
 import 'package:fitness_mobile/app/models/cart_model.dart';
 import 'package:fitness_mobile/app/models/shop_item_model.dart';
-import 'package:fitness_mobile/app/providers/cart_provider.dart';
+import 'package:fitness_mobile/app/providers/korpa_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../routes/app_routes.dart';
 
 class ProizvodiProvider extends ChangeNotifier {
   ValueNotifier<bool> refreshing = ValueNotifier(false);
   List<ShopItemModel> listOfItems = [];
-  CartProvider? cartProvider;
+  KorpaProvider? korpaProvider;
 
   getAllListItems() async {
     refreshing.value = true;
@@ -36,7 +38,7 @@ class ProizvodiProvider extends ChangeNotifier {
               //TODO Add to cart, add this later
               //TODO Show user that he added in cart and he cant add same thing again
               refreshing.value = true;
-              cartProvider?.addItemToCart(
+              korpaProvider?.addItemToCart(
                 CartModel(
                   shopItemModel.id,
                   shopItemModel.price,
@@ -67,7 +69,11 @@ class ProizvodiProvider extends ChangeNotifier {
     );
   }
 
-  setCartProvider(CartProvider setCartProvider) {
-    cartProvider = setCartProvider;
+  setKorpaProvider(KorpaProvider setKorpaProvider) {
+    korpaProvider = setKorpaProvider;
+  }
+
+  goToKorpaScreen(BuildContext context) {
+    Navigator.of(context).pushNamed(AppRoutes.korpa);
   }
 }

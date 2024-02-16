@@ -1,4 +1,4 @@
-import 'package:fitness_mobile/app/providers/cart_provider.dart';
+import 'package:fitness_mobile/app/providers/korpa_provider.dart';
 import 'package:fitness_mobile/app/providers/termin_provider.dart';
 import 'package:fitness_mobile/app/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -14,14 +14,14 @@ class TerminScreen extends StatefulWidget {
 
 class _TerminScreenState extends State<TerminScreen> {
   late TerminProvider terminProvider;
-  late CartProvider cartProvider;
+  late KorpaProvider korpaProvider;
 
   @override
   void initState() {
     super.initState();
     terminProvider = context.read<TerminProvider>();
-    cartProvider = context.read<CartProvider>();
-    terminProvider.setCartProvider(cartProvider);
+    korpaProvider = context.read<KorpaProvider>();
+    terminProvider.setKorpaProvider(korpaProvider);
     terminProvider.searchWithDate(true);
   }
 

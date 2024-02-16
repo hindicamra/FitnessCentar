@@ -1,6 +1,6 @@
 import 'package:fitness_mobile/app/models/cart_model.dart';
 import 'package:fitness_mobile/app/models/training_model.dart';
-import 'package:fitness_mobile/app/providers/cart_provider.dart';
+import 'package:fitness_mobile/app/providers/korpa_provider.dart';
 import 'package:fitness_mobile/app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -13,7 +13,7 @@ class TerminProvider extends ChangeNotifier {
   String? endDate;
   ValueNotifier<bool> refreshing = ValueNotifier(false);
   List<TrainingModel> listOfTrainings = [];
-  CartProvider? cartProvider;
+  KorpaProvider? korpaProvider;
 
   resetDate() {
     formKey.currentState!.fields[formName]?.reset();
@@ -57,7 +57,7 @@ class TerminProvider extends ChangeNotifier {
               //TODO Show user that he added in cart and he cant add same thing again
               refreshing.value = true;
               listOfTrainings.remove(trainingModel);
-              cartProvider?.addItemToCart(
+              korpaProvider?.addItemToCart(
                 CartModel(trainingModel.trainingId, trainingModel.price,
                     '${trainingModel.trainer} - ${trainingModel.typeOfTraining} - ${trainingModel.date}'),
               );
@@ -84,7 +84,7 @@ class TerminProvider extends ChangeNotifier {
     );
   }
 
-  setCartProvider(CartProvider setCartProvider) {
-    cartProvider = setCartProvider;
+  setKorpaProvider(KorpaProvider setKorpaProvider) {
+    korpaProvider = setKorpaProvider;
   }
 }

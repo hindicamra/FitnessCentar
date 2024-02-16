@@ -1,4 +1,4 @@
-import 'package:fitness_mobile/app/providers/cart_provider.dart';
+import 'package:fitness_mobile/app/providers/korpa_provider.dart';
 import 'package:fitness_mobile/app/providers/proizvodi_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,14 +12,14 @@ class ProizvodiScreen extends StatefulWidget {
 
 class _ProizvodiScreenState extends State<ProizvodiScreen> {
   late ProizvodiProvider proizvodiProvider;
-  late CartProvider cartProvider;
+  late KorpaProvider korpaProvider;
 
   @override
   void initState() {
     super.initState();
     proizvodiProvider = context.read<ProizvodiProvider>();
-    cartProvider = context.read<CartProvider>();
-    proizvodiProvider.setCartProvider(cartProvider);
+    korpaProvider = context.read<KorpaProvider>();
+    proizvodiProvider.setKorpaProvider(korpaProvider);
     proizvodiProvider.getAllListItems();
   }
 
@@ -27,7 +27,7 @@ class _ProizvodiScreenState extends State<ProizvodiScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => print('KLIK'),
+        onPressed: () => proizvodiProvider.goToKorpaScreen(context),
         foregroundColor: Colors.white,
         backgroundColor: Colors.blue,
         child: const Icon(
