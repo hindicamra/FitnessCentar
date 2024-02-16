@@ -10,6 +10,12 @@ import 'package:http/http.dart';
 class Utils {
   HttpClient? httpClient;
 
+  bool isValidEmail(String email) {
+    return RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(email);
+  }
+
   Image imageFromBase64String(String base64String) {
     return Image.memory(base64Decode(base64String));
   }

@@ -1,25 +1,24 @@
 import 'package:fitness_mobile/app/models/user_model.dart';
-import 'package:fitness_mobile/app/routes/app_routes.dart';
 import 'package:fitness_mobile/app/screens/naslovna_screen.dart';
 import 'package:fitness_mobile/app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
-class LoginProvider extends ChangeNotifier {
+class RegisterProvider extends ChangeNotifier {
+  TextEditingController name = TextEditingController();
+  TextEditingController surname = TextEditingController();
   TextEditingController email = TextEditingController();
+  TextEditingController age = TextEditingController();
+  TextEditingController height = TextEditingController();
+  TextEditingController weight = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController repeatPassword = TextEditingController();
 
   UserModel? userModel;
 
-  goToRegisterScreen(BuildContext context) {
-    Navigator.of(context).pushNamed(AppRoutes.register);
-  }
-
-  sendLoginApiCall(BuildContext context) async {
+  registerUser(BuildContext context) async {
     /// For testing now without backend data
-    if (email.text.isNotEmpty &&
-        Utils().isValidEmail(email.text) &&
-        password.text.length > 3) {
+    if (checkFields() == '') {
       context.loaderOverlay.show();
       await Future.delayed(const Duration(seconds: 2));
       userModel = UserModel(
@@ -90,7 +89,7 @@ class LoginProvider extends ChangeNotifier {
         context: context,
         builder: (BuildContext context) => AlertDialog(
           title: const Text('Upozorenje'),
-          content: const Text("Neispravni email ili lozinka!"),
+          content: Text("Neispravno polje ${checkFields()}"),
           actions: [
             TextButton(
               onPressed: () {
@@ -101,6 +100,22 @@ class LoginProvider extends ChangeNotifier {
           ],
         ),
       );
+    }
+  }
+
+  String checkFields() {
+    if (name.text.isEmpty || name.text.length < 3) {
+      return 'Ime';
+    } else if (surname.text.isEmpty || surname.text.length < 3) {
+      return 'Prezime';
+    } else if (email.text.isEmpty || !Utils().isValidEmail(email.text)) {
+      return 'Email';
+    } else if (password.text.isEmpty || password.text.length < 4) {
+      return 'Lozinka';
+    } else if (repeatPassword.text != password.text) {
+      return 'Ponovljena lozinka';
+    } else {
+      return '';
     }
   }
 }

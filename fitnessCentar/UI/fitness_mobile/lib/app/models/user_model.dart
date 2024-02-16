@@ -8,6 +8,7 @@ class UserModel {
   final int userId;
   final String name;
   final String surname;
+  final String email;
   final int age;
   final int height;
   final int weight;
@@ -16,6 +17,7 @@ class UserModel {
     this.userId,
     this.name,
     this.surname,
+    this.email,
     this.age,
     this.height,
     this.weight,
