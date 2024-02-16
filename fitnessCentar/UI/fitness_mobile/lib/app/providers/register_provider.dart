@@ -48,13 +48,13 @@ class RegisterProvider extends ChangeNotifier {
       );
 
       context.loaderOverlay.hide();
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => NaslovnaScreen(
-            userModel: userModel!,
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+            builder: (context) => NaslovnaScreen(
+              userModel: userModel!,
+            ),
           ),
-        ),
-      );
+          (route) => false);
 
       // context.loaderOverlay.show();
       // var url = Uri.https(AppConstants.baseUrl, 'login');
