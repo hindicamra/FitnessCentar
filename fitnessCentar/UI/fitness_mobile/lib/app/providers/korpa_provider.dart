@@ -34,7 +34,7 @@ class KorpaProvider extends ChangeNotifier {
               paymentSheetParameters: SetupPaymentSheetParameters(
                   paymentIntentClientSecret: paymentIntent![
                       'client_secret'], //Gotten from payment intent
-                  style: ThemeMode.dark,
+                  style: ThemeMode.light,
                   merchantDisplayName: 'FitnesCentar'))
           .then((value) {});
 
@@ -52,6 +52,8 @@ class KorpaProvider extends ChangeNotifier {
       await Stripe.instance.presentPaymentSheet();
 
       Fluttertoast.showToast(msg: 'Plaćanje uspešno završeno');
+      listItems.value = [];
+      listItems.notifyListeners();
     } on Exception catch (e) {
       if (e is StripeException) {
         Fluttertoast.showToast(
