@@ -1,12 +1,21 @@
 import 'package:fitness_mobile/app/models/rating_model.dart';
+import 'package:fitness_mobile/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class RecenzijeProvider extends ChangeNotifier {
   ValueNotifier<bool> refreshing = ValueNotifier(false);
   List<RatingModel> listOfRating = [];
 
-  addRating() {
-    //TODO go to rating page
+  addRating(BuildContext context) async {
+    await Navigator.pushNamed(
+      context,
+      AppRoutes.dodajRecenziju,
+    ).then((val) {
+      bool? data = val as bool?;
+      if (data ?? false) {
+        getAllRatings();
+      }
+    });
   }
 
   getAllRatings() async {

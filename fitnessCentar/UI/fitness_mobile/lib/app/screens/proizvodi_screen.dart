@@ -27,6 +27,7 @@ class _ProizvodiScreenState extends State<ProizvodiScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        heroTag: 'Proizvodi tag',
         onPressed: () => proizvodiProvider.goToKorpaScreen(context),
         foregroundColor: Colors.white,
         backgroundColor: Colors.blue,
@@ -101,55 +102,60 @@ class _ProizvodiScreenState extends State<ProizvodiScreen> {
                                           context,
                                           proizvodiProvider.listOfItems[index],
                                         ),
-                                        child: Card(
-                                          elevation: 5,
-                                          color: Colors.blue,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(15),
-                                            child: Column(
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      'Ime proizvoda: ${proizvodiProvider.listOfItems[index].name}',
-                                                      style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 16,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                const SizedBox(
-                                                  height: 20,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Flexible(
-                                                      child: Text(
-                                                        'Opis proizvoda: ${proizvodiProvider.listOfItems[index].description}',
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 15),
+                                          child: Card(
+                                            elevation: 5,
+                                            color: Colors.blue,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(15),
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        'Ime proizvoda: ${proizvodiProvider.listOfItems[index].name}',
                                                         style: const TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 16,
                                                         ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                const SizedBox(
-                                                  height: 20,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      'Cena: ${proizvodiProvider.listOfItems[index].price} €',
-                                                      style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 16,
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Flexible(
+                                                        child: Text(
+                                                          'Opis proizvoda: ${proizvodiProvider.listOfItems[index].description}',
+                                                          style:
+                                                              const TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 16,
+                                                          ),
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        'Cena: ${proizvodiProvider.listOfItems[index].price} €',
+                                                        style: const TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 16,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),

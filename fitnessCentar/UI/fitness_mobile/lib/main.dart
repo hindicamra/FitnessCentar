@@ -1,3 +1,4 @@
+import 'package:fitness_mobile/app/providers/dodaj_recenziju_provider.dart';
 import 'package:fitness_mobile/app/providers/korpa_provider.dart';
 import 'package:fitness_mobile/app/providers/login_provider.dart';
 import 'package:fitness_mobile/app/providers/naslovna_provider.dart';
@@ -6,6 +7,7 @@ import 'package:fitness_mobile/app/providers/recenzije_provider.dart';
 import 'package:fitness_mobile/app/providers/register_provider.dart';
 import 'package:fitness_mobile/app/providers/termin_provider.dart';
 import 'package:fitness_mobile/app/routes/app_routes.dart';
+import 'package:fitness_mobile/app/screens/dodaj_recenziju_screen.dart';
 import 'package:fitness_mobile/app/screens/korpa_screen.dart';
 import 'package:fitness_mobile/app/screens/login_screen.dart';
 import 'package:fitness_mobile/app/screens/register_screen.dart';
@@ -51,6 +53,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => RegisterProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => DodajRecenzijuProvider(),
+        ),
       ],
       child: MaterialApp(
         title: 'Fitness Centar',
@@ -65,6 +70,7 @@ class MyApp extends StatelessWidget {
                 child: RegisterScreen(),
               ),
           AppRoutes.korpa: (context) => const KorpaScreen(),
+          AppRoutes.dodajRecenziju: (context) => const DodajRecenzijuScreen(),
         },
       ),
     );
