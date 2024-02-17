@@ -1,6 +1,7 @@
 import 'package:fitness_mobile/app/models/training_model.dart';
 import 'package:fitness_mobile/app/models/user_model.dart';
 import 'package:fitness_mobile/app/screens/naslovna_screen_widget.dart';
+import 'package:fitness_mobile/app/screens/profil_screen.dart';
 import 'package:fitness_mobile/app/screens/proizvodi_screen.dart';
 import 'package:fitness_mobile/app/screens/recenzije_screen.dart';
 import 'package:fitness_mobile/app/screens/termin_screen.dart';
@@ -9,23 +10,13 @@ import 'package:flutter/material.dart';
 class NaslovnaProvider extends ChangeNotifier {
   ValueNotifier<int> currentPageIndex = ValueNotifier(0);
   ValueNotifier<bool> refreshing = ValueNotifier(false);
-  UserModel? userModel;
+  late UserModel userModel;
   final List<Widget> listOfPages = [
     const NaslovnaScreenWidget(),
     const TerminScreen(),
     const ProizvodiScreen(),
     const RecenzijaScreen(),
-    const Card(
-      shadowColor: Colors.transparent,
-      child: SizedBox.expand(
-        child: Center(
-          child: Text(
-            'Profil page',
-            style: TextStyle(color: Colors.black),
-          ),
-        ),
-      ),
-    ),
+    const ProfilScreen(),
   ];
 
   setUserModelData(UserModel userModelData) {
@@ -40,7 +31,7 @@ class NaslovnaProvider extends ChangeNotifier {
     /// Mock data for now
     refreshing.value = true;
     await Future.delayed(const Duration(seconds: 2));
-    userModel?.listOfActiveTrainings.add(
+    userModel.listOfActiveTrainings?.add(
       TrainingModel(
         1,
         '6/6/2024',

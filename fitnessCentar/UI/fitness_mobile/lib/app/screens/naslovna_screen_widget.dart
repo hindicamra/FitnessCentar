@@ -67,7 +67,7 @@ class _NaslovnaScreenWidgetState extends State<NaslovnaScreenWidget> {
                             color: Colors.blue,
                           ),
                         )
-                      : (homeProvider.userModel?.listOfActiveTrainings.length ??
+                      : (homeProvider.userModel.listOfActiveTrainings?.length ??
                                   0) ==
                               0
                           ? Column(
@@ -110,7 +110,7 @@ class _NaslovnaScreenWidgetState extends State<NaslovnaScreenWidget> {
                                   homeProvider.getUserDataFromApi(context),
                               child: ListView.builder(
                                 itemCount: homeProvider.userModel
-                                        ?.listOfActiveTrainings.length ??
+                                        .listOfActiveTrainings?.length ??
                                     0,
                                 padding: const EdgeInsets.only(top: 30),
                                 itemBuilder: (BuildContext context, int index) {
@@ -126,7 +126,7 @@ class _NaslovnaScreenWidgetState extends State<NaslovnaScreenWidget> {
                                             children: [
                                               Expanded(
                                                 child: Text(
-                                                  'Trainer: ${homeProvider.userModel!.listOfActiveTrainings[index].trainer}',
+                                                  'Trainer: ${homeProvider.userModel.listOfActiveTrainings?[index].trainer}',
                                                   style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 16,
@@ -135,7 +135,7 @@ class _NaslovnaScreenWidgetState extends State<NaslovnaScreenWidget> {
                                               ),
                                               Expanded(
                                                 child: Text(
-                                                  'Datum: ${homeProvider.userModel!.listOfActiveTrainings[index].date}',
+                                                  'Datum: ${homeProvider.userModel.listOfActiveTrainings?[index].date}',
                                                   style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 16,
@@ -151,7 +151,7 @@ class _NaslovnaScreenWidgetState extends State<NaslovnaScreenWidget> {
                                             children: [
                                               Expanded(
                                                 child: Text(
-                                                  'Trajanje: ${homeProvider.userModel!.listOfActiveTrainings[index].duration} h',
+                                                  'Trajanje: ${homeProvider.userModel.listOfActiveTrainings?[index].duration} h',
                                                   style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 16,
@@ -160,7 +160,7 @@ class _NaslovnaScreenWidgetState extends State<NaslovnaScreenWidget> {
                                               ),
                                               Expanded(
                                                 child: Text(
-                                                  'Tip vezbe: ${homeProvider.userModel!.listOfActiveTrainings[index].typeOfTraining}',
+                                                  'Tip vezbe: ${homeProvider.userModel.listOfActiveTrainings?[index].typeOfTraining}',
                                                   style: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 16,

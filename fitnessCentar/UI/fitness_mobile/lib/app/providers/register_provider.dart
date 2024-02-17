@@ -1,8 +1,11 @@
 import 'package:fitness_mobile/app/models/user_model.dart';
-import 'package:fitness_mobile/app/screens/naslovna_screen.dart';
+import 'package:fitness_mobile/app/providers/naslovna_provider.dart';
+import 'package:fitness_mobile/app/providers/profil_provider.dart';
+import 'package:fitness_mobile/app/routes/app_routes.dart';
 import 'package:fitness_mobile/app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:provider/provider.dart';
 
 class RegisterProvider extends ChangeNotifier {
   TextEditingController name = TextEditingController();
@@ -48,13 +51,21 @@ class RegisterProvider extends ChangeNotifier {
       );
 
       context.loaderOverlay.hide();
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-            builder: (context) => NaslovnaScreen(
-              userModel: userModel!,
-            ),
-          ),
-          (route) => false);
+      NaslovnaProvider naslovnaProvider = context.read<NaslovnaProvider>();
+      naslovnaProvider.setUserModelData(userModel!);
+      ProfilProvider profilProvider = context.read<ProfilProvider>();
+      profilProvider.setUserModel(userModel!);
+      Navigator.popAndPushNamed(context, AppRoutes.naslovna);
+
+      context.loaderOverlay.hide();
+
+      // Navigator.of(context).pushAndRemoveUntil(
+      //     MaterialPageRoute(
+      //       builder: (context) => NaslovnaScreen(
+      //         userModel: userModel!,
+      //       ),
+      //     ),
+      //     (route) => false);
 
       // context.loaderOverlay.show();
       // var url = Uri.https(AppConstants.baseUrl, 'login');

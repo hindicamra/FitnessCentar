@@ -1,9 +1,11 @@
 import 'package:fitness_mobile/app/models/user_model.dart';
+import 'package:fitness_mobile/app/providers/naslovna_provider.dart';
+import 'package:fitness_mobile/app/providers/profil_provider.dart';
 import 'package:fitness_mobile/app/routes/app_routes.dart';
-import 'package:fitness_mobile/app/screens/naslovna_screen.dart';
 import 'package:fitness_mobile/app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:provider/provider.dart';
 
 class LoginProvider extends ChangeNotifier {
   TextEditingController email = TextEditingController();
@@ -48,14 +50,20 @@ class LoginProvider extends ChangeNotifier {
         ],
       );
 
+      NaslovnaProvider naslovnaProvider = context.read<NaslovnaProvider>();
+      naslovnaProvider.setUserModelData(userModel!);
+      ProfilProvider profilProvider = context.read<ProfilProvider>();
+      profilProvider.setUserModel(userModel!);
+      Navigator.popAndPushNamed(context, AppRoutes.naslovna);
+
       context.loaderOverlay.hide();
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => NaslovnaScreen(
-            userModel: userModel!,
-          ),
-        ),
-      );
+      // Navigator.of(context).pushReplacement(
+      //   MaterialPageRoute(
+      //     builder: (context) => NaslovnaScreen(
+      //       userModel: userModel!,
+      //     ),
+      //   ),
+      // );
 
       // context.loaderOverlay.show();
       // var url = Uri.https(AppConstants.baseUrl, 'login');

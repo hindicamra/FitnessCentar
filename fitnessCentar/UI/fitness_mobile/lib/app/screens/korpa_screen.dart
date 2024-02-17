@@ -127,26 +127,34 @@ class _ProizvodiScreenState extends State<KorpaScreen> {
                 );
               },
             ),
-            Visibility(
-              visible: korpaProvider.listItems.value.isNotEmpty,
-              child: TextButton(
-                onPressed: () => korpaProvider.buyAllItems(),
-                child: Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.blue,
-                  ),
-                  child: const Center(
-                      child: Text(
-                    'Kupi',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16.0,
+            ValueListenableBuilder(
+              valueListenable: korpaProvider.listItems,
+              builder: (context, value, _) {
+                return Provider<List<CartModel>>.value(
+                  value: value,
+                  child: Visibility(
+                    visible: value.isNotEmpty,
+                    child: TextButton(
+                      onPressed: () => korpaProvider.buyAllItems(),
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.blue,
+                        ),
+                        child: const Center(
+                            child: Text(
+                          'Kupi',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16.0,
+                          ),
+                        )),
+                      ),
                     ),
-                  )),
-                ),
-              ),
+                  ),
+                );
+              },
             ),
           ],
         ),

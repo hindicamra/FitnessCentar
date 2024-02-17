@@ -5,14 +5,14 @@ part 'user_model.g.dart';
 
 @JsonSerializable()
 class UserModel {
-  final int userId;
+  final int? userId;
   final String name;
   final String surname;
   final String email;
-  final int age;
-  final int height;
-  final int weight;
-  final List<TrainingModel> listOfActiveTrainings;
+  final int? age;
+  final int? height;
+  final int? weight;
+  final List<TrainingModel>? listOfActiveTrainings;
   UserModel(
     this.userId,
     this.name,
