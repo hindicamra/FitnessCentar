@@ -1,8 +1,12 @@
+import 'package:fitness_admin/providers/home_provider.dart';
 import 'package:fitness_admin/providers/login_provider.dart';
+import 'package:fitness_admin/providers/upravljanje_zaposlenima_provider.dart';
 import 'package:fitness_admin/routes/app_routes.dart';
 import 'package:fitness_admin/screens/homepage_screen.dart';
 import 'package:fitness_admin/screens/login_screen.dart';
+import 'package:fitness_admin/screens/upravljanje_zaposlenima_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -10,6 +14,12 @@ void main() {
     providers: [
       ChangeNotifierProvider(
         create: (_) => LoginProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => HomeProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => UpravljanjeZaposlenimaProvider(),
       ),
     ],
     child: const MyApp(),
@@ -26,8 +36,12 @@ class MyApp extends StatelessWidget {
       initialRoute: AppRoutes.login,
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
-        AppRoutes.login: (context) => const LoginScreen(),
+        AppRoutes.login: (context) => const LoaderOverlay(
+              child: LoginScreen(),
+            ),
         AppRoutes.naslovna: (context) => const HomepageScreen(),
+        AppRoutes.upravljanjeZaposlenima: (context) =>
+            const UpravljanjeZaposlenimaScreen(),
       },
     );
   }

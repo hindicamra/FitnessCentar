@@ -1,5 +1,4 @@
 import 'package:fitness_admin/providers/login_provider.dart';
-import 'package:fitness_admin/screens/homepage_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -100,12 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                        builder: (context) => const HomepageScreen()),
-                  );
-                },
+                onPressed: () => loginProvider.sendLoginApiCall(context),
                 child: const Text('Login'),
               ),
             ],

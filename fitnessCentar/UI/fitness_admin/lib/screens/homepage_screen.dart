@@ -1,7 +1,7 @@
-import 'package:fitness_admin/screens/korisnici_screen.dart';
-import 'package:fitness_admin/screens/login_screen.dart';
-import 'package:fitness_admin/screens/uposlenici_screen.dart';
+import 'package:fitness_admin/providers/home_provider.dart';
+import 'package:fitness_admin/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomepageScreen extends StatefulWidget {
   const HomepageScreen({Key? key}) : super(key: key);
@@ -11,7 +11,13 @@ class HomepageScreen extends StatefulWidget {
 }
 
 class _HomepageScreenState extends State<HomepageScreen> {
-  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+  late HomeProvider homeProvider;
+
+  @override
+  void initState() {
+    homeProvider = context.read<HomeProvider>();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +27,13 @@ class _HomepageScreenState extends State<HomepageScreen> {
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.zero,
           ),
+          width: 250,
           child: Column(
             children: [
               Container(
                 alignment: Alignment.center,
                 height: kToolbarHeight,
-                color: Colors.blue,
+                color: Colors.black,
                 child: const Text(
                   'Menu',
                   style: TextStyle(
@@ -39,32 +46,25 @@ class _HomepageScreenState extends State<HomepageScreen> {
                 padding: const EdgeInsets.only(top: kToolbarHeight),
                 child: Column(
                   children: [
+                    homeProvider.userModel?.ulogaId == 1
+                        ? ListTile(
+                            title: const Text('Upravljanje zaposlenima'),
+                            onTap: () => homeProvider
+                                .goToUpravljanjeZaposlenimaScreen(context),
+                          )
+                        : Container(),
                     ListTile(
-                      title: const Text('Administrator'),
-                      onTap: () {
-                        _navigatorKey.currentState?.pushReplacement(
-                          MaterialPageRoute(
-                              builder: (context) => const KorisniciScreen()),
-                        );
-                      },
+                      title: const Text('Upravljanje korisnicima'),
+                      onTap: () {},
                     ),
                     ListTile(
-                      title: const Text('Uposlenici'),
-                      onTap: () {
-                        _navigatorKey.currentState?.pushReplacement(
-                          MaterialPageRoute(
-                              builder: (context) => const UposleniciScreen()),
-                        );
-                      },
+                      title: const Text('Pregled raspored treninga'),
+                      onTap: () {},
                     ),
                     ListTile(
                       title: const Text('Odjava'),
                       onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LoginScreen()),
-                        );
+                        Navigator.popAndPushNamed(context, AppRoutes.login);
                       },
                     ),
                   ],
@@ -74,29 +74,16 @@ class _HomepageScreenState extends State<HomepageScreen> {
           ),
         ),
         Expanded(
-          child: Navigator(
-            key: _navigatorKey,
-            onGenerateRoute: (settings) {
-              return MaterialPageRoute(
-                  builder: (context) => const MainContent());
-            },
+          child: Container(
+            color: Colors.white,
+            padding: const EdgeInsets.all(16.0),
+            child: const Center(
+              child: Text('Dobrodošli',
+                  style: TextStyle(fontSize: 42, color: Colors.red)),
+            ),
           ),
         ),
       ],
-    );
-  }
-}
-
-class MainContent extends StatelessWidget {
-  const MainContent({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      child: const Center(
-        child: Text('Dobrodošli'),
-      ),
     );
   }
 }

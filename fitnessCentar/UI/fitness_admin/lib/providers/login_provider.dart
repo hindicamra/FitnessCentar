@@ -1,6 +1,9 @@
 import 'package:fitness_admin/models/user_model.dart';
+import 'package:fitness_admin/providers/home_provider.dart';
 import 'package:fitness_admin/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:loader_overlay/loader_overlay.dart';
+import 'package:provider/provider.dart';
 
 class LoginProvider extends ChangeNotifier {
   TextEditingController username = TextEditingController();
@@ -11,9 +14,11 @@ class LoginProvider extends ChangeNotifier {
   sendLoginApiCall(BuildContext context) async {
     /// For testing now without backend data
     if (username.text.length > 3 && password.text.length > 3) {
+      context.loaderOverlay.show();
       await Future.delayed(
         const Duration(seconds: 2),
       );
+
       userModel = UserModel(
         1,
         'IME',
@@ -25,6 +30,9 @@ class LoginProvider extends ChangeNotifier {
         'STATUS',
         1,
       );
+      HomeProvider homeProvider = context.read<HomeProvider>();
+      homeProvider.setUserModel(userModel);
+      context.loaderOverlay.hide();
 
       Navigator.popAndPushNamed(context, AppRoutes.naslovna);
 
