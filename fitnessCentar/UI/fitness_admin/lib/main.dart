@@ -1,8 +1,10 @@
 import 'package:fitness_admin/providers/home_provider.dart';
+import 'package:fitness_admin/providers/izmena_zaposlenih_provider.dart';
 import 'package:fitness_admin/providers/login_provider.dart';
 import 'package:fitness_admin/providers/upravljanje_zaposlenima_provider.dart';
 import 'package:fitness_admin/routes/app_routes.dart';
 import 'package:fitness_admin/screens/homepage_screen.dart';
+import 'package:fitness_admin/screens/izmena_zaposlenih_screen.dart';
 import 'package:fitness_admin/screens/login_screen.dart';
 import 'package:fitness_admin/screens/upravljanje_zaposlenima_screen.dart';
 import 'package:flutter/gestures.dart';
@@ -21,6 +23,9 @@ void main() {
       ),
       ChangeNotifierProvider(
         create: (_) => UpravljanjeZaposlenimaProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => IzmenaZaposlenihProvider(),
       ),
     ],
     child: const MyApp(),
@@ -44,6 +49,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.naslovna: (context) => const HomepageScreen(),
         AppRoutes.upravljanjeZaposlenima: (context) =>
             const UpravljanjeZaposlenimaScreen(),
+        AppRoutes.izmenaZaposlenih: (context) => const IzmenaZaposlenihScreen(),
       },
     );
   }

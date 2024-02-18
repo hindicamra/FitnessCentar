@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: const TextStyle(
                     color: Colors.black,
                   ),
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.name,
                   controller: loginProvider.username,
                   decoration: const InputDecoration(
                     fillColor: Colors.white,

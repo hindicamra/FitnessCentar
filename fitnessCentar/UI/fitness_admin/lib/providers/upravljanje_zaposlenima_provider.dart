@@ -1,4 +1,5 @@
 import 'package:fitness_admin/models/user_model.dart';
+import 'package:fitness_admin/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class UpravljanjeZaposlenimaProvider extends ChangeNotifier {
@@ -21,5 +22,18 @@ class UpravljanjeZaposlenimaProvider extends ChangeNotifier {
       ),
     );
     listItems.notifyListeners();
+  }
+
+  goToIzmenaZaposlenihScreen(UserModel userModel, BuildContext context) async {
+    await Navigator.pushNamed(
+      context,
+      AppRoutes.izmenaZaposlenih,
+      arguments: userModel,
+    ).then((val) {
+      bool? data = val as bool?;
+      if (data ?? false) {
+        searchApi();
+      }
+    });
   }
 }

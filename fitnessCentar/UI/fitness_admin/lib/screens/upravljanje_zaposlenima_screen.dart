@@ -116,37 +116,42 @@ class _UpravljanjeZaposlenimaScreenState
                             itemCount: value.length,
                             controller: ScrollController(),
                             itemBuilder: (BuildContext context, int index) {
-                              return Card(
-                                elevation: 5,
-                                color: Colors.blue,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(15),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Id: ${value[index].korisnikId}',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
+                              return GestureDetector(
+                                onTap: () => upravljanjeZaposlenimaProvider
+                                    .goToIzmenaZaposlenihScreen(
+                                        value[index], context),
+                                child: Card(
+                                  elevation: 5,
+                                  color: Colors.blue,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(15),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Id: ${value[index].korisnikId}',
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        'Ime: ${value[index].ime}',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
+                                        Text(
+                                          'Ime: ${value[index].ime}',
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                          ),
                                         ),
-                                      ),
-                                      Text(
-                                        'Prezime: ${value[index].prezime}',
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
+                                        Text(
+                                          'Prezime: ${value[index].prezime}',
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );
