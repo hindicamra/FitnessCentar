@@ -5,6 +5,7 @@ import 'package:fitness_admin/routes/app_routes.dart';
 import 'package:fitness_admin/screens/homepage_screen.dart';
 import 'package:fitness_admin/screens/login_screen.dart';
 import 'package:fitness_admin/screens/upravljanje_zaposlenima_screen.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Fitness Centar',
+      scrollBehavior: MyCustomScrollBehavior(),
       initialRoute: AppRoutes.login,
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
@@ -45,4 +47,14 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+}
+
+class MyCustomScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        // etc.
+      };
 }

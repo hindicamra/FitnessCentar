@@ -98,9 +98,26 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () => loginProvider.sendLoginApiCall(context),
-                child: const Text('Login'),
+              SizedBox(
+                width: 300,
+                child: TextButton(
+                  onPressed: () => loginProvider.sendLoginApiCall(context),
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blue,
+                    ),
+                    child: const Center(
+                        child: Text(
+                      'Login',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                      ),
+                    )),
+                  ),
+                ),
               ),
             ],
           ),

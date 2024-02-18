@@ -33,7 +33,7 @@ class _HomepageScreenState extends State<HomepageScreen> {
               Container(
                 alignment: Alignment.center,
                 height: kToolbarHeight,
-                color: Colors.black,
+                color: Colors.blue,
                 child: const Text(
                   'Menu',
                   style: TextStyle(
