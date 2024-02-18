@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'korisnik.g.dart';
+part 'user_model.g.dart';
 
 @JsonSerializable()
-class Korisnik {
+class UserModel {
   int? korisnikId;
   String? ime;
   String? prezime;
@@ -14,22 +14,14 @@ class Korisnik {
   String? status;
   int? ulogaId;
 
-  Korisnik(
-    this.korisnikId,
-    this.ime,
-    this.prezime,
-    this.korisnickoIme,
-    this.email,
-    this.telefon,
-    this.adresa,
-    this.status,
-    this.ulogaId
-  );
+  UserModel(this.korisnikId, this.ime, this.prezime, this.korisnickoIme,
+      this.email, this.telefon, this.adresa, this.status, this.ulogaId);
 
-  factory Korisnik.fromJson(Map<String, dynamic> json) => _$KorisnikFromJson(json);
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
 
   /// `toJson` is the convention for a class to declare support for serialization
   /// to JSON. The implementation simply calls the private, generated
   /// helper method `_$UserToJson`.
-  Map<String, dynamic> toJson() => _$KorisnikToJson(this);
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
 }

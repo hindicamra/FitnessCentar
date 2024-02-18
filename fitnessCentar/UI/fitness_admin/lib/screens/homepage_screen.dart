@@ -40,7 +40,7 @@ class _HomepageScreenState extends State<HomepageScreen> {
                 child: Column(
                   children: [
                     ListTile(
-                      title: const Text('Korisnici'),
+                      title: const Text('Administrator'),
                       onTap: () {
                         _navigatorKey.currentState?.pushReplacement(
                           MaterialPageRoute(
@@ -95,7 +95,7 @@ class MainContent extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16.0),
       child: const Center(
-        child: Text('Main Content'),
+        child: Text('Dobrodošli'),
       ),
     );
   }

@@ -13,7 +13,7 @@ class _KorisniciScreenState extends State<KorisniciScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: MyCustomAppBar(
-        title: "Korisnici",
+        title: "Administrator",
       ),
       body: Placeholder(),
     );
