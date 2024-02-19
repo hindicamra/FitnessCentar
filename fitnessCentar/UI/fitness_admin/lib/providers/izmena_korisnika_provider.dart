@@ -13,7 +13,7 @@ class IzmenaKorisnikaProvider extends ChangeNotifier {
   TextEditingController status = TextEditingController();
   TextEditingController role = TextEditingController();
 
-  setUserMode(UserModel userModelData) {
+  setUserModel(UserModel userModelData) {
     userModel = userModelData;
   }
 

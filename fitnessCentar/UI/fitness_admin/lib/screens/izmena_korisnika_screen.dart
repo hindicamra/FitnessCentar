@@ -22,7 +22,7 @@ class _IzmenaKorisnikaScreenState extends State<IzmenaKorisnikaScreen> {
   @override
   Widget build(BuildContext context) {
     final userModel = ModalRoute.of(context)!.settings.arguments as UserModel;
-    izmenaKorisnikaProvider.setUserMode(userModel);
+    izmenaKorisnikaProvider.setUserModel(userModel);
     izmenaKorisnikaProvider.setData();
     return Scaffold(
       appBar: AppBar(

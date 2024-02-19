@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class HomeProvider extends ChangeNotifier {
   UserModel? userModel;
 
-  setUserModel(UserModel? userModelData) {
+  setUserModell(UserModel? userModelData) {
     userModel = userModelData;
   }
 

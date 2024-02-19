@@ -13,7 +13,7 @@ class LoginProvider extends ChangeNotifier {
 
   sendLoginApiCall(BuildContext context) async {
     /// For testing now without backend data
-    if (username.text.length > 3 && password.text.length > 3) {
+    if (username.text.length > 2 && password.text.length > 3) {
       context.loaderOverlay.show();
       await Future.delayed(
         const Duration(seconds: 2),
@@ -31,7 +31,7 @@ class LoginProvider extends ChangeNotifier {
         1,
       );
       HomeProvider homeProvider = context.read<HomeProvider>();
-      homeProvider.setUserModel(userModel);
+      homeProvider.setUserModell(userModel);
       context.loaderOverlay.hide();
 
       Navigator.popAndPushNamed(context, AppRoutes.naslovna);

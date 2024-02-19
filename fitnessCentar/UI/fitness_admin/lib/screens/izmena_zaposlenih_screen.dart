@@ -22,7 +22,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
   @override
   Widget build(BuildContext context) {
     final userModel = ModalRoute.of(context)!.settings.arguments as UserModel;
-    izmenaZaposlenihProvider.setUserMode(userModel);
+    izmenaZaposlenihProvider.setUserModel(userModel);
     izmenaZaposlenihProvider.setData();
 
     return Scaffold(

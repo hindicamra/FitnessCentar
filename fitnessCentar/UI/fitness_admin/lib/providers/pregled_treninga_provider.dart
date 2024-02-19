@@ -5,8 +5,8 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class PregledTreningaProvider extends ChangeNotifier {
   final formKey = GlobalKey<FormBuilderState>();
-  final String formName = 'dateRange';
-  String? startDate;
+  final String formName = 'date';
+  String? date;
   ValueNotifier<List<TrainingModel>> listItems = ValueNotifier([]);
 
   searchApi() {
