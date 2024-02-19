@@ -12,4 +12,8 @@ class HomeProvider extends ChangeNotifier {
   goToUpravljanjeZaposlenimaScreen(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.upravljanjeZaposlenima);
   }
+
+  goToUpravljanjeKorisnicimaScreen(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.upravljanjeKorinsicima);
+  }
 }

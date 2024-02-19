@@ -55,7 +55,8 @@ class _HomepageScreenState extends State<HomepageScreen> {
                         : Container(),
                     ListTile(
                       title: const Text('Upravljanje korisnicima'),
-                      onTap: () {},
+                      onTap: () => homeProvider
+                          .goToUpravljanjeKorisnicimaScreen(context),
                     ),
                     ListTile(
                       title: const Text('Pregled raspored treninga'),

@@ -1,37 +1,36 @@
 import 'package:fitness_admin/models/user_model.dart';
-import 'package:fitness_admin/providers/izmena_zaposlenih_provider.dart';
+import 'package:fitness_admin/providers/izmena_korisnika_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class IzmenaZaposlenihScreen extends StatefulWidget {
-  const IzmenaZaposlenihScreen({super.key});
+class IzmenaKorisnikaScreen extends StatefulWidget {
+  const IzmenaKorisnikaScreen({super.key});
 
   @override
-  State<IzmenaZaposlenihScreen> createState() => _IzmenaZaposlenihScreenState();
+  State<IzmenaKorisnikaScreen> createState() => _IzmenaKorisnikaScreenState();
 }
 
-class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
-  late IzmenaZaposlenihProvider izmenaZaposlenihProvider;
+class _IzmenaKorisnikaScreenState extends State<IzmenaKorisnikaScreen> {
+  late IzmenaKorisnikaProvider izmenaKorisnikaProvider;
 
   @override
   void initState() {
-    izmenaZaposlenihProvider = context.read<IzmenaZaposlenihProvider>();
+    izmenaKorisnikaProvider = context.read<IzmenaKorisnikaProvider>();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final userModel = ModalRoute.of(context)!.settings.arguments as UserModel;
-    izmenaZaposlenihProvider.setUserMode(userModel);
-    izmenaZaposlenihProvider.setData();
-
+    izmenaKorisnikaProvider.setUserMode(userModel);
+    izmenaKorisnikaProvider.setData();
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
         backgroundColor: Colors.blue,
         centerTitle: true,
         title: Text(
-          'Zaposleni: ${izmenaZaposlenihProvider.userModel?.ime}',
+          'Zaposleni: ${izmenaKorisnikaProvider.userModel?.ime}',
         ),
       ),
       body: SingleChildScrollView(
@@ -59,7 +58,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                             color: Colors.black,
                           ),
                           keyboardType: TextInputType.name,
-                          controller: izmenaZaposlenihProvider.name,
+                          controller: izmenaKorisnikaProvider.name,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -91,7 +90,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                             color: Colors.black,
                           ),
                           keyboardType: TextInputType.name,
-                          controller: izmenaZaposlenihProvider.surname,
+                          controller: izmenaKorisnikaProvider.surname,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -131,7 +130,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                             color: Colors.black,
                           ),
                           keyboardType: TextInputType.name,
-                          controller: izmenaZaposlenihProvider.username,
+                          controller: izmenaKorisnikaProvider.username,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -163,7 +162,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                             color: Colors.black,
                           ),
                           keyboardType: TextInputType.emailAddress,
-                          controller: izmenaZaposlenihProvider.email,
+                          controller: izmenaKorisnikaProvider.email,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -203,7 +202,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                             color: Colors.black,
                           ),
                           keyboardType: TextInputType.phone,
-                          controller: izmenaZaposlenihProvider.phone,
+                          controller: izmenaKorisnikaProvider.phone,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -235,7 +234,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                             color: Colors.black,
                           ),
                           keyboardType: TextInputType.text,
-                          controller: izmenaZaposlenihProvider.address,
+                          controller: izmenaKorisnikaProvider.address,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -275,7 +274,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                             color: Colors.black,
                           ),
                           keyboardType: TextInputType.text,
-                          controller: izmenaZaposlenihProvider.status,
+                          controller: izmenaKorisnikaProvider.status,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -307,7 +306,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                             color: Colors.black,
                           ),
                           keyboardType: TextInputType.text,
-                          controller: izmenaZaposlenihProvider.role,
+                          controller: izmenaKorisnikaProvider.role,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -334,7 +333,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                     width: 300,
                     child: TextButton(
                       onPressed: () =>
-                          izmenaZaposlenihProvider.saveUser(context),
+                          izmenaKorisnikaProvider.saveUser(context),
                       child: Container(
                         height: 50,
                         decoration: BoxDecoration(
@@ -356,7 +355,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                     width: 300,
                     child: TextButton(
                       onPressed: () =>
-                          izmenaZaposlenihProvider.deleteUser(context),
+                          izmenaKorisnikaProvider.deleteUser(context),
                       child: Container(
                         height: 50,
                         decoration: BoxDecoration(

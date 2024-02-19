@@ -2,7 +2,7 @@ import 'package:fitness_admin/models/user_model.dart';
 import 'package:fitness_admin/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
-class UpravljanjeZaposlenimaProvider extends ChangeNotifier {
+class UpravljanjeKorisnicimaProvider extends ChangeNotifier {
   TextEditingController search = TextEditingController();
   ValueNotifier<List<UserModel>> listItems = ValueNotifier([]);
 
@@ -11,7 +11,7 @@ class UpravljanjeZaposlenimaProvider extends ChangeNotifier {
     listItems.value.add(
       UserModel(
         1,
-        'IME ZAPOSLEN',
+        'IME KORISNIK',
         'PREZIME',
         'KORISNIKO IME',
         'EMAIL',
@@ -24,10 +24,10 @@ class UpravljanjeZaposlenimaProvider extends ChangeNotifier {
     listItems.notifyListeners();
   }
 
-  goToIzmenaZaposlenihScreen(UserModel userModel, BuildContext context) async {
+  goToIzmenaKorisnikaScreen(UserModel userModel, BuildContext context) async {
     await Navigator.pushNamed(
       context,
-      AppRoutes.izmenaZaposlenih,
+      AppRoutes.izmenaKorisnika,
       arguments: userModel,
     ).then((val) {
       bool? data = val as bool?;
