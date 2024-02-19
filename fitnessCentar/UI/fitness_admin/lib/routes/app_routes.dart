@@ -6,4 +6,6 @@ class AppRoutes {
   static const izmenaZaposlenih = '/izmenaZaposlenih';
   static const upravljanjeKorinsicima = '/izmenaKorisnicima';
   static const izmenaKorisnika = '/izmenaKorisnika';
+  static const pregledTreninga = '/pregledTreninga';
+  static const detaljiTreninga = '/detaljiTreninga';
 }

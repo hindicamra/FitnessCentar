@@ -1,14 +1,18 @@
+import 'package:fitness_admin/providers/detalji_treninga_provider.dart';
 import 'package:fitness_admin/providers/home_provider.dart';
 import 'package:fitness_admin/providers/izmena_korisnika_provider.dart';
 import 'package:fitness_admin/providers/izmena_zaposlenih_provider.dart';
 import 'package:fitness_admin/providers/login_provider.dart';
+import 'package:fitness_admin/providers/pregled_treninga_provider.dart';
 import 'package:fitness_admin/providers/upravljanje_korisnicima_provider.dart';
 import 'package:fitness_admin/providers/upravljanje_zaposlenima_provider.dart';
 import 'package:fitness_admin/routes/app_routes.dart';
+import 'package:fitness_admin/screens/detalji_treninga_screen.dart';
 import 'package:fitness_admin/screens/homepage_screen.dart';
 import 'package:fitness_admin/screens/izmena_korisnika_screen.dart';
 import 'package:fitness_admin/screens/izmena_zaposlenih_screen.dart';
 import 'package:fitness_admin/screens/login_screen.dart';
+import 'package:fitness_admin/screens/pregled_treninga_screen.dart';
 import 'package:fitness_admin/screens/upavljanje_korisnicima_screen.dart';
 import 'package:fitness_admin/screens/upravljanje_zaposlenima_screen.dart';
 import 'package:flutter/gestures.dart';
@@ -37,6 +41,12 @@ void main() {
       ChangeNotifierProvider(
         create: (_) => IzmenaKorisnikaProvider(),
       ),
+      ChangeNotifierProvider(
+        create: (_) => PregledTreningaProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => DetaljiTreningaProvider(),
+      ),
     ],
     child: const MyApp(),
   ));
@@ -63,6 +73,8 @@ class MyApp extends StatelessWidget {
         AppRoutes.upravljanjeKorinsicima: (context) =>
             const UpravljanjeKorisnicimaScreen(),
         AppRoutes.izmenaKorisnika: (context) => const IzmenaKorisnikaScreen(),
+        AppRoutes.pregledTreninga: (context) => const PregledTreningaScreen(),
+        AppRoutes.detaljiTreninga: (context) => const DetaljiTreningaScreen(),
       },
     );
   }

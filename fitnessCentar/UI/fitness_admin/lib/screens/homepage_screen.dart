@@ -60,7 +60,8 @@ class _HomepageScreenState extends State<HomepageScreen> {
                     ),
                     ListTile(
                       title: const Text('Pregled raspored treninga'),
-                      onTap: () {},
+                      onTap: () =>
+                          homeProvider.goToPregledTreningaScreen(context),
                     ),
                     ListTile(
                       title: const Text('Odjava'),
