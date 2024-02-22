@@ -1,5 +1,6 @@
 import 'package:fitness_admin/providers/home_provider.dart';
 import 'package:fitness_admin/routes/app_routes.dart';
+import 'package:fitness_admin/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -46,7 +47,7 @@ class _HomepageScreenState extends State<HomepageScreen> {
                 padding: const EdgeInsets.only(top: kToolbarHeight),
                 child: Column(
                   children: [
-                    homeProvider.userModel?.ulogaId == 1
+                    homeProvider.userModel?.ulogaId == UserRole.admin.value
                         ? ListTile(
                             title: const Text('Upravljanje zaposlenima'),
                             onTap: () => homeProvider

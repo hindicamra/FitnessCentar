@@ -9,13 +9,19 @@ class Authorization {
 }
 
 enum UserStatus {
-  active,
-  nonActive,
+  active(1),
+  nonActive(2);
+
+  const UserStatus(this.value);
+  final int value;
 }
 
 enum UserRole {
-  admin,
-  user,
+  admin(1),
+  user(2);
+
+  const UserRole(this.value);
+  final int value;
 }
 
 Image imageFromBase64String(String base64Image) {

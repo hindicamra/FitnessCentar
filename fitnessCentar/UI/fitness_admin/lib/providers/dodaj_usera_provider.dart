@@ -3,7 +3,7 @@ import 'package:fitness_admin/utils/constants.dart';
 import 'package:fitness_admin/utils/utils.dart';
 import 'package:flutter/material.dart';
 
-class IzmenaZaposlenihProvider extends ChangeNotifier {
+class DodajUseraProvider extends ChangeNotifier {
   UserModel? userModel;
 
   TextEditingController name = TextEditingController();
@@ -42,28 +42,8 @@ class IzmenaZaposlenihProvider extends ChangeNotifier {
     ),
   ];
 
-  setUserModel(UserModel userModelData) {
-    userModel = userModelData;
-  }
-
-  setData() async {
-    name.text = userModel?.ime ?? '';
-    surname.text = userModel?.prezime ?? '';
-    username.text = userModel?.korisnickoIme ?? '';
-    email.text = userModel?.email ?? '';
-    phone.text = userModel?.telefon ?? '';
-    address.text = userModel?.adresa ?? '';
-    status ??= userModel?.status;
-    role ??= userModel?.ulogaId;
-  }
-
   saveUser(BuildContext context) {
     //TODO send api call to save user
-    Navigator.pop(context, true);
-  }
-
-  deleteUser(BuildContext context) {
-    //TODO send api call to delete user
     Navigator.pop(context, true);
   }
 }

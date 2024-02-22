@@ -17,7 +17,7 @@ class UpravljanjeKorisnicimaProvider extends ChangeNotifier {
         'EMAIL',
         'TELEFON',
         'ADRESA',
-        'STATUS',
+        1,
         1,
         'PLAN ISHRANE',
       ),

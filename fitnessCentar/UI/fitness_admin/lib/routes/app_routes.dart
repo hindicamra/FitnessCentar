@@ -8,4 +8,5 @@ class AppRoutes {
   static const izmenaKorisnika = '/izmenaKorisnika';
   static const pregledTreninga = '/pregledTreninga';
   static const detaljiTreninga = '/detaljiTreninga';
+  static const dodajUsera = '/dodajUsera';
 }

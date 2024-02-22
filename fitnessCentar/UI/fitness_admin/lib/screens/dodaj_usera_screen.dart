@@ -1,37 +1,32 @@
-import 'package:fitness_admin/models/user_model.dart';
-import 'package:fitness_admin/providers/izmena_zaposlenih_provider.dart';
+import 'package:fitness_admin/providers/dodaj_usera_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class IzmenaZaposlenihScreen extends StatefulWidget {
-  const IzmenaZaposlenihScreen({super.key});
+class DodajUseraScreen extends StatefulWidget {
+  const DodajUseraScreen({super.key});
 
   @override
-  State<IzmenaZaposlenihScreen> createState() => _IzmenaZaposlenihScreenState();
+  State<DodajUseraScreen> createState() => _DodajUseraScreenState();
 }
 
-class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
-  late IzmenaZaposlenihProvider izmenaZaposlenihProvider;
+class _DodajUseraScreenState extends State<DodajUseraScreen> {
+  late DodajUseraProvider dodajUseraProvider;
 
   @override
   void initState() {
-    izmenaZaposlenihProvider = context.read<IzmenaZaposlenihProvider>();
+    dodajUseraProvider = context.read<DodajUseraProvider>();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final userModel = ModalRoute.of(context)!.settings.arguments as UserModel;
-    izmenaZaposlenihProvider.setUserModel(userModel);
-    izmenaZaposlenihProvider.setData();
-
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
         backgroundColor: Colors.blue,
         centerTitle: true,
-        title: Text(
-          'Zaposleni: ${izmenaZaposlenihProvider.userModel?.ime}',
+        title: const Text(
+          'Dodaj User',
         ),
       ),
       body: SingleChildScrollView(
@@ -59,7 +54,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                             color: Colors.black,
                           ),
                           keyboardType: TextInputType.name,
-                          controller: izmenaZaposlenihProvider.name,
+                          controller: dodajUseraProvider.name,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -91,7 +86,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                             color: Colors.black,
                           ),
                           keyboardType: TextInputType.name,
-                          controller: izmenaZaposlenihProvider.surname,
+                          controller: dodajUseraProvider.surname,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -131,7 +126,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                             color: Colors.black,
                           ),
                           keyboardType: TextInputType.name,
-                          controller: izmenaZaposlenihProvider.username,
+                          controller: dodajUseraProvider.username,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -163,7 +158,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                             color: Colors.black,
                           ),
                           keyboardType: TextInputType.emailAddress,
-                          controller: izmenaZaposlenihProvider.email,
+                          controller: dodajUseraProvider.email,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -203,7 +198,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                             color: Colors.black,
                           ),
                           keyboardType: TextInputType.phone,
-                          controller: izmenaZaposlenihProvider.phone,
+                          controller: dodajUseraProvider.phone,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -235,7 +230,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                             color: Colors.black,
                           ),
                           keyboardType: TextInputType.text,
-                          controller: izmenaZaposlenihProvider.address,
+                          controller: dodajUseraProvider.address,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -269,7 +264,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                         height: 10,
                       ),
                       DropdownButton<int>(
-                        value: izmenaZaposlenihProvider.status,
+                        value: dodajUseraProvider.status,
                         icon: const Icon(Icons.arrow_drop_down),
                         elevation: 16,
                         style:
@@ -280,10 +275,10 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                         ),
                         onChanged: (int? value) {
                           setState(() {
-                            izmenaZaposlenihProvider.status = value ?? 1;
+                            dodajUseraProvider.status = value ?? 1;
                           });
                         },
-                        items: izmenaZaposlenihProvider.dropDownStatusItems,
+                        items: dodajUseraProvider.dropDownStatusItems,
                       ),
                     ],
                   ),
@@ -298,7 +293,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                         height: 10,
                       ),
                       DropdownButton<int>(
-                        value: izmenaZaposlenihProvider.role,
+                        value: dodajUseraProvider.role,
                         icon: const Icon(Icons.arrow_drop_down),
                         elevation: 16,
                         style:
@@ -309,10 +304,10 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                         ),
                         onChanged: (int? value) {
                           setState(() {
-                            izmenaZaposlenihProvider.role = value ?? 1;
+                            dodajUseraProvider.role = value ?? 1;
                           });
                         },
-                        items: izmenaZaposlenihProvider.dropDownRoleItems,
+                        items: dodajUseraProvider.dropDownRoleItems,
                       ),
                     ],
                   ),
@@ -327,8 +322,7 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                   SizedBox(
                     width: 300,
                     child: TextButton(
-                      onPressed: () =>
-                          izmenaZaposlenihProvider.saveUser(context),
+                      onPressed: () => dodajUseraProvider.saveUser(context),
                       child: Container(
                         height: 50,
                         decoration: BoxDecoration(
@@ -338,28 +332,6 @@ class _IzmenaZaposlenihScreenState extends State<IzmenaZaposlenihScreen> {
                         child: const Center(
                             child: Text(
                           'Sačuvaj',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16.0,
-                          ),
-                        )),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 300,
-                    child: TextButton(
-                      onPressed: () =>
-                          izmenaZaposlenihProvider.deleteUser(context),
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.blue,
-                        ),
-                        child: const Center(
-                            child: Text(
-                          'Obriši',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16.0,

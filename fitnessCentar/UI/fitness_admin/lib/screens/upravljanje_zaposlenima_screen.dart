@@ -1,5 +1,7 @@
 import 'package:fitness_admin/models/user_model.dart';
 import 'package:fitness_admin/providers/upravljanje_zaposlenima_provider.dart';
+import 'package:fitness_admin/utils/constants.dart';
+import 'package:fitness_admin/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,6 +33,16 @@ class _UpravljanjeZaposlenimaScreenState
         centerTitle: true,
         title: const Text(
           'Zaposleni',
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        heroTag: 'Proizvodi tag',
+        onPressed: () =>
+            upravljanjeZaposlenimaProvider.goToDodajUseraScreen(context),
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.blue,
+        child: const Icon(
+          Icons.add,
         ),
       ),
       body: Padding(
@@ -124,35 +136,61 @@ class _UpravljanjeZaposlenimaScreenState
                                   elevation: 5,
                                   color: Colors.blue,
                                   child: Padding(
-                                    padding: const EdgeInsets.all(15),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Id: ${value[index].korisnikId}',
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
+                                      padding: const EdgeInsets.all(15),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                'Id: ${value[index].korisnikId}',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                              Text(
+                                                'Ime: ${value[index].ime}',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                              Text(
+                                                'Prezime: ${value[index].prezime}',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                        Text(
-                                          'Ime: ${value[index].ime}',
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
+                                          const SizedBox(
+                                            height: 10,
                                           ),
-                                        ),
-                                        Text(
-                                          'Prezime: ${value[index].prezime}',
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                'Status: ${value[index].status == UserStatus.active.value ? AppConstants.active : AppConstants.nonActive}',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                              Text(
+                                                'Uloga: ${value[index].ulogaId == UserRole.admin.value ? AppConstants.admin : AppConstants.user}',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                        ],
+                                      )),
                                 ),
                               );
                             },

@@ -11,7 +11,7 @@ class UserModel {
   String? email;
   String? telefon;
   String? adresa;
-  String? status;
+  int? status;
   int? ulogaId;
   String? planIshrane;
 
