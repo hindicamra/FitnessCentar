@@ -261,7 +261,7 @@ class _IzmenaKorisnikaScreenState extends State<IzmenaKorisnikaScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        'Status: ',
+                        'Plan ishrane: ',
                         style: TextStyle(fontSize: 16, color: Colors.black),
                       ),
                       const SizedBox(
@@ -274,7 +274,7 @@ class _IzmenaKorisnikaScreenState extends State<IzmenaKorisnikaScreen> {
                             color: Colors.black,
                           ),
                           keyboardType: TextInputType.text,
-                          controller: izmenaKorisnikaProvider.status,
+                          controller: izmenaKorisnikaProvider.dietPlat,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -282,39 +282,7 @@ class _IzmenaKorisnikaScreenState extends State<IzmenaKorisnikaScreen> {
                               borderSide:
                                   BorderSide(color: Colors.black, width: 2.0),
                             ),
-                            hintText: "Status",
-                            hintStyle: TextStyle(color: Colors.grey),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Uloga: ',
-                        style: TextStyle(fontSize: 16, color: Colors.black),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      SizedBox(
-                        width: 300,
-                        child: TextFormField(
-                          style: const TextStyle(
-                            color: Colors.black,
-                          ),
-                          keyboardType: TextInputType.text,
-                          controller: izmenaKorisnikaProvider.role,
-                          decoration: const InputDecoration(
-                            fillColor: Colors.white,
-                            filled: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: Colors.black, width: 2.0),
-                            ),
-                            hintText: "Uloga",
+                            hintText: "Plan ishrane",
                             hintStyle: TextStyle(color: Colors.grey),
                           ),
                         ),

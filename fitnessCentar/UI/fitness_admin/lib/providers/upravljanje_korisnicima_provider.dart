@@ -19,6 +19,7 @@ class UpravljanjeKorisnicimaProvider extends ChangeNotifier {
         'ADRESA',
         'STATUS',
         1,
+        'PLAN ISHRANE',
       ),
     );
     listItems.notifyListeners();

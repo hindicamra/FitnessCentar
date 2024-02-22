@@ -13,9 +13,20 @@ class UserModel {
   String? adresa;
   String? status;
   int? ulogaId;
+  String? planIshrane;
 
-  UserModel(this.korisnikId, this.ime, this.prezime, this.korisnickoIme,
-      this.email, this.telefon, this.adresa, this.status, this.ulogaId);
+  UserModel(
+    this.korisnikId,
+    this.ime,
+    this.prezime,
+    this.korisnickoIme,
+    this.email,
+    this.telefon,
+    this.adresa,
+    this.status,
+    this.ulogaId,
+    this.planIshrane,
+  );
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);

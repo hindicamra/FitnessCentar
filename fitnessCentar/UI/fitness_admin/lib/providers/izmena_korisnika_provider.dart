@@ -10,8 +10,7 @@ class IzmenaKorisnikaProvider extends ChangeNotifier {
   TextEditingController email = TextEditingController();
   TextEditingController phone = TextEditingController();
   TextEditingController address = TextEditingController();
-  TextEditingController status = TextEditingController();
-  TextEditingController role = TextEditingController();
+  TextEditingController dietPlat = TextEditingController();
 
   setUserModel(UserModel userModelData) {
     userModel = userModelData;
@@ -24,8 +23,7 @@ class IzmenaKorisnikaProvider extends ChangeNotifier {
     email.text = userModel?.email ?? '';
     phone.text = userModel?.telefon ?? '';
     address.text = userModel?.adresa ?? '';
-    status.text = userModel?.status ?? '';
-    role.text = (userModel?.ulogaId == 1) ? 'Admin' : 'Radnik';
+    dietPlat.text = userModel?.planIshrane ?? '';
   }
 
   saveUser(BuildContext context) {

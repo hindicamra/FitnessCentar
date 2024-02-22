@@ -29,6 +29,7 @@ class LoginProvider extends ChangeNotifier {
         'ADRESA',
         'STATUS',
         1,
+        'PLAN ISHRANE',
       );
       HomeProvider homeProvider = context.read<HomeProvider>();
       homeProvider.setUserModell(userModel);
