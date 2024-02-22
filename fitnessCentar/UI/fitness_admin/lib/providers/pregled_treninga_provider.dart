@@ -37,4 +37,8 @@ class PregledTreningaProvider extends ChangeNotifier {
       }
     });
   }
+
+  goToDodajTreningScreen(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.dodajTrening);
+  }
 }

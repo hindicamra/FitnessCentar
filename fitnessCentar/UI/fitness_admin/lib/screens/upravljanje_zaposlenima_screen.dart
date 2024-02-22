@@ -36,7 +36,7 @@ class _UpravljanjeZaposlenimaScreenState
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        heroTag: 'Proizvodi tag',
+        heroTag: 'Dodaj usera tag',
         onPressed: () =>
             upravljanjeZaposlenimaProvider.goToDodajUseraScreen(context),
         foregroundColor: Colors.white,

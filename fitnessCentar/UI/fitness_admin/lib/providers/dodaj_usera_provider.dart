@@ -44,6 +44,6 @@ class DodajUseraProvider extends ChangeNotifier {
 
   saveUser(BuildContext context) {
     //TODO send api call to save user
-    Navigator.pop(context, true);
+    Navigator.pop(context);
   }
 }

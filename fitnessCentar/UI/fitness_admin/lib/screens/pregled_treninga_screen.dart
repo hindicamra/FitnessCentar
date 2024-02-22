@@ -32,6 +32,16 @@ class _PregledTreningaScreenState extends State<PregledTreningaScreen> {
           'Pregled Treninga',
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        heroTag: 'Dodaj trening tag',
+        onPressed: () =>
+            pregledTreningaProvider.goToDodajTreningScreen(context),
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.blue,
+        child: const Icon(
+          Icons.add,
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(15),
         child: Column(

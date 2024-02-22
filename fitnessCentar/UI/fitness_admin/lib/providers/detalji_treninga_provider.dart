@@ -27,12 +27,12 @@ class DetaljiTreningaProvider extends ChangeNotifier {
     price.text = trainingModel?.price.toString() ?? '';
   }
 
-  saveUser(BuildContext context) {
+  saveTraining(BuildContext context) {
     //TODO send api call to save user
     Navigator.pop(context, true);
   }
 
-  deleteUser(BuildContext context) {
+  deleteTraining(BuildContext context) {
     //TODO send api call to delete user
     Navigator.pop(context, true);
   }

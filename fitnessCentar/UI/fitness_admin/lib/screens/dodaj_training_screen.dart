@@ -1,39 +1,34 @@
-import 'package:fitness_admin/models/training_model.dart';
-import 'package:fitness_admin/providers/detalji_treninga_provider.dart';
+import 'package:fitness_admin/providers/dodaj_trening_provider.dart';
 import 'package:fitness_admin/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 
-class DetaljiTreningaScreen extends StatefulWidget {
-  const DetaljiTreningaScreen({super.key});
+class DodajTreningScreen extends StatefulWidget {
+  const DodajTreningScreen({super.key});
 
   @override
-  State<DetaljiTreningaScreen> createState() => _DetaljiTreningaScreenState();
+  State<DodajTreningScreen> createState() => _DodajTreningScreenState();
 }
 
-class _DetaljiTreningaScreenState extends State<DetaljiTreningaScreen> {
-  late DetaljiTreningaProvider detaljiTreningaProvider;
+class _DodajTreningScreenState extends State<DodajTreningScreen> {
+  late DodajTreningProvider dodajTreningProvider;
 
   @override
   void initState() {
-    detaljiTreningaProvider = context.read<DetaljiTreningaProvider>();
+    dodajTreningProvider = context.read<DodajTreningProvider>();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final trainingModel =
-        ModalRoute.of(context)!.settings.arguments as TrainingModel;
-    detaljiTreningaProvider.setTrainingModel(trainingModel);
-    detaljiTreningaProvider.setData();
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
         backgroundColor: Colors.blue,
         centerTitle: true,
-        title: Text(
-          'Trener: ${detaljiTreningaProvider.trainingModel?.trainer}',
+        title: const Text(
+          'Dodaj Trening',
         ),
       ),
       body: SingleChildScrollView(
@@ -57,11 +52,10 @@ class _DetaljiTreningaScreenState extends State<DetaljiTreningaScreen> {
                       SizedBox(
                         width: 300,
                         child: FormBuilder(
-                          key: detaljiTreningaProvider.formKey,
+                          key: dodajTreningProvider.formKey,
                           child: FormBuilderDateTimePicker(
-                            initialValue: detaljiTreningaProvider.dateTime,
                             inputType: InputType.date,
-                            name: detaljiTreningaProvider.formName,
+                            name: dodajTreningProvider.formName,
                             firstDate: DateTime(2024, 1, 1),
                             lastDate: DateTime.now(),
                             format: AppConstants.dateFormat,
@@ -100,7 +94,7 @@ class _DetaljiTreningaScreenState extends State<DetaljiTreningaScreen> {
                             color: Colors.black,
                           ),
                           keyboardType: TextInputType.number,
-                          controller: detaljiTreningaProvider.duration,
+                          controller: dodajTreningProvider.duration,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -132,7 +126,7 @@ class _DetaljiTreningaScreenState extends State<DetaljiTreningaScreen> {
                             color: Colors.black,
                           ),
                           keyboardType: TextInputType.name,
-                          controller: detaljiTreningaProvider.trainer,
+                          controller: dodajTreningProvider.trainer,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -162,7 +156,7 @@ class _DetaljiTreningaScreenState extends State<DetaljiTreningaScreen> {
                             color: Colors.black,
                           ),
                           keyboardType: TextInputType.name,
-                          controller: detaljiTreningaProvider.typeOfTraining,
+                          controller: dodajTreningProvider.typeOfTraining,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -202,7 +196,7 @@ class _DetaljiTreningaScreenState extends State<DetaljiTreningaScreen> {
                             color: Colors.black,
                           ),
                           keyboardType: TextInputType.number,
-                          controller: detaljiTreningaProvider.price,
+                          controller: dodajTreningProvider.price,
                           decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
@@ -229,7 +223,7 @@ class _DetaljiTreningaScreenState extends State<DetaljiTreningaScreen> {
                     width: 300,
                     child: TextButton(
                       onPressed: () =>
-                          detaljiTreningaProvider.saveTraining(context),
+                          dodajTreningProvider.saveTraining(context),
                       child: Container(
                         height: 50,
                         decoration: BoxDecoration(
@@ -239,28 +233,6 @@ class _DetaljiTreningaScreenState extends State<DetaljiTreningaScreen> {
                         child: const Center(
                             child: Text(
                           'Sačuvaj',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16.0,
-                          ),
-                        )),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 300,
-                    child: TextButton(
-                      onPressed: () =>
-                          detaljiTreningaProvider.deleteTraining(context),
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.blue,
-                        ),
-                        child: const Center(
-                            child: Text(
-                          'Obriši',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16.0,

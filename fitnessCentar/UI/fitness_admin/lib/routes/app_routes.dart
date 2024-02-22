@@ -9,4 +9,5 @@ class AppRoutes {
   static const pregledTreninga = '/pregledTreninga';
   static const detaljiTreninga = '/detaljiTreninga';
   static const dodajUsera = '/dodajUsera';
+  static const dodajTrening = '/dodajTrening';
 }

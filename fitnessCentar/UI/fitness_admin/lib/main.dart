@@ -1,4 +1,5 @@
 import 'package:fitness_admin/providers/detalji_treninga_provider.dart';
+import 'package:fitness_admin/providers/dodaj_trening_provider.dart';
 import 'package:fitness_admin/providers/dodaj_usera_provider.dart';
 import 'package:fitness_admin/providers/home_provider.dart';
 import 'package:fitness_admin/providers/izmena_korisnika_provider.dart';
@@ -9,6 +10,7 @@ import 'package:fitness_admin/providers/upravljanje_korisnicima_provider.dart';
 import 'package:fitness_admin/providers/upravljanje_zaposlenima_provider.dart';
 import 'package:fitness_admin/routes/app_routes.dart';
 import 'package:fitness_admin/screens/detalji_treninga_screen.dart';
+import 'package:fitness_admin/screens/dodaj_training_screen.dart';
 import 'package:fitness_admin/screens/dodaj_usera_screen.dart';
 import 'package:fitness_admin/screens/homepage_screen.dart';
 import 'package:fitness_admin/screens/izmena_korisnika_screen.dart';
@@ -52,6 +54,9 @@ void main() {
       ChangeNotifierProvider(
         create: (_) => DodajUseraProvider(),
       ),
+      ChangeNotifierProvider(
+        create: (_) => DodajTreningProvider(),
+      ),
     ],
     child: const MyApp(),
   ));
@@ -81,6 +86,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.pregledTreninga: (context) => const PregledTreningaScreen(),
         AppRoutes.detaljiTreninga: (context) => const DetaljiTreningaScreen(),
         AppRoutes.dodajUsera: (context) => const DodajUseraScreen(),
+        AppRoutes.dodajTrening: (context) => const DodajTreningScreen(),
       },
     );
   }
