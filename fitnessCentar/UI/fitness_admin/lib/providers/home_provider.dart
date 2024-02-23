@@ -20,4 +20,8 @@ class HomeProvider extends ChangeNotifier {
   goToPregledTreningaScreen(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.pregledTreninga);
   }
+
+  goToZahtevTreningaScreen(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.zahteviTreninga);
+  }
 }

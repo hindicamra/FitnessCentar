@@ -1,4 +1,5 @@
 import 'package:fitness_admin/providers/detalji_treninga_provider.dart';
+import 'package:fitness_admin/providers/detalji_zahteva_treninga_provider.dart';
 import 'package:fitness_admin/providers/dodaj_trening_provider.dart';
 import 'package:fitness_admin/providers/dodaj_usera_provider.dart';
 import 'package:fitness_admin/providers/home_provider.dart';
@@ -8,8 +9,10 @@ import 'package:fitness_admin/providers/login_provider.dart';
 import 'package:fitness_admin/providers/pregled_treninga_provider.dart';
 import 'package:fitness_admin/providers/upravljanje_korisnicima_provider.dart';
 import 'package:fitness_admin/providers/upravljanje_zaposlenima_provider.dart';
+import 'package:fitness_admin/providers/zahtevi_treninga_provider.dart';
 import 'package:fitness_admin/routes/app_routes.dart';
 import 'package:fitness_admin/screens/detalji_treninga_screen.dart';
+import 'package:fitness_admin/screens/detalji_zahteva_traininga_screen.dart';
 import 'package:fitness_admin/screens/dodaj_training_screen.dart';
 import 'package:fitness_admin/screens/dodaj_usera_screen.dart';
 import 'package:fitness_admin/screens/homepage_screen.dart';
@@ -19,6 +22,7 @@ import 'package:fitness_admin/screens/login_screen.dart';
 import 'package:fitness_admin/screens/pregled_treninga_screen.dart';
 import 'package:fitness_admin/screens/upavljanje_korisnicima_screen.dart';
 import 'package:fitness_admin/screens/upravljanje_zaposlenima_screen.dart';
+import 'package:fitness_admin/screens/zahtevi_treninga_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -57,6 +61,12 @@ void main() {
       ChangeNotifierProvider(
         create: (_) => DodajTreningProvider(),
       ),
+      ChangeNotifierProvider(
+        create: (_) => ZahteviTreningaProvider(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => DetaljiZahtevaTreningaProvider(),
+      ),
     ],
     child: const MyApp(),
   ));
@@ -87,6 +97,9 @@ class MyApp extends StatelessWidget {
         AppRoutes.detaljiTreninga: (context) => const DetaljiTreningaScreen(),
         AppRoutes.dodajUsera: (context) => const DodajUseraScreen(),
         AppRoutes.dodajTrening: (context) => const DodajTreningScreen(),
+        AppRoutes.zahteviTreninga: (context) => const ZahteviTreningaScreen(),
+        AppRoutes.detaljiZahtevaTreninga: (context) =>
+            const DetaljiZahtevaTreningaScreen(),
       },
     );
   }

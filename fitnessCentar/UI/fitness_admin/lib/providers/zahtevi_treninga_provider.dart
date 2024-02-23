@@ -2,12 +2,9 @@ import 'package:fitness_admin/models/training_model.dart';
 import 'package:fitness_admin/models/user_model.dart';
 import 'package:fitness_admin/routes/app_routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-class PregledTreningaProvider extends ChangeNotifier {
-  final formKey = GlobalKey<FormBuilderState>();
-  final String formName = 'date';
-  String? date;
+class ZahteviTreningaProvider extends ChangeNotifier {
+  TextEditingController search = TextEditingController();
   ValueNotifier<List<TrainingModel>> listItems = ValueNotifier([]);
 
   searchApi() {
@@ -37,11 +34,11 @@ class PregledTreningaProvider extends ChangeNotifier {
     listItems.notifyListeners();
   }
 
-  goToDetaljiTreningaScreen(
+  goToDetaljiZahtevTreningaScreen(
       TrainingModel trainingModel, BuildContext context) async {
     await Navigator.pushNamed(
       context,
-      AppRoutes.detaljiTreninga,
+      AppRoutes.detaljiZahtevaTreninga,
       arguments: trainingModel,
     ).then((val) {
       bool? data = val as bool?;
@@ -49,9 +46,5 @@ class PregledTreningaProvider extends ChangeNotifier {
         searchApi();
       }
     });
-  }
-
-  goToDodajTreningScreen(BuildContext context) {
-    Navigator.pushNamed(context, AppRoutes.dodajTrening);
   }
 }

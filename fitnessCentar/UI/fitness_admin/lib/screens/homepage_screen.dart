@@ -65,6 +65,11 @@ class _HomepageScreenState extends State<HomepageScreen> {
                           homeProvider.goToPregledTreningaScreen(context),
                     ),
                     ListTile(
+                      title: const Text('Zahtevi treninga'),
+                      onTap: () =>
+                          homeProvider.goToZahtevTreningaScreen(context),
+                    ),
+                    ListTile(
                       title: const Text('Odjava'),
                       onTap: () {
                         Navigator.popAndPushNamed(context, AppRoutes.login);
