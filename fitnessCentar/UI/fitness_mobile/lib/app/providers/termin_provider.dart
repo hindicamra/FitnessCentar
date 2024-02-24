@@ -1,6 +1,4 @@
-import 'package:fitness_mobile/app/models/cart_model.dart';
 import 'package:fitness_mobile/app/models/training_model.dart';
-import 'package:fitness_mobile/app/providers/korpa_provider.dart';
 import 'package:fitness_mobile/app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -13,7 +11,6 @@ class TerminProvider extends ChangeNotifier {
   String? endDate;
   ValueNotifier<bool> refreshing = ValueNotifier(false);
   List<TrainingModel> listOfTrainings = [];
-  KorpaProvider? korpaProvider;
 
   resetDate() {
     formKey.currentState!.fields[formName]?.reset();
@@ -48,8 +45,8 @@ class TerminProvider extends ChangeNotifier {
     showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: const Text('Kupiti trening?'),
-        content: const Text("Da li zelite da kupite ovaj trening?"),
+        title: const Text('Rezerviši trening?'),
+        content: const Text("Da li zelite da rezervišete ovaj trening?"),
         actions: [
           TextButton(
             onPressed: () {
@@ -57,18 +54,15 @@ class TerminProvider extends ChangeNotifier {
               //TODO Show user that he added in cart and he cant add same thing again
               refreshing.value = true;
               listOfTrainings.remove(trainingModel);
-              korpaProvider?.addItemToCart(
-                CartModel(trainingModel.trainingId, trainingModel.price,
-                    '${trainingModel.trainer} - ${trainingModel.typeOfTraining} - ${trainingModel.date}'),
-              );
               refreshing.value = false;
               Fluttertoast.showToast(
-                  msg: "Trening dodat u korpu",
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.BOTTOM,
-                  backgroundColor: Colors.green,
-                  textColor: Colors.black,
-                  fontSize: 16.0);
+                msg: "Uspešno ste poslali trening na rezervaciju",
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.BOTTOM,
+                backgroundColor: Colors.green,
+                textColor: Colors.black,
+                fontSize: 16.0,
+              );
               Navigator.of(context).pop();
             },
             child: const Text('Da'),
@@ -82,9 +76,5 @@ class TerminProvider extends ChangeNotifier {
         ],
       ),
     );
-  }
-
-  setKorpaProvider(KorpaProvider setKorpaProvider) {
-    korpaProvider = setKorpaProvider;
   }
 }
