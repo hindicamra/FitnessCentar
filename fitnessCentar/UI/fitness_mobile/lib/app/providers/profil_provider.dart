@@ -30,4 +30,8 @@ class ProfilProvider extends ChangeNotifier {
   goToKorpaScreen(BuildContext context) {
     Navigator.pushNamed(context, AppRoutes.korpa);
   }
+
+  logout(BuildContext context) {
+    Navigator.popAndPushNamed(context, AppRoutes.login);
+  }
 }

@@ -141,7 +141,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
                       ),
                     ),
                     const SizedBox(
-                      width: 30,
+                      width: 15,
                     ),
                     Expanded(
                       child: TextButton(
@@ -165,7 +165,28 @@ class _ProfilScreenState extends State<ProfilScreen> {
                       ),
                     ),
                   ],
-                )
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                TextButton(
+                  onPressed: () => profilProvider.logout(context),
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blue,
+                    ),
+                    child: const Center(
+                        child: Text(
+                      'Logout',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                      ),
+                    )),
+                  ),
+                ),
               ],
             ),
           );
