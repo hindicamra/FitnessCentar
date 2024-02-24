@@ -73,7 +73,7 @@ class _NaslovnaScreenState extends State<NaslovnaScreen> {
                   icon: Icon(
                     Icons.store_outlined,
                   ),
-                  label: 'Proizvodi',
+                  label: 'Članarina',
                   activeIcon: Icon(
                     Icons.store,
                   ),

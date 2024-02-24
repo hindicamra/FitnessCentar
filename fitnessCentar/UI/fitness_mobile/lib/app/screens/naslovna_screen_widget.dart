@@ -28,7 +28,7 @@ class _NaslovnaScreenWidgetState extends State<NaslovnaScreenWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Dobrodošli ${homeProvider.userModel?.name ?? ''}',
+                'Dobrodošli ${homeProvider.userModel.name ?? ''}',
                 style: const TextStyle(
                   color: Colors.black,
                   fontSize: 30,

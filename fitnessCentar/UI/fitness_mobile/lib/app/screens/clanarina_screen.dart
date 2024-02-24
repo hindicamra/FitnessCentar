@@ -1,34 +1,34 @@
+import 'package:fitness_mobile/app/providers/clanarina_provider.dart';
 import 'package:fitness_mobile/app/providers/korpa_provider.dart';
-import 'package:fitness_mobile/app/providers/proizvodi_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ProizvodiScreen extends StatefulWidget {
-  const ProizvodiScreen({super.key});
+class ClanarinaScreen extends StatefulWidget {
+  const ClanarinaScreen({super.key});
 
   @override
-  State<ProizvodiScreen> createState() => _ProizvodiScreenState();
+  State<ClanarinaScreen> createState() => _ClanarinaScreenState();
 }
 
-class _ProizvodiScreenState extends State<ProizvodiScreen> {
-  late ProizvodiProvider proizvodiProvider;
+class _ClanarinaScreenState extends State<ClanarinaScreen> {
+  late ClanarinaProvider clanarinaProvider;
   late KorpaProvider korpaProvider;
 
   @override
   void initState() {
     super.initState();
-    proizvodiProvider = context.read<ProizvodiProvider>();
+    clanarinaProvider = context.read<ClanarinaProvider>();
     korpaProvider = context.read<KorpaProvider>();
-    proizvodiProvider.setKorpaProvider(korpaProvider);
-    proizvodiProvider.getAllListItems();
+    clanarinaProvider.setKorpaProvider(korpaProvider);
+    clanarinaProvider.getAllListItems();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        heroTag: 'Proizvodi tag',
-        onPressed: () => proizvodiProvider.goToKorpaScreen(context),
+        heroTag: 'Clanarina tag',
+        onPressed: () => clanarinaProvider.goToKorpaScreen(context),
         foregroundColor: Colors.white,
         backgroundColor: Colors.blue,
         child: const Icon(
@@ -40,7 +40,7 @@ class _ProizvodiScreenState extends State<ProizvodiScreen> {
           child: Column(
             children: [
               ValueListenableBuilder(
-                valueListenable: proizvodiProvider.refreshing,
+                valueListenable: clanarinaProvider.refreshing,
                 builder: (context, value, _) {
                   return Provider<bool>.value(
                     value: value,
@@ -51,12 +51,12 @@ class _ProizvodiScreenState extends State<ProizvodiScreen> {
                                 color: Colors.blue,
                               ),
                             )
-                          : proizvodiProvider.listOfItems.isEmpty
+                          : clanarinaProvider.listOfItems.isEmpty
                               ? Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     const Text(
-                                      'Nema nijednog proizvoda',
+                                      'Nema nijedne clanarine',
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 20,
@@ -68,7 +68,7 @@ class _ProizvodiScreenState extends State<ProizvodiScreen> {
                                     ),
                                     TextButton(
                                       onPressed: () =>
-                                          proizvodiProvider.getAllListItems(),
+                                          clanarinaProvider.getAllListItems(),
                                       child: Container(
                                         height: 50,
                                         decoration: BoxDecoration(
@@ -90,17 +90,17 @@ class _ProizvodiScreenState extends State<ProizvodiScreen> {
                                 )
                               : RefreshIndicator(
                                   onRefresh: () =>
-                                      proizvodiProvider.getAllListItems(),
+                                      clanarinaProvider.getAllListItems(),
                                   child: ListView.builder(
                                     itemCount:
-                                        proizvodiProvider.listOfItems.length,
+                                        clanarinaProvider.listOfItems.length,
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       return GestureDetector(
                                         onTap: () =>
-                                            proizvodiProvider.showDialogToBuy(
+                                            clanarinaProvider.showDialogToBuy(
                                           context,
-                                          proizvodiProvider.listOfItems[index],
+                                          clanarinaProvider.listOfItems[index],
                                         ),
                                         child: Padding(
                                           padding:
@@ -115,7 +115,7 @@ class _ProizvodiScreenState extends State<ProizvodiScreen> {
                                                   Row(
                                                     children: [
                                                       Text(
-                                                        'Ime proizvoda: ${proizvodiProvider.listOfItems[index].name}',
+                                                        'Članarina: ${clanarinaProvider.listOfItems[index].name}',
                                                         style: const TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 16,
@@ -130,7 +130,7 @@ class _ProizvodiScreenState extends State<ProizvodiScreen> {
                                                     children: [
                                                       Flexible(
                                                         child: Text(
-                                                          'Opis proizvoda: ${proizvodiProvider.listOfItems[index].description}',
+                                                          'Opis članarine: ${clanarinaProvider.listOfItems[index].description}',
                                                           style:
                                                               const TextStyle(
                                                             color: Colors.white,
@@ -146,7 +146,7 @@ class _ProizvodiScreenState extends State<ProizvodiScreen> {
                                                   Row(
                                                     children: [
                                                       Text(
-                                                        'Cena: ${proizvodiProvider.listOfItems[index].price} €',
+                                                        'Cena: ${clanarinaProvider.listOfItems[index].price} €',
                                                         style: const TextStyle(
                                                           color: Colors.white,
                                                           fontSize: 16,

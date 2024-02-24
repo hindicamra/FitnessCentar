@@ -1,9 +1,9 @@
+import 'package:fitness_mobile/app/providers/clanarina_provider.dart';
 import 'package:fitness_mobile/app/providers/dodaj_recenziju_provider.dart';
 import 'package:fitness_mobile/app/providers/korpa_provider.dart';
 import 'package:fitness_mobile/app/providers/login_provider.dart';
 import 'package:fitness_mobile/app/providers/naslovna_provider.dart';
 import 'package:fitness_mobile/app/providers/profil_provider.dart';
-import 'package:fitness_mobile/app/providers/proizvodi_provider.dart';
 import 'package:fitness_mobile/app/providers/recenzije_provider.dart';
 import 'package:fitness_mobile/app/providers/register_provider.dart';
 import 'package:fitness_mobile/app/providers/termin_provider.dart';
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
           create: (_) => KorpaProvider(),
         ),
         ChangeNotifierProvider(
-          create: (_) => ProizvodiProvider(),
+          create: (_) => ClanarinaProvider(),
         ),
         ChangeNotifierProvider(
           create: (_) => RecenzijeProvider(),

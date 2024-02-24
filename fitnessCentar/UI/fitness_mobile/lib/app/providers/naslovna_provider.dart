@@ -1,8 +1,8 @@
 import 'package:fitness_mobile/app/models/training_model.dart';
 import 'package:fitness_mobile/app/models/user_model.dart';
+import 'package:fitness_mobile/app/screens/clanarina_screen.dart';
 import 'package:fitness_mobile/app/screens/naslovna_screen_widget.dart';
 import 'package:fitness_mobile/app/screens/profil_screen.dart';
-import 'package:fitness_mobile/app/screens/proizvodi_screen.dart';
 import 'package:fitness_mobile/app/screens/recenzije_screen.dart';
 import 'package:fitness_mobile/app/screens/termin_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class NaslovnaProvider extends ChangeNotifier {
   final List<Widget> listOfPages = [
     const NaslovnaScreenWidget(),
     const TerminScreen(),
-    const ProizvodiScreen(),
+    const ClanarinaScreen(),
     const RecenzijaScreen(),
     const ProfilScreen(),
   ];
@@ -55,7 +55,7 @@ class NaslovnaProvider extends ChangeNotifier {
         title = 'Termini';
         break;
       case 2:
-        title = 'Proizvodi';
+        title = 'Članarina';
         break;
       case 3:
         title = 'Recenzije';

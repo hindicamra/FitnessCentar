@@ -6,7 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../routes/app_routes.dart';
 
-class ProizvodiProvider extends ChangeNotifier {
+class ClanarinaProvider extends ChangeNotifier {
   ValueNotifier<bool> refreshing = ValueNotifier(false);
   List<ShopItemModel> listOfItems = [];
   KorpaProvider? korpaProvider;
@@ -15,13 +15,27 @@ class ProizvodiProvider extends ChangeNotifier {
     refreshing.value = true;
     await Future.delayed(const Duration(seconds: 2));
     //TODO Make api call here for now use mock data
-    listOfItems.add(
-      ShopItemModel(
-        1,
-        100,
-        'Test Item',
-        'This is a test item description',
-      ),
+    listOfItems.addAll(
+      [
+        ShopItemModel(
+          1,
+          100,
+          'Test Item',
+          'This is a test item description',
+        ),
+        ShopItemModel(
+          1,
+          100,
+          'Test Item',
+          'This is a test item description',
+        ),
+        ShopItemModel(
+          1,
+          100,
+          'Test Item',
+          'This is a test item description',
+        ),
+      ],
     );
     refreshing.value = false;
   }
@@ -30,8 +44,8 @@ class ProizvodiProvider extends ChangeNotifier {
     showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: const Text('Kupiti prozivod?'),
-        content: const Text("Da li zelite da kupite ovaj proizvod?"),
+        title: const Text('Kupiti članarinu?'),
+        content: const Text("Da li zelite da kupite ovu članarinu?"),
         actions: [
           TextButton(
             onPressed: () {
