@@ -13,9 +13,10 @@ namespace fitnessCentar.Security
     {
         IKorisnikService _korisnikService;
 
+
         public BasicAuthenticationHandler(
             IKorisnikService korisnikService,
-            IUlogaService ulogaService,
+ 
             IOptionsMonitor<AuthenticationSchemeOptions> options,
             ILoggerFactory logger,
             UrlEncoder encoder,
@@ -23,6 +24,7 @@ namespace fitnessCentar.Security
             : base(options, logger, encoder, clock)
         {
             _korisnikService = korisnikService;
+
         }
 
 
@@ -41,20 +43,20 @@ namespace fitnessCentar.Security
             var password = credentials[1];
 
             var user = await _korisnikService.Login(username, password);
+            
 
             if (user == null)
             {
                 return AuthenticateResult.Fail("Incorrect username or password");
             }
-            else
-            {
+            
                 var claims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Name, user.Ime),
-                    new Claim(ClaimTypes.NameIdentifier, user.KorisnickoIme)
-                };
+                    new Claim(ClaimTypes.NameIdentifier, user.KorisnickoIme),
+                    new Claim(ClaimTypes.Role, user.Uloga)};
 
-                claims.Add(new Claim(ClaimTypes.Role, user.Uloga));
+
 
                 var identity = new ClaimsIdentity(claims, Scheme.Name);
 
@@ -62,7 +64,7 @@ namespace fitnessCentar.Security
 
                 var ticket = new AuthenticationTicket(principal, Scheme.Name);
                 return AuthenticateResult.Success(ticket);
-            }
+            
         }
     }
 }

@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 
 namespace fitnessCentar.Controllers
 {
+    [ApiController]
     [Route("[controller]")]
-    [Authorize]
     public class BaseController<T, TSearch> : ControllerBase where T : class where TSearch : class
     {
         protected readonly IService<T, TSearch> _service;
@@ -20,13 +20,13 @@ namespace fitnessCentar.Controllers
         }
 
         [HttpGet()]
-        public async Task<PagedResult<T>> Get([FromQuery] TSearch search)
+        public virtual async Task<PagedResult<T>> Get([FromQuery] TSearch search)
         {
             return await _service.Get(search);
         }
 
         [HttpGet("{id}")]
-        public async Task<T> GetById(int id)
+        public virtual async Task<T> GetById(int id)
         {
             return await _service.GetById(id);
         }

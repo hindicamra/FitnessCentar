@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace fitnessCentar.Controllers
 {
-    [Route("[controller]")]
+  
     public class BaseCRUDController<T, TSearch, TInsert, TUpdate> : BaseController<T, TSearch> where T : class where TSearch : class
     {
         protected new readonly ICRUDService<T, TSearch, TInsert, TUpdate> _service;

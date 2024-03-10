@@ -10,7 +10,7 @@ namespace fitnessCentar.Model.Status
 
 	public enum Uloga
 	{
-		Admin,
+		Admin =1,
 		Uposlenik,
 		Korisnik
 	}

@@ -60,15 +60,18 @@ namespace fitnessCentar.Services
 
         public async Task<Model.Korisnik> Login(string username, string password)
         {
-            var entity = await _context.Korisniks.FirstOrDefaultAsync(x => x.KorisnickoIme == username);
+            var entity = await _context.Korisniks.Include(x => x.Uloga).FirstOrDefaultAsync(x => x.KorisnickoIme == username);
+
 
             if (entity != null)
             {
                 var hash = GenerateHash(entity.PasswordSalt, password);
 
-                if (hash == entity.PasswordSalt)
+                if (hash == entity.PasswordHash)
                 {
-                    return _mapper.Map<Model.Korisnik>(entity);
+
+
+                    return _mapper.Map<Model.Korisnik>(entity); ;
                 }
             }
 

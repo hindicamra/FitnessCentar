@@ -7,12 +7,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace fitnessCentar.Controllers
 {
-    [ApiController]
-    [Authorize(Roles = "Admin")]
+
+    
     public class UlogaController : BaseController<Uloga, UlogaSearchObject>
     {
         public UlogaController(ILogger<BaseController<Uloga, UlogaSearchObject>> logger, IUlogaService service) : base(logger, service)
         {
         }
+
+        [Authorize(Roles = "Korisnik")]
+        public override Task<PagedResult<Uloga>> Get([FromQuery] UlogaSearchObject search)
+        {
+            return base.Get(search);
+        }
+
+
     }
 }
+ 

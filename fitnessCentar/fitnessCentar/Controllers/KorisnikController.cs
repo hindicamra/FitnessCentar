@@ -22,7 +22,7 @@ namespace fitnessCentar.Controllers
         [Authorize(Roles = "Admin")]
         public virtual async Task<Model.Korisnik> InsertUposlenik([FromBody] KorisnikInsertRequest request)
         {
-            if (request.UlogaId == (int)Model.Status.Uloga.Korisnik)
+            if (request.UlogaId == (int)Model.Status.Uloga.Uposlenik)
             {
                 throw new UserException("Nevalidna uloga");
             }
@@ -30,8 +30,7 @@ namespace fitnessCentar.Controllers
             return await _service.Insert(request);
         }
 
-        [HttpPost("Korisnik")]
-        [AllowAnonymous]
+        [HttpPost("korisnik"), AllowAnonymous]
         public override async Task<Model.Korisnik> Insert([FromBody] KorisnikInsertRequest request)
         {
             if (request.UlogaId != (int)Model.Status.Uloga.Korisnik)
