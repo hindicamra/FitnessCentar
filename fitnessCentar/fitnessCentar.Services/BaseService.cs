@@ -28,7 +28,7 @@ namespace fitnessCentar.Services
             _mapper = mapper;
         }
 
-        public async Task<PagedResult<T>> Get(TSearch search)
+        public virtual async Task<PagedResult<T>> Get(TSearch search)
         {
             var query = _context.Set<TDb>().AsQueryable();
 
@@ -60,7 +60,7 @@ namespace fitnessCentar.Services
             return query;
         }
 
-        public async Task<T> GetById(int id)
+        public virtual async Task<T> GetById(int id)
         {
             var entity = await _context.Set<TDb>().FindAsync(id);
 

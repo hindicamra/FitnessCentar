@@ -27,7 +27,7 @@ public partial class Korisnik
 
     public byte[]? Slika { get; set; }
 
-    public string? Status { get; set; }
+    public bool Status { get; set; }
 
     public virtual ICollection<Clanarina> Clanarinas { get; set; } = new List<Clanarina>();
 

@@ -12,10 +12,16 @@ namespace fitnessCentar.Services
     {
         public MappingProfile() 
         {
-           
 
 
-            CreateMap<Database.Korisnik, Model.Korisnik>().ForMember(dest => dest.Uloga, opt => opt.MapFrom(src => src.Uloga.Naziv));
+
+            CreateMap<Database.Korisnik, Model.Korisnik>()
+    .ForMember(dest => dest.Uloga, opt => opt.MapFrom(src => src.Uloga.Naziv))
+    .ForMember(dest => dest.PlanoviIshrane, opt => opt.MapFrom(src => src.PlanIshraneKorisniks.Select(pik => pik.PlanIshrane)));
+   
+
+
+            //CreateMap<Database.Korisnik, Model.Korisnik>().ForMember(dest => dest.Uloga, opt => opt.MapFrom(src => src.Uloga.Naziv));
             //CreateMap<Database.Korisnik, Model.Korisnik>();
             CreateMap<Model.Requests.KorisnikInsertRequest, Database.Korisnik>();
             CreateMap<Model.Requests.KorisnikUpdateRequest, Database.Korisnik>()

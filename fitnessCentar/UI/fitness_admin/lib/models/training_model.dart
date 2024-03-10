@@ -12,6 +12,8 @@ class TrainingModel {
   final String? typeOfTraining;
   final int? price;
   final UserModel userModel;
+
+  
   TrainingModel(
     this.trainingId,
     this.date,

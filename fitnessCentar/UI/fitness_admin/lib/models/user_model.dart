@@ -26,6 +26,7 @@ class UserModel {
     this.status,
     this.ulogaId,
     this.planIshrane,
+    
   );
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

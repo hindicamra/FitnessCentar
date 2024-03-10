@@ -8,6 +8,7 @@ namespace fitnessCentar.Model.SearchObjects
 {
     public class KorisnikSearchObject : BaseSearchObject
     {
-        public bool? IsUlogeIncluded { get; set; }
+        public string? ImePrezime { get; set; }
+        public int? UlogaId { get; set; }
     }
 }

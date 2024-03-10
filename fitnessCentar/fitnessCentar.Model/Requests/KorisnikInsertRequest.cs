@@ -16,13 +16,13 @@ namespace fitnessCentar.Model.Requests
         [Required(AllowEmptyStrings = false, ErrorMessage = "Lozinka je obavezno polje.")]
         [MinLength(3, ErrorMessage = "Dužina lozinke mora biti najmanje 3 karaktera.")]
         [MaxLength(20, ErrorMessage = "Dužina lozinke ne smije preći 20 karaktera.")]
-        public string Password { get; set; } = null!;
+        public string Password { get; set; } = "Password123*";
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Potvrda lozinke je obavezno polje.")]
         [MinLength(3, ErrorMessage = "Dužina potvrde lozinke mora biti najmanje 3 karaktera.")]
         [MaxLength(20, ErrorMessage = "Dužina potvrde lozinke ne smije preći 20 karaktera.")]
         [Compare("Password", ErrorMessage = "Lozinke moraju biti iste")]
-        public string PasswordPotvrda { get; set; } = null!;
+        public string PasswordPotvrda { get; set; }= "Password123*";
 
         [Required(ErrorMessage = "UlogaId je obavezno polje.")]
         public int UlogaId { get; set; }

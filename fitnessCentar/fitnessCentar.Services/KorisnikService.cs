@@ -11,6 +11,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace fitnessCentar.Services
 {
@@ -77,5 +78,47 @@ namespace fitnessCentar.Services
 
             return null;
         }
+
+
+        public override async Task<PagedResult<Model.Korisnik>> Get(KorisnikSearchObject search)
+        {
+            var query = _context.Set<Database.Korisnik>().AsQueryable().Include("Uloga").Include("PlanIshraneKorisniks.PlanIshrane");
+
+
+            if (search != null && !string.IsNullOrEmpty(search.ImePrezime))
+            {
+                query = query.Where(x => x.Ime.Contains(search.ImePrezime) || x.Prezime.Contains(search.ImePrezime));
+            }
+
+            if(search!=null && search.UlogaId!=null)
+            {
+                query=query.Where(x => x.UlogaId==search.UlogaId);
+            }
+
+            PagedResult<Model.Korisnik> result = new PagedResult<Model.Korisnik>();
+
+            
+            if (search?.Page.HasValue == true && search?.PageSize.HasValue == true && query.Any())
+            {
+                query = query.Skip(search.Page.Value * search.PageSize.Value).Take(search.PageSize.Value);
+            }
+
+            result.Count = await query.CountAsync();
+
+            var list = await query.ToListAsync();
+
+            result.Result = _mapper.Map<List<Model.Korisnik>>(list);
+
+            return result;
+        }
+
+
+
+
+
+
+
+
+
     }
 }

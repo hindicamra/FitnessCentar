@@ -22,12 +22,16 @@ namespace fitnessCentar.Model
 
         public string? Addresa { get; set; }
 
-        public byte[]? Slika { get; set; }
 
-        public string? Status { get; set; }
+        public bool Status { get; set; }
 
         public string Uloga { get; set; } = null!;
 
-        
+        public int UlogaId { get; set; }
+
+        public List<PlanIshrane> PlanoviIshrane { get; set; } = null!;
+
+
+
     }
 }

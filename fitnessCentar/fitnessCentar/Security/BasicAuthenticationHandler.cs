@@ -16,7 +16,6 @@ namespace fitnessCentar.Security
 
         public BasicAuthenticationHandler(
             IKorisnikService korisnikService,
- 
             IOptionsMonitor<AuthenticationSchemeOptions> options,
             ILoggerFactory logger,
             UrlEncoder encoder,
