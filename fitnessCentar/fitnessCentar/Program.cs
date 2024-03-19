@@ -53,6 +53,7 @@ builder.Services.AddTransient<IPlanIshraneKorisnikService, PlanIshraneKorisnikSe
 builder.Services.AddTransient<IPlacanjaService, PlacanjaService>();
 
 builder.Services.AddTransient<IUlogaService, UlogaService>();
+builder.Services.AddTransient<IEmailService, EmailService>();
 
 builder.Services.AddAutoMapper(typeof(IKorisnikService));
 builder.Services.AddAuthentication("BasicAuthentication")
@@ -73,5 +74,12 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+/*using (var scope = app.Services.CreateAsyncScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<FitnessCentarContext>();
+
+    dataContext.Database.Migrate();
+
+}*/
 
 app.Run();

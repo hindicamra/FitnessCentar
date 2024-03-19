@@ -1,0 +1,26 @@
+﻿
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+
+WORKDIR /src
+EXPOSE 80
+EXPOSE 443
+
+
+COPY ["fitnessCentar.Notifications/fitnessCentar.Notifications.csproj", "fitnessCentar.Notifications/"]
+RUN dotnet restore "fitnessCentar.Notifications/fitnessCentar.Notifications.csproj"
+
+
+COPY . .
+WORKDIR "/src/fitnessCentar.Notifications"
+RUN dotnet build "fitnessCentar.Notifications.csproj" -c Release -o /app/build
+
+
+FROM build AS publish
+RUN dotnet publish "fitnessCentar.Notifications.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /app
+COPY --from=publish /app/publish .
+
+
+ENTRYPOINT ["dotnet", "fitnessCentar.Notifications.dll"]

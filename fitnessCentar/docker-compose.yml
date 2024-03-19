@@ -2,7 +2,7 @@ version: '3'
 services:
 #mssql docker
   fitnesscentar-sql:
-    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    image: mcr.microsoft.com/mssql/server:2019-latest
     restart: unless-stopped
     environment:
       - ACCEPT_EULA=Y
@@ -14,6 +14,27 @@ services:
         - 1433
     networks:
       - fitnesscentar-net
+  
+  fitnesscentar-rabbitmq:
+    image: rabbitmq:3.12.1-management
+    restart: unless-stopped
+    ports:
+      - 5672:5672
+      - 15672:15672
+  
+  fitnesscentar-notifications:
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile.notifications
+    depends_on:
+      - fitnesscentar-rabbitmq
+      - fitnesscentar-sql
+      - fitnesscentar-api
+    networks:
+      - fitnesscentar-net
+    ports:
+      - 7111:80
 
   fitnesscentar-api:
     restart: unless-stopped
@@ -21,7 +42,7 @@ services:
       context: .
     environment:
       - ConnectionStrings:DefaultConnection=Server=fitnessCentar-sql,1433;Database=210420;User=sa;Password=QWElkj132!;ConnectRetryCount=0;TrustServerCertificate=True
-      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - 7150:7150
     networks:

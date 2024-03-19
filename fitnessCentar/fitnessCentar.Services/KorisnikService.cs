@@ -17,10 +17,11 @@ namespace fitnessCentar.Services
 {
     public class KorisnikService : BaseCRUDService<Model.Korisnik, Database.Korisnik, KorisnikSearchObject, KorisnikInsertRequest, KorisnikUpdateRequest>, IKorisnikService 
     {
-
-        public KorisnikService(FitnessCentarContext context, IMapper mapper)
-            : base(context, mapper) 
+        private readonly IEmailService _emailService;
+        public KorisnikService(FitnessCentarContext context, IMapper mapper, IEmailService emailService)
+            : base(context, mapper)
         {
+            _emailService = emailService;
         }
 
         public override async Task BeforeInsert(Database.Korisnik entity, KorisnikInsertRequest insert)
@@ -70,6 +71,19 @@ namespace fitnessCentar.Services
 
                 if (hash == entity.PasswordHash)
                 {
+
+                    ReservationNotifier reservation = new ReservationNotifier
+                    {
+                        Id = 1,
+                        Trening="Ovo je test",
+                        Email = entity.Email,
+                        Datum = DateTime.Now,
+                        Vrijeme = DateTime.Now,
+
+
+                    };
+
+                    _emailService.SendingObject(reservation);
 
 
                     return _mapper.Map<Model.Korisnik>(entity); ;

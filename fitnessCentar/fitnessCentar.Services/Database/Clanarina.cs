@@ -19,7 +19,7 @@ public partial class Clanarina
 
     public virtual Korisnik? Korisnik { get; set; }
 
-    public virtual ICollection<Placanja> Placanjas { get; set; } = new List<Placanja>();
+
 
     public virtual TipClanarine? TipClanarine { get; set; }
 }

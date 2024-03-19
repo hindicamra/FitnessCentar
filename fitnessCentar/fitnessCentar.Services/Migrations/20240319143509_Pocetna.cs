@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace fitnessCentar.Services.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Pocetna : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +19,8 @@ namespace fitnessCentar.Services.Migrations
                 {
                     PlanIshraneId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Opis = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,7 +34,8 @@ namespace fitnessCentar.Services.Migrations
                     TipClanarineId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Cijena = table.Column<float>(type: "real", nullable: false)
+                    Cijena = table.Column<float>(type: "real", nullable: false),
+                    Trajanje = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -66,6 +70,26 @@ namespace fitnessCentar.Services.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Placanjas",
+                columns: table => new
+                {
+                    PlacanjeId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Iznos = table.Column<float>(type: "real", nullable: false),
+                    Datum = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TipClanarineId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Placanjas", x => x.PlacanjeId);
+                    table.ForeignKey(
+                        name: "FK_Placanjas_TipClanarines_TipClanarineId",
+                        column: x => x.TipClanarineId,
+                        principalTable: "TipClanarines",
+                        principalColumn: "TipClanarineId");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Korisniks",
                 columns: table => new
                 {
@@ -81,7 +105,7 @@ namespace fitnessCentar.Services.Migrations
                     Addresa = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UlogaId = table.Column<int>(type: "int", nullable: false),
                     Slika = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Status = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -104,7 +128,7 @@ namespace fitnessCentar.Services.Migrations
                     TipClanarineId = table.Column<int>(type: "int", nullable: false),
                     Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Opis = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Trajanje = table.Column<int>(type: "int", nullable: false)
+                    VaziDo = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -130,8 +154,7 @@ namespace fitnessCentar.Services.Migrations
                     PlanIshraneKorisnikId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PlanIshraneId = table.Column<int>(type: "int", nullable: true),
-                    KorisnikId = table.Column<int>(type: "int", nullable: true),
-                    Opis = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    KorisnikId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -204,24 +227,34 @@ namespace fitnessCentar.Services.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Placanjas",
-                columns: table => new
+            migrationBuilder.InsertData(
+                table: "Trenings",
+                columns: new[] { "TreningId", "Naziv", "Opis" },
+                values: new object[,]
                 {
-                    PlacanjeId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Iznos = table.Column<float>(type: "real", nullable: false),
-                    Datum = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ClanarinaId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
+                    { 1, "Trening ruku", "Opis treninga ruku" },
+                    { 2, "Trening nogu", "Opis treninga nogu" },
+                    { 3, "Trening ledja", "Opis treninga ledja" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Ulogas",
+                columns: new[] { "UlogaId", "Naziv" },
+                values: new object[,]
                 {
-                    table.PrimaryKey("PK_Placanjas", x => x.PlacanjeId);
-                    table.ForeignKey(
-                        name: "FK_Placanjas_Clanarinas_ClanarinaId",
-                        column: x => x.ClanarinaId,
-                        principalTable: "Clanarinas",
-                        principalColumn: "ClanarinaId");
+                    { 1, "Admin" },
+                    { 2, "Uposlenik" },
+                    { 3, "Korisnik" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Korisniks",
+                columns: new[] { "KorisnikId", "Addresa", "Email", "Ime", "KorisnickoIme", "PasswordHash", "PasswordSalt", "Prezime", "Slika", "Status", "Telefon", "UlogaId" },
+                values: new object[,]
+                {
+                    { 1, "Adresa", "admin@gmail.com", "Admin", "admin", "C5fuEDcAxNxDuUXqOJCU9DYfLpM=", "qQ0nSvQ4rOy3pP/Zi95wIw==", "Admin", null, true, "060000000", 1 },
+                    { 2, "Adresa", "uposlenik@gmail.com", "Uposlenik", "uposlenik", "C5fuEDcAxNxDuUXqOJCU9DYfLpM=", "qQ0nSvQ4rOy3pP/Zi95wIw==", "Uposlenik", null, true, "060000001", 2 },
+                    { 3, "Adresa", "korisnik@gmail.com", "Korisnik", "korisnik", "C5fuEDcAxNxDuUXqOJCU9DYfLpM=", "qQ0nSvQ4rOy3pP/Zi95wIw==", "Korisnik", null, true, "060000002", 3 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -240,9 +273,9 @@ namespace fitnessCentar.Services.Migrations
                 column: "UlogaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Placanjas_ClanarinaId",
+                name: "IX_Placanjas_TipClanarineId",
                 table: "Placanjas",
-                column: "ClanarinaId");
+                column: "TipClanarineId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlanIshraneKorisniks_KorisnikId",
@@ -279,6 +312,9 @@ namespace fitnessCentar.Services.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Clanarinas");
+
+            migrationBuilder.DropTable(
                 name: "Placanjas");
 
             migrationBuilder.DropTable(
@@ -291,19 +327,16 @@ namespace fitnessCentar.Services.Migrations
                 name: "Rezervacijas");
 
             migrationBuilder.DropTable(
-                name: "Clanarinas");
+                name: "TipClanarines");
 
             migrationBuilder.DropTable(
                 name: "PlanIshranes");
 
             migrationBuilder.DropTable(
-                name: "Trenings");
-
-            migrationBuilder.DropTable(
                 name: "Korisniks");
 
             migrationBuilder.DropTable(
-                name: "TipClanarines");
+                name: "Trenings");
 
             migrationBuilder.DropTable(
                 name: "Ulogas");

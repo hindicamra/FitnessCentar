@@ -12,7 +12,7 @@ public partial class Placanja
     public float Iznos { get; set; }
     public DateTime Datum { get; set; }
 
-    public int? ClanarinaId { get; set; }
+    public int? TipClanarineId { get; set; }
 
-    public virtual Clanarina? Clanarina { get; set; }
+    public virtual TipClanarine? TipClanarine { get; set; }
 }

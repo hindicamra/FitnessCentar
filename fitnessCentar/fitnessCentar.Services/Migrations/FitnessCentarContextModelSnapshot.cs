@@ -108,6 +108,50 @@ namespace fitnessCentar.Services.Migrations
                     b.HasIndex("UlogaId");
 
                     b.ToTable("Korisniks");
+
+                    b.HasData(
+                        new
+                        {
+                            KorisnikId = 1,
+                            Addresa = "Adresa",
+                            Email = "admin@gmail.com",
+                            Ime = "Admin",
+                            KorisnickoIme = "admin",
+                            PasswordHash = "C5fuEDcAxNxDuUXqOJCU9DYfLpM=",
+                            PasswordSalt = "qQ0nSvQ4rOy3pP/Zi95wIw==",
+                            Prezime = "Admin",
+                            Status = true,
+                            Telefon = "060000000",
+                            UlogaId = 1
+                        },
+                        new
+                        {
+                            KorisnikId = 2,
+                            Addresa = "Adresa",
+                            Email = "uposlenik@gmail.com",
+                            Ime = "Uposlenik",
+                            KorisnickoIme = "uposlenik",
+                            PasswordHash = "C5fuEDcAxNxDuUXqOJCU9DYfLpM=",
+                            PasswordSalt = "qQ0nSvQ4rOy3pP/Zi95wIw==",
+                            Prezime = "Uposlenik",
+                            Status = true,
+                            Telefon = "060000001",
+                            UlogaId = 2
+                        },
+                        new
+                        {
+                            KorisnikId = 3,
+                            Addresa = "Adresa",
+                            Email = "korisnik@gmail.com",
+                            Ime = "Korisnik",
+                            KorisnickoIme = "korisnik",
+                            PasswordHash = "C5fuEDcAxNxDuUXqOJCU9DYfLpM=",
+                            PasswordSalt = "qQ0nSvQ4rOy3pP/Zi95wIw==",
+                            Prezime = "Korisnik",
+                            Status = true,
+                            Telefon = "060000002",
+                            UlogaId = 3
+                        });
                 });
 
             modelBuilder.Entity("fitnessCentar.Services.Database.Placanja", b =>
@@ -118,18 +162,18 @@ namespace fitnessCentar.Services.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlacanjeId"));
 
-                    b.Property<int?>("ClanarinaId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Datum")
                         .HasColumnType("datetime2");
 
                     b.Property<float>("Iznos")
                         .HasColumnType("real");
 
+                    b.Property<int?>("TipClanarineId")
+                        .HasColumnType("int");
+
                     b.HasKey("PlacanjeId");
 
-                    b.HasIndex("ClanarinaId");
+                    b.HasIndex("TipClanarineId");
 
                     b.ToTable("Placanjas");
                 });
@@ -278,6 +322,26 @@ namespace fitnessCentar.Services.Migrations
                     b.HasKey("TreningId");
 
                     b.ToTable("Trenings");
+
+                    b.HasData(
+                        new
+                        {
+                            TreningId = 1,
+                            Naziv = "Trening ruku",
+                            Opis = "Opis treninga ruku"
+                        },
+                        new
+                        {
+                            TreningId = 2,
+                            Naziv = "Trening nogu",
+                            Opis = "Opis treninga nogu"
+                        },
+                        new
+                        {
+                            TreningId = 3,
+                            Naziv = "Trening ledja",
+                            Opis = "Opis treninga ledja"
+                        });
                 });
 
             modelBuilder.Entity("fitnessCentar.Services.Database.Uloga", b =>
@@ -295,6 +359,23 @@ namespace fitnessCentar.Services.Migrations
                     b.HasKey("UlogaId");
 
                     b.ToTable("Ulogas");
+
+                    b.HasData(
+                        new
+                        {
+                            UlogaId = 1,
+                            Naziv = "Admin"
+                        },
+                        new
+                        {
+                            UlogaId = 2,
+                            Naziv = "Uposlenik"
+                        },
+                        new
+                        {
+                            UlogaId = 3,
+                            Naziv = "Korisnik"
+                        });
                 });
 
             modelBuilder.Entity("fitnessCentar.Services.Database.Clanarina", b =>
@@ -306,7 +387,7 @@ namespace fitnessCentar.Services.Migrations
                         .IsRequired();
 
                     b.HasOne("fitnessCentar.Services.Database.TipClanarine", "TipClanarine")
-                        .WithMany("Clanarinas")
+                        .WithMany()
                         .HasForeignKey("TipClanarineId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -329,11 +410,11 @@ namespace fitnessCentar.Services.Migrations
 
             modelBuilder.Entity("fitnessCentar.Services.Database.Placanja", b =>
                 {
-                    b.HasOne("fitnessCentar.Services.Database.Clanarina", "Clanarina")
-                        .WithMany("Placanjas")
-                        .HasForeignKey("ClanarinaId");
+                    b.HasOne("fitnessCentar.Services.Database.TipClanarine", "TipClanarine")
+                        .WithMany()
+                        .HasForeignKey("TipClanarineId");
 
-                    b.Navigation("Clanarina");
+                    b.Navigation("TipClanarine");
                 });
 
             modelBuilder.Entity("fitnessCentar.Services.Database.PlanIshraneKorisnik", b =>
@@ -389,11 +470,6 @@ namespace fitnessCentar.Services.Migrations
                     b.Navigation("Trening");
                 });
 
-            modelBuilder.Entity("fitnessCentar.Services.Database.Clanarina", b =>
-                {
-                    b.Navigation("Placanjas");
-                });
-
             modelBuilder.Entity("fitnessCentar.Services.Database.Korisnik", b =>
                 {
                     b.Navigation("Clanarinas");
@@ -408,11 +484,6 @@ namespace fitnessCentar.Services.Migrations
             modelBuilder.Entity("fitnessCentar.Services.Database.PlanIshrane", b =>
                 {
                     b.Navigation("PlanIshraneKorisniks");
-                });
-
-            modelBuilder.Entity("fitnessCentar.Services.Database.TipClanarine", b =>
-                {
-                    b.Navigation("Clanarinas");
                 });
 
             modelBuilder.Entity("fitnessCentar.Services.Database.Trening", b =>
