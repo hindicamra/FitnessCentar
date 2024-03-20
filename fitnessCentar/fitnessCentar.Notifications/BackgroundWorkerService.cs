@@ -32,15 +32,15 @@ public class ConsumeRabbitMQHostedService : BackgroundService
             Password = _password
         };
 
-        // create connection  
+
         _connection = factory.CreateConnection();
 
-        // create channel  
+
         _channel = _connection.CreateModel();
 
-        //_channel.ExchangeDeclare("demo.exchange", ExchangeType.Topic);
+
         _channel.QueueDeclare("Reservation_added", false, false, false, null);
-        //_channel.QueueBind("demo.queue.log", "demo.exchange", "demo.queue.*", null);
+        
         _channel.BasicQos(0, 1, false);
 
         _connection.ConnectionShutdown += RabbitMQ_ConnectionShutdown;
@@ -78,7 +78,7 @@ public class ConsumeRabbitMQHostedService : BackgroundService
     private async Task HandleMessage(ReservationNotifier reservation)
     {
         // we just print this message   
-        _logger.LogInformation($"Reservation received: {reservation.Id}");
+        //_logger.LogInformation($"Reservation received: {reservation.Id}");
         await _emailSender.SendEmailAsync(reservation.Email, "Uspješno ste napravili rezervaciju!", $"Vaša rezervacija za {reservation.Trening} na datum {reservation.Datum.ToShortDateString()} / {reservation.Vrijeme.ToShortTimeString()}.");
 
     }

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace fitnessCentar.Controllers
 {
     [ApiController]
-    [Authorize(Roles = "admin,korisnik")]
+    [Authorize(Roles = "Admin,Korisnik")]
     public class ClanarinaController : BaseCRUDController<Model.Clanarina, Model.SearchObjects.ClanarinaSearchObject, ClanarinaInsertRequest, ClanarinaUpdateRequest>
     {
 

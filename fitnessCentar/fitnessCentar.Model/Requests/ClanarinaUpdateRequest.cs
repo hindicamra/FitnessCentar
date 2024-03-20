@@ -11,8 +11,7 @@ namespace fitnessCentar.Model.Requests
     {
         public int? KorisnikId { get; set; }
         public int? TipClanarineId { get; set; }
-        public string? Naziv { get; set; }
-        public string? Opis { get; set; }
+  
 
         [Required(ErrorMessage = "VaziDo je obavezno polje.")]
         [FutureDate(ErrorMessage = "The date must be in the future.")]

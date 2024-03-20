@@ -15,11 +15,6 @@ namespace fitnessCentar.Model.Requests
         [Required(ErrorMessage = "TipClanarine je obavezno polje.")]
         public int TipClanarineId { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Naziv je obavezno polje.")]
-        public string Naziv { get; set; }
-
-        public string? Opis { get; set; }
-
-        public DateTime? VaziDo { get; set; }
+       
     }
 }

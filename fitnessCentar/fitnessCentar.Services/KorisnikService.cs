@@ -72,19 +72,7 @@ namespace fitnessCentar.Services
                 if (hash == entity.PasswordHash)
                 {
 
-                    ReservationNotifier reservation = new ReservationNotifier
-                    {
-                        Id = 1,
-                        Trening="Ovo je test",
-                        Email = entity.Email,
-                        Datum = DateTime.Now,
-                        Vrijeme = DateTime.Now,
-
-
-                    };
-
-                    _emailService.SendingObject(reservation);
-
+                  
 
                     return _mapper.Map<Model.Korisnik>(entity); ;
                 }

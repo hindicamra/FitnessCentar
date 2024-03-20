@@ -7,6 +7,7 @@ using fitnessCentar.Model.Status;
 using fitnessCentar.Services.Database;
 using fitnessCentar.Services.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace fitnessCentar.Services
 {
@@ -16,21 +17,41 @@ namespace fitnessCentar.Services
         private readonly ITreningService _treningService;
         private readonly IClanarinaService _clanarinaService;
         private readonly IEmailService _emailService;
+        private readonly IServiceProvider _serviceProvider;
+
 
         public RezervacijaService(FitnessCentarContext context, IMapper mapper,
-            IKorisnikService korisnikService, IClanarinaService clanarinaService, IEmailService emailService, ITreningService treningService)
+            IKorisnikService korisnikService, IClanarinaService clanarinaService, IEmailService emailService, ITreningService treningService, IServiceProvider serviceProvider)
             : base(context, mapper)
         {
             _korisnikService = korisnikService;
             _clanarinaService = clanarinaService;
             _emailService = emailService;
             _treningService = treningService;
+            _serviceProvider = serviceProvider;
         }
 
         public override IQueryable<Database.Rezervacija> AddInclude(IQueryable<Database.Rezervacija> query, RezervacijaSearchObject? search = null)
         {
             query = query.Include("Korisnik");
             return base.AddInclude(query, search);
+        }
+        public override IQueryable<Database.Rezervacija> AddFilter(IQueryable<Database.Rezervacija> query, RezervacijaSearchObject? search = null)
+        {
+            if (search != null)
+            {
+                if (search.KorisnikId.HasValue)
+                {
+                    query = query.Where(r => r.KorisnikId == search.KorisnikId.Value);
+                }
+
+                if (search.Datum.HasValue)
+                {
+                    query = query.Where(r => r.Datum.Date == search.Datum.Value.Date);
+                }
+            }
+
+            return base.AddFilter(query, search);
         }
 
         public override async Task BeforeInsert(Database.Rezervacija entity, RezervacijaInsertRequest insert)
@@ -43,7 +64,6 @@ namespace fitnessCentar.Services
                 throw new UserException("Korisnik ne postoji");
             }
 
-
             if (trening is null)
             {
                 throw new UserException("Trening ne postoji");
@@ -51,22 +71,40 @@ namespace fitnessCentar.Services
 
             var clanarina = await _clanarinaService.Get(new ClanarinaSearchObject() { KorisnikId = korisnik.KorisnikId });
 
+            if (clanarina.Count == 0)
+            {
+                throw new UserException("Korisnik nije clan");
+            }
+
             if (clanarina.Result?.FirstOrDefault()?.VaziDo < DateTime.Now)
             {
                 throw new UserException("Clanarina nije validna");
+            }
+
+
+            
+            var rezervacijaService = _serviceProvider.GetService(typeof(IRezervacijaService)) as IRezervacijaService;
+
+            var existingReservation = await rezervacijaService.Get(new RezervacijaSearchObject()
+            {
+                KorisnikId = korisnik.KorisnikId,
+                Datum = insert.Datum
+            });
+
+            if (existingReservation.Count > 0)
+            {
+                throw new UserException("Već ste rezervisali za ovaj datum");
             }
 
             entity.Status = Enum.GetName(typeof(StatusRezervacije), StatusRezervacije.NaCekanju);
 
             ReservationNotifier reservation = new ReservationNotifier
             {
-                Id = 1,
                 Trening = trening.Naziv,
                 Email = korisnik.Email,
                 Datum = insert.Datum,
                 Vrijeme = insert.Datum
             };
-
 
             _emailService.SendingObject(reservation);
         }

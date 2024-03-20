@@ -11,10 +11,6 @@ public partial class Clanarina
 
     public int TipClanarineId { get; set; }
 
-    public string Naziv { get; set; } = null!;
-
-    public string? Opis { get; set; }
-
     public DateTime VaziDo { get; set; }
 
     public virtual Korisnik? Korisnik { get; set; }
