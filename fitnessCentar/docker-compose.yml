@@ -1,6 +1,5 @@
 version: '3'
 services:
-#mssql docker
   fitnesscentar-sql:
     image: mcr.microsoft.com/mssql/server:2019-latest
     restart: unless-stopped
@@ -11,24 +10,37 @@ services:
     ports:
       - 1401:1433
     expose:
-        - 1433
+      - 1433
     networks:
       - fitnesscentar-net
-  
-  fitnesscentar-rabbitmq:
+
+  rabbitmq:
     image: rabbitmq:3.12.1-management
+    container_name: rabbitmq
     restart: unless-stopped
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=mypass
     ports:
       - 5672:5672
       - 15672:15672
-  
+    expose:
+      - 5672
+    networks:
+      - fitnesscentar-net
+
   fitnesscentar-notifications:
     restart: on-failure
     build:
       context: .
       dockerfile: Dockerfile.notifications
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_USERNAME=user
+      - RABBITMQ_PASSWORD=mypass
+      - RABBITMQ_VIRTUALHOST=/
     depends_on:
-      - fitnesscentar-rabbitmq
+      - rabbitmq
       - fitnesscentar-sql
       - fitnesscentar-api
     networks:
@@ -41,17 +53,20 @@ services:
     build:
       context: .
     environment:
-      - ConnectionStrings:DefaultConnection=Server=fitnessCentar-sql,1433;Database=210420;User=sa;Password=QWElkj132!;ConnectRetryCount=0;TrustServerCertificate=True
+      - ConnectionStrings:DefaultConnection=Server=fitnesscentar-sql,1433;Database=210420;User=sa;Password=QWElkj132!;ConnectRetryCount=0;TrustServerCertificate=True
       - ASPNETCORE_ENVIRONMENT=Development
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+      - RABBITMQ_USERNAME=user
+      - RABBITMQ_PASSWORD=mypass
+      - RABBITMQ_VIRTUALHOST=/
     ports:
       - 7150:7150
     networks:
       - fitnesscentar-net
-    links:
-      - fitnesscentar-sql
     depends_on:
       - fitnesscentar-sql
-      
+
 networks:
   fitnesscentar-net:
-    driver: bridge      
+    driver: bridge

@@ -12,7 +12,7 @@ using fitnessCentar.Services.Database;
 namespace fitnessCentar.Services.Migrations
 {
     [DbContext(typeof(FitnessCentarContext))]
-    [Migration("20240319143509_Pocetna")]
+    [Migration("20240320142819_Pocetna")]
     partial class Pocetna
     {
         /// <inheritdoc />
@@ -35,13 +35,6 @@ namespace fitnessCentar.Services.Migrations
 
                     b.Property<int>("KorisnikId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Naziv")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Opis")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TipClanarineId")
                         .HasColumnType("int");

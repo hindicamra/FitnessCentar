@@ -28,7 +28,7 @@ namespace fitnessCentar.Services
         {
             entity.PasswordSalt = GenerateSalt();
             entity.PasswordHash = GenerateHash(entity.PasswordSalt, insert.Password);
-            entity.UlogaId=2;
+            entity.UlogaId=insert.UlogaId;
         }
 
         public static string GenerateSalt()

@@ -126,8 +126,6 @@ namespace fitnessCentar.Services.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     KorisnikId = table.Column<int>(type: "int", nullable: false),
                     TipClanarineId = table.Column<int>(type: "int", nullable: false),
-                    Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Opis = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     VaziDo = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>

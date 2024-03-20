@@ -74,12 +74,12 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-/*using (var scope = app.Services.CreateAsyncScope())
+using (var scope = app.Services.CreateAsyncScope())
 {
     var dataContext = scope.ServiceProvider.GetRequiredService<FitnessCentarContext>();
 
     dataContext.Database.Migrate();
 
-}*/
+}
 
 app.Run();
