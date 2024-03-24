@@ -8,5 +8,6 @@ namespace fitnessCentar.Model.SearchObjects
 {
     public class PlanIshraneKorisnikSearchObject:BaseSearchObject
     {
+        public string? ImePrezime { get; set; }
     }
 }

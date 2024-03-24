@@ -19,6 +19,18 @@ namespace fitnessCentar.Services
             query = query.Include("Korisnik");
             return base.AddInclude(query, search);
         }
+
+        public override IQueryable<Recenzija> AddFilter(IQueryable<Recenzija> query, RecenzijaSearchObject? search = null)
+        {
+            query = query.Include(x => x.Korisnik);
+
+            if (search?.ImePrezime != null)
+            {
+                string searchTerm = search.ImePrezime;
+                query = query.Where(x => x.Korisnik.Ime.Contains(searchTerm) || x.Korisnik.Prezime.Contains(searchTerm));
+            }
+            return base.AddFilter(query, search);
+        }
     }
 }
 

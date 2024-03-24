@@ -13,6 +13,17 @@ namespace fitnessCentar.Services
 			: base(context, mapper)
 		{
 		}
+
+        public override IQueryable<Database.Trening> AddFilter(IQueryable<Database.Trening> query, TreningSearchObject? search = null)
+        {
+
+            if (search != null && !string.IsNullOrEmpty(search.Naziv))
+            {
+                query = query.Where(x => x.Naziv.Contains(search.Naziv));
+            }
+
+                return base.AddFilter(query, search);
+        }
     }
 }
 

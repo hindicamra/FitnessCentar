@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using fitnessCentar.Model;
 using fitnessCentar.Model.Requests;
 using fitnessCentar.Model.SearchObjects;
 using fitnessCentar.Services.Database;
@@ -42,6 +43,31 @@ namespace fitnessCentar.Services
             {
                 throw new UserException("Nevalidni podaci");
             }
+
+            var existingPlanIshraneKorisnik = _context.PlanIshraneKorisniks
+    .FirstOrDefault(x => x.KorisnikId == insert.KorisnikId && x.PlanIshraneId == insert.PlanIshraneId);
+
+            if (existingPlanIshraneKorisnik != null)
+            {
+                throw new UserException("Već postoji ovaj plan ishrane za ovog korisnika");
+            }
+
+
         }
+
+        public override IQueryable<Database.PlanIshraneKorisnik> AddFilter(IQueryable<Database.PlanIshraneKorisnik> query, PlanIshraneKorisnikSearchObject? search = null)
+        {
+            query = query.Include(x => x.Korisnik)
+                         .Include(x => x.PlanIshrane);
+
+            if (search?.ImePrezime != null)
+            {
+                string searchTerm = search.ImePrezime;
+                query = query.Where(x => x.Korisnik.Ime.Contains(searchTerm) || x.Korisnik.Prezime.Contains(searchTerm));
+            }
+
+            return base.AddFilter(query, search);
+        }
+
     }
 }

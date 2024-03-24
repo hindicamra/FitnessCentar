@@ -15,5 +15,15 @@ namespace fitnessCentar.Services
         public TipClanarineService(FitnessCentarContext context, IMapper mapper) : base(context, mapper)
         {
         }
+
+        public override IQueryable<TipClanarine> AddFilter(IQueryable<TipClanarine> query, TipClanarineSearchObject? search = null)
+        {
+            if (search != null && !string.IsNullOrEmpty(search.Naziv))
+            {
+                query = query.Where(x => x.Naziv.Contains(search.Naziv));
+            }
+
+            return base.AddFilter(query, search);
+        }
     }
 }

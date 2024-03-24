@@ -8,5 +8,6 @@ namespace fitnessCentar.Model.SearchObjects
 {
     public class TipClanarineSearchObject:BaseSearchObject
     {
+        public string? Naziv { get; set; }
     }
 }

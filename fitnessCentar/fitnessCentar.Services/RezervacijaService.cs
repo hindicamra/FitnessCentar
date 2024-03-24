@@ -49,6 +49,10 @@ namespace fitnessCentar.Services
                 {
                     query = query.Where(r => r.Datum.Date == search.Datum.Value.Date);
                 }
+                if (search.Status.HasValue)
+                {
+                    query=query.Where(r=>r.Status==search.Status.ToString());
+                }
             }
 
             return base.AddFilter(query, search);
