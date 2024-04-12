@@ -24,8 +24,8 @@ namespace fitnessCentar.Model.Requests
         [Compare("Password", ErrorMessage = "Lozinke moraju biti iste")]
         public string PasswordPotvrda { get; set; }= "Password123*";
 
-        [Required(ErrorMessage = "UlogaId je obavezno polje.")]
-        public int UlogaId { get; set; }
+
+        public int? UlogaId { get; set; }
 
         [EmailAddress(ErrorMessage = "Email adresa nije validna.")]
         public string? Email { get; set; }

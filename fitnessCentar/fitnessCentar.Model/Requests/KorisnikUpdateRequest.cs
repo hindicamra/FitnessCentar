@@ -18,12 +18,21 @@ namespace fitnessCentar.Model.Requests
 
         [Phone(ErrorMessage = "Telefon nije validan.")]
         public string? Telefon { get; set; }
-      
+
+
+
+        public string? Password { get; set; }
+
+
+        public string? PasswordPotvrda { get; set; }
+
+
+
         public string? Addresa { get; set; }
 
         public int? UlogaId { get; set; }
 
-        public byte[]? Slika { get; set; }
+        //public byte[]? Slika { get; set; }
 
         public bool? Status { get; set; }
     }

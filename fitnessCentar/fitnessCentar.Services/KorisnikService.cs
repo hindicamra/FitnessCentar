@@ -3,6 +3,7 @@ using fitnessCentar.Model;
 using fitnessCentar.Model.Requests;
 using fitnessCentar.Model.SearchObjects;
 using fitnessCentar.Services.Database;
+using fitnessCentar.Services.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
@@ -28,7 +29,7 @@ namespace fitnessCentar.Services
         {
             entity.PasswordSalt = GenerateSalt();
             entity.PasswordHash = GenerateHash(entity.PasswordSalt, insert.Password);
-            entity.UlogaId=insert.UlogaId;
+            entity.UlogaId=insert.UlogaId?? 0;
         }
 
         public static string GenerateSalt()
@@ -71,9 +72,6 @@ namespace fitnessCentar.Services
 
                 if (hash == entity.PasswordHash)
                 {
-
-                  
-
                     return _mapper.Map<Model.Korisnik>(entity); ;
                 }
             }
@@ -115,7 +113,22 @@ namespace fitnessCentar.Services
         }
 
 
+        public override async Task<Model.Korisnik> Update(int id, KorisnikUpdateRequest update)
+        {
+            var entity = await _context.Korisniks.FindAsync(id);
+            if (entity == null)
+            {
+                throw new UserException("Korisnik ne postoji!");
+            }
+            if (update.Password != null)
+            {
+                entity.PasswordSalt = GenerateSalt();
+                entity.PasswordHash = GenerateHash(entity.PasswordSalt, update.Password);
+            }
+            entity.UlogaId = update.UlogaId ?? 0;
 
+            return await base.Update(id, update);
+        }
 
 
 
