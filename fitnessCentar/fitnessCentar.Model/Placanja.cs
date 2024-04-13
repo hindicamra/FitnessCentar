@@ -10,7 +10,7 @@ namespace fitnessCentar.Model
     {
         public int PlacanjeId { get; set; }
         public float Iznos { get; set; }
-        public int ClanarinaId { get; set; }
+        public int TipClanarineId { get; set; }
         public DateTime Datum { get; set; }
     }
 }

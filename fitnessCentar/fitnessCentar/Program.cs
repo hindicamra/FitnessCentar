@@ -78,9 +78,9 @@ app.UseAuthorization();
 app.MapControllers();
 using (var scope = app.Services.CreateAsyncScope())
 {
-    /*var dataContext = scope.ServiceProvider.GetRequiredService<FitnessCentarContext>();
+    var dataContext = scope.ServiceProvider.GetRequiredService<FitnessCentarContext>();
 
-    dataContext.Database.Migrate();*/
+    dataContext.Database.Migrate();
 
 }
 

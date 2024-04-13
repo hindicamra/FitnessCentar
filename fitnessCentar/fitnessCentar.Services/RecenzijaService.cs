@@ -3,6 +3,7 @@ using AutoMapper;
 using fitnessCentar.Model.Requests;
 using fitnessCentar.Model.SearchObjects;
 using fitnessCentar.Services.Database;
+using fitnessCentar.Services.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace fitnessCentar.Services
@@ -30,6 +31,19 @@ namespace fitnessCentar.Services
                 query = query.Where(x => x.Korisnik.Ime.Contains(searchTerm) || x.Korisnik.Prezime.Contains(searchTerm));
             }
             return base.AddFilter(query, search);
+        }
+
+        public override Task BeforeInsert(Recenzija entity, RecenzijaInsertRequest insert)
+        {
+
+            var existingRecenzija =  _context.Recenzijas.FirstOrDefaultAsync(r => r.KorisnikId == insert.KorisnikId && r.TreningId == insert.TreningId);
+
+            if (existingRecenzija.Result != null)
+            {
+                throw new UserException("Ne mozete ocijeniti isti trening vise puta");
+            }
+
+            return base.BeforeInsert(entity, insert);
         }
     }
 }

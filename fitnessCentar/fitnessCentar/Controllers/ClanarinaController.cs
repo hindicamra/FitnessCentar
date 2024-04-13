@@ -10,6 +10,7 @@ namespace fitnessCentar.Controllers
 {
     [ApiController]
     [Authorize(Roles = "Admin,Korisnik")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class ClanarinaController : BaseCRUDController<Model.Clanarina, Model.SearchObjects.ClanarinaSearchObject, ClanarinaInsertRequest, ClanarinaUpdateRequest>
     {
 

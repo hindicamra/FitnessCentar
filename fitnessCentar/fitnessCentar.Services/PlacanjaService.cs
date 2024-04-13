@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using fitnessCentar.Services.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace fitnessCentar.Services
 {
@@ -25,29 +26,45 @@ namespace fitnessCentar.Services
 
         public override async Task BeforeInsert(Database.Placanja entity, PlacanjaInsertRequest insert)
         {
-            //Dobaviti trajanje clanarine i produziti clanarinu
+            var clanarina = await _context.Clanarinas.FirstOrDefaultAsync(c => c.KorisnikId == insert.KorisnikId);
 
-            var clanarina = await _clanarinaService.GetById(insert.ClanarinaId);
+            var tipClanarine = await _tipClanarineService.GetById(insert.TipClanarineId);
 
-            if (clanarina is null)
+          
+
+            if (clanarina != null)
             {
-                throw new UserException("Clanarina sa proslijedjenim Id ne postoji");
+                
+
+                ClanarinaUpdateRequest updateRequest = new ClanarinaUpdateRequest
+                {
+                   KorisnikId = clanarina.KorisnikId,
+                   TipClanarineId=insert.TipClanarineId,
+                   VaziDo = clanarina.VaziDo.AddDays(tipClanarine.Trajanje)
+            };
+
+              
+
+                await _clanarinaService.Update(clanarina.ClanarinaId, updateRequest);
+
+
+
+            }
+            else
+            {
+                ClanarinaInsertRequest insertRequest = new ClanarinaInsertRequest
+                {
+                    KorisnikId = insert.KorisnikId,
+                    TipClanarineId = insert.TipClanarineId,
+                };
+               
             }
 
-            var tipClanarine = await _tipClanarineService.GetById(clanarina.TipClanarineId);
 
-            // Provjera da li je uplacen dovoljan iznos za tip clanarine
+            await base.BeforeInsert(entity, insert);
 
-            if (insert.Iznos < tipClanarine.Cijena)
-            {
-                throw new UserException("Nedovoljan iznos za uplatu");
-            }
-
-            ClanarinaUpdateRequest updateRequest = _mapper.Map<ClanarinaUpdateRequest>(clanarina);
-
-            updateRequest.VaziDo = clanarina.VaziDo.AddDays(tipClanarine.Trajanje);
-
-            await _clanarinaService.Update(clanarina.ClanarinaId, updateRequest);
         }
+
+
     }
 }

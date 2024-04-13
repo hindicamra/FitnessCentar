@@ -14,7 +14,9 @@ namespace fitnessCentar.Model.Requests
 
         public float Iznos { get; set; }
 
-        public int ClanarinaId { get; set; }
+        public int TipClanarineId { get; set; }
+
+        public int KorisnikId { get; set; } 
 
         [Required(ErrorMessage = "Datum je obavezno polje.")]
         public DateTime Datum { get; set; }

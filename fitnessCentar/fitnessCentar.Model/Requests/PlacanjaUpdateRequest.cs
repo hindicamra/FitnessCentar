@@ -12,7 +12,7 @@ namespace fitnessCentar.Model.Requests
         [Range(0.01, double.MaxValue, ErrorMessage = "Iznos mora biti veći od 0.")]
         public float? Iznos { get; set; }
 
-        public int? ClanarinaId { get; set; }
+        public int? TipClanarineId { get; set; }
 
         public DateTime? Datum { get; set; }
 

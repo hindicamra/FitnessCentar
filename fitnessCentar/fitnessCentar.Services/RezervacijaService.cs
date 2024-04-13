@@ -110,7 +110,7 @@ namespace fitnessCentar.Services
                 Vrijeme = insert.Datum
             };
 
-            //_emailService.SendingObject(reservation);
+            _emailService.SendingObject(reservation);
         }
 
 

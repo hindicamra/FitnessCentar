@@ -12,7 +12,7 @@ using fitnessCentar.Services.Database;
 namespace fitnessCentar.Services.Migrations
 {
     [DbContext(typeof(FitnessCentarContext))]
-    [Migration("20240320142819_Pocetna")]
+    [Migration("20240413192117_Pocetna")]
     partial class Pocetna
     {
         /// <inheritdoc />
@@ -49,6 +49,15 @@ namespace fitnessCentar.Services.Migrations
                     b.HasIndex("TipClanarineId");
 
                     b.ToTable("Clanarinas");
+
+                    b.HasData(
+                        new
+                        {
+                            ClanarinaId = 1,
+                            KorisnikId = 3,
+                            TipClanarineId = 3,
+                            VaziDo = new DateTime(2024, 6, 12, 21, 21, 17, 231, DateTimeKind.Local).AddTicks(4462)
+                        });
                 });
 
             modelBuilder.Entity("fitnessCentar.Services.Database.Korisnik", b =>
@@ -172,6 +181,15 @@ namespace fitnessCentar.Services.Migrations
                     b.HasIndex("TipClanarineId");
 
                     b.ToTable("Placanjas");
+
+                    b.HasData(
+                        new
+                        {
+                            PlacanjeId = 1,
+                            Datum = new DateTime(2024, 4, 13, 21, 21, 17, 231, DateTimeKind.Local).AddTicks(4411),
+                            Iznos = 60f,
+                            TipClanarineId = 3
+                        });
                 });
 
             modelBuilder.Entity("fitnessCentar.Services.Database.PlanIshrane", b =>
@@ -193,6 +211,20 @@ namespace fitnessCentar.Services.Migrations
                     b.HasKey("PlanIshraneId");
 
                     b.ToTable("PlanIshranes");
+
+                    b.HasData(
+                        new
+                        {
+                            PlanIshraneId = 1,
+                            Naziv = "Ananas dijeta",
+                            Opis = "Konzumacija svega osim ananasa"
+                        },
+                        new
+                        {
+                            PlanIshraneId = 2,
+                            Naziv = "Avokado dijeta",
+                            Opis = "Konzumacija svega osim avokada"
+                        });
                 });
 
             modelBuilder.Entity("fitnessCentar.Services.Database.PlanIshraneKorisnik", b =>
@@ -216,6 +248,20 @@ namespace fitnessCentar.Services.Migrations
                     b.HasIndex("PlanIshraneId");
 
                     b.ToTable("PlanIshraneKorisniks");
+
+                    b.HasData(
+                        new
+                        {
+                            PlanIshraneKorisnikId = 1,
+                            KorisnikId = 3,
+                            PlanIshraneId = 1
+                        },
+                        new
+                        {
+                            PlanIshraneKorisnikId = 2,
+                            KorisnikId = 3,
+                            PlanIshraneId = 2
+                        });
                 });
 
             modelBuilder.Entity("fitnessCentar.Services.Database.Recenzija", b =>
@@ -245,6 +291,16 @@ namespace fitnessCentar.Services.Migrations
                     b.HasIndex("TreningId");
 
                     b.ToTable("Recenzijas");
+
+                    b.HasData(
+                        new
+                        {
+                            RecenzijaId = 1,
+                            KorisnikId = 3,
+                            Ocjena = 5,
+                            Tekst = "Al'a sam se odradio/la",
+                            TreningId = 1
+                        });
                 });
 
             modelBuilder.Entity("fitnessCentar.Services.Database.Rezervacija", b =>
@@ -274,6 +330,32 @@ namespace fitnessCentar.Services.Migrations
                     b.HasIndex("TreningId");
 
                     b.ToTable("Rezervacijas");
+
+                    b.HasData(
+                        new
+                        {
+                            RezervacijaId = 1,
+                            Datum = new DateTime(2024, 4, 13, 21, 21, 17, 231, DateTimeKind.Local).AddTicks(4501),
+                            KorisnikId = 3,
+                            Status = "Odobrena",
+                            TreningId = 1
+                        },
+                        new
+                        {
+                            RezervacijaId = 2,
+                            Datum = new DateTime(2024, 4, 15, 21, 21, 17, 231, DateTimeKind.Local).AddTicks(4503),
+                            KorisnikId = 3,
+                            Status = "NaCekanju",
+                            TreningId = 1
+                        },
+                        new
+                        {
+                            RezervacijaId = 3,
+                            Datum = new DateTime(2024, 4, 16, 21, 21, 17, 231, DateTimeKind.Local).AddTicks(4505),
+                            KorisnikId = 3,
+                            Status = "Odbijena",
+                            TreningId = 1
+                        });
                 });
 
             modelBuilder.Entity("fitnessCentar.Services.Database.TipClanarine", b =>
@@ -297,6 +379,29 @@ namespace fitnessCentar.Services.Migrations
                     b.HasKey("TipClanarineId");
 
                     b.ToTable("TipClanarines");
+
+                    b.HasData(
+                        new
+                        {
+                            TipClanarineId = 1,
+                            Cijena = 7f,
+                            Naziv = "7-dnevna",
+                            Trajanje = 7
+                        },
+                        new
+                        {
+                            TipClanarineId = 2,
+                            Cijena = 30f,
+                            Naziv = "30-dnevna",
+                            Trajanje = 30
+                        },
+                        new
+                        {
+                            TipClanarineId = 3,
+                            Cijena = 60f,
+                            Naziv = "60-dnevna",
+                            Trajanje = 60
+                        });
                 });
 
             modelBuilder.Entity("fitnessCentar.Services.Database.Trening", b =>
