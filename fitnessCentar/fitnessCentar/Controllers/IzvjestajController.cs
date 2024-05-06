@@ -7,7 +7,7 @@ namespace fitnessCentar.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class IzvjestajController : Controller
     {
 

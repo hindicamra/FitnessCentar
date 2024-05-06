@@ -15,7 +15,7 @@ namespace fitnessCentar.Controllers
         {
         }
 
-        [Authorize(Roles = "Korisnik")]
+        //[Authorize(Roles = "Korisnik")]
         public override Task<PagedResult<Uloga>> Get([FromQuery] UlogaSearchObject search)
         {
             return base.Get(search);
