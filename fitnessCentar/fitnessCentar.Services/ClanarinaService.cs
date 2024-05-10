@@ -34,5 +34,18 @@ namespace fitnessCentar.Services
 
             entity.VaziDo = DateTime.Now.AddDays(tipClanarine.Trajanje);
         }
+
+        public override IQueryable<Clanarina> AddFilter(IQueryable<Clanarina> query, ClanarinaSearchObject? search = null)
+        {
+
+
+            if (search?.KorisnikId !=null && search.KorisnikId!= 0)
+            {
+                query=query.Where(x => x.KorisnikId==search.KorisnikId);
+            }
+
+
+            return base.AddFilter(query, search);
+        }
     }
 }
