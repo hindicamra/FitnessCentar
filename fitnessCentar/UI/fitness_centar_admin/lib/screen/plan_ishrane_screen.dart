@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
+import 'package:fitness_centar_web/models/plan_ishrane_korisnika.dart';
+import 'package:fitness_centar_web/providers/plan_ishrane_korisnika_provider.dart';
+import 'package:fitness_centar_web/screen/plan_ishrane_dodaj_screen.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:fitness_centar_web/models/plan_ishrane.dart';
-import 'package:fitness_centar_web/providers/plan_ishrane_provider.dart';
 import 'package:fitness_centar_web/screen/menu_screen.dart';
 import 'package:fitness_centar_web/screen/plan_ishrane_dodaj_uredi_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,22 +21,23 @@ class PlanIshraneScreen extends StatefulWidget {
 }
 
 class _PlanIshraneScreenState extends State<PlanIshraneScreen> {
-  late PlanIshraneProvider _planIshraneProvider;
-  SearchResult<PlanIshrane>? result;
-  TextEditingController _nazivController = TextEditingController();
+  late PlanIshraneKorisnikaProvider _planIshraneKorisnikaProvider;
+  SearchResult<PlanIshraneKorisnika>? result;
+  final TextEditingController _nazivController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _planIshraneProvider = context.read<PlanIshraneProvider>();
+    _planIshraneKorisnikaProvider =
+        context.read<PlanIshraneKorisnikaProvider>();
     planIshraneStream.add(-1);
-    KorisnikData.planIshrane = null;
+    KorisnikData.planIshraneKorisnika = null;
     _loadData();
   }
 
   Future<void> _loadData() async {
-    var data = await _planIshraneProvider.get(filter: {
-      'Naziv': null,
+    var data = await _planIshraneKorisnikaProvider.get(filter: {
+      'ImePrezime': null,
       'Page': 0,
       'PageSize': 100,
     });
@@ -61,7 +63,7 @@ class _PlanIshraneScreenState extends State<PlanIshraneScreen> {
       body: InkWell(
         onTap: () {
           planIshraneStream.add(-1);
-          KorisnikData.planIshrane = null;
+          KorisnikData.planIshraneKorisnika = null;
         },
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -123,8 +125,8 @@ class _PlanIshraneScreenState extends State<PlanIshraneScreen> {
           ),
           ElevatedButton(
               onPressed: () async {
-                var data = await _planIshraneProvider.get(filter: {
-                  'Naziv': _nazivController.text,
+                var data = await _planIshraneKorisnikaProvider.get(filter: {
+                  'ImePrezime': _nazivController.text,
                   'Page': 0,
                   'PageSize': 10,
                 });
@@ -148,13 +150,21 @@ class _PlanIshraneScreenState extends State<PlanIshraneScreen> {
           const SizedBox(width: 8),
           ElevatedButton(
             onPressed: () async {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => PlanIshraneDodajUrediScreen(
-                    planIshrane: KorisnikData.planIshrane,
+              if (KorisnikData.planIshraneKorisnika == null) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => PlanIshraneDodajScreen(),
                   ),
-                ),
-              );
+                );
+              } else {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => PlanIshraneDodajUrediScreen(
+                      planIshrane: KorisnikData.planIshraneKorisnika,
+                    ),
+                  ),
+                );
+              }
             },
             style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -181,7 +191,7 @@ class _PlanIshraneScreenState extends State<PlanIshraneScreen> {
 
     return Expanded(
         child: SingleChildScrollView(
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: StreamBuilder<Object>(
             stream: planIshraneStream.stream,
@@ -196,7 +206,7 @@ class _PlanIshraneScreenState extends State<PlanIshraneScreen> {
                   const DataColumn(
                     label: Expanded(
                       child: Text(
-                        'Naziv',
+                        'Ime Prezime',
                         style: TextStyle(fontStyle: FontStyle.italic),
                       ),
                     ),
@@ -204,7 +214,15 @@ class _PlanIshraneScreenState extends State<PlanIshraneScreen> {
                   const DataColumn(
                     label: Expanded(
                       child: Text(
-                        'Opis',
+                        'Korisnicko ime',
+                        style: TextStyle(fontStyle: FontStyle.italic),
+                      ),
+                    ),
+                  ),
+                  const DataColumn(
+                    label: Expanded(
+                      child: Text(
+                        'Planovi ishrane',
                         style: TextStyle(fontStyle: FontStyle.italic),
                       ),
                     ),
@@ -218,7 +236,7 @@ class _PlanIshraneScreenState extends State<PlanIshraneScreen> {
 }
 
 class _DataSource extends DataTableSource {
-  final List<PlanIshrane> data;
+  final List<PlanIshraneKorisnika> data;
 
   _DataSource({required this.data});
   Color _getDataRowColor(Set<MaterialState> states) {
@@ -247,13 +265,14 @@ class _DataSource extends DataTableSource {
     return DataRow(
         selected: index == planIshraneStream.value ? true : false,
         onSelectChanged: (selected) {
-          KorisnikData.planIshrane = e;
+          KorisnikData.planIshraneKorisnika = e;
           planIshraneStream.add(index);
         },
         color: MaterialStateProperty.resolveWith(_getDataRowColor),
         cells: [
-          DataCell(Text(e.naziv.toString())),
-          DataCell(Text(e.opis.toString())),
+          DataCell(Text(e.korisnik.toString())),
+          DataCell(Text(e.korisnik.toString())),
+          DataCell(Text(e.planIshrane.toString())),
         ]);
   }
 

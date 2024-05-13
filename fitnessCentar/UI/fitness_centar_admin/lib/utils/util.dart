@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import '../models/izvjestaj.dart';
 import '../models/korisnik.dart';
+import '../models/plan_ishrane_korisnika.dart';
 import '../models/recenzija.dart';
 import '../models/rezervacija.dart';
 import '../models/trening.dart';
@@ -27,6 +28,7 @@ class KorisnikData {
   static Recenzija? recenzija;
   static Izvjestaj? izvjestaj;
   static Rezervacija? rezervacijaStatus;
+  static PlanIshraneKorisnika? planIshraneKorisnika;
 }
 
 Image imageFromBase64String(String base64Image) {

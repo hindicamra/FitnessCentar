@@ -7,13 +7,13 @@ part 'plan_ishrane_korisnika.g.dart';
 
 @JsonSerializable()
 class PlanIshraneKorisnika {
-  int? planIshraneKorisnikaId;
-  String? planIshraneKorisnika;
+  int? planIshraneKorisnikId;
+  String? planIshrane;
   String? korisnik;
 
   PlanIshraneKorisnika(
-    this.planIshraneKorisnikaId,
-    this.planIshraneKorisnika,
+    this.planIshraneKorisnikId,
+    this.planIshrane,
     this.korisnik,
   );
 

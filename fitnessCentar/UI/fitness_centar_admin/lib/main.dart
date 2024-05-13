@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 import 'providers/korisnik_provider.dart';
+import 'providers/plan_ishrane_korisnika_provider.dart';
 import 'providers/plan_ishrane_provider.dart';
 import 'providers/recenzija_provider.dart';
 import 'providers/rezervacija_list_provider.dart';
@@ -33,6 +34,7 @@ void main() {
       ChangeNotifierProvider(create: (_) => TipClanarineProvider()),
       ChangeNotifierProvider(create: (_) => IzvjestajProvider()),
       ChangeNotifierProvider(create: (_) => IzvjestajRecenzijeProvider()),
+      ChangeNotifierProvider(create: (_) => PlanIshraneKorisnikaProvider())
     ],
     child: const MyMaterialApp(),
   ));
@@ -191,7 +193,7 @@ class LoginPage extends StatelessWidget {
                       Authorization.korisnik =
                           await _korisnikProvider.authenticate();
 
-                      if (Authorization.korisnik!.ulogaId != 4) {
+                      if (Authorization.korisnik!.ulogaId != 5) {
                         //treba promjeniti 4 u 3
                         Navigator.of(context).push(
                           MaterialPageRoute(
