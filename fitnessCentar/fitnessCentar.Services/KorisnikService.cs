@@ -113,6 +113,14 @@ namespace fitnessCentar.Services
         }
 
 
+        public override async Task<Model.Korisnik> GetById(int id)
+        {
+            var entity = await _context.Set<Database.Korisnik>().AsQueryable().Include("Uloga").Include("PlanIshraneKorisniks.PlanIshrane").FirstOrDefaultAsync(x=>x.KorisnikId==id);
+
+           
+            return _mapper.Map<Model.Korisnik>(entity);
+        }
+
         public override async Task<Model.Korisnik> Update(int id, KorisnikUpdateRequest update)
         {
             var entity = await _context.Korisniks.FindAsync(id);
