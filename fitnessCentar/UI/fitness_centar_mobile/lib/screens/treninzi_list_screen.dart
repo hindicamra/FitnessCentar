@@ -28,7 +28,7 @@ class _NovostiListScreenState extends State<TreningListsScreen> {
   Future loadData() async {
     var tmpData = await _treninziProvider!.get();
     setState(() {
-      data = tmpData;
+      data = tmpData.result;
     });
   }
 

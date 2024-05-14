@@ -1,6 +1,9 @@
+import 'package:fitness_centar_mobile/models/clanarina.dart';
 import 'package:fitness_centar_mobile/models/rezervacija.dart';
+import 'package:fitness_centar_mobile/providers/clanarina_provider.dart';
 
 import 'package:fitness_centar_mobile/providers/rezervacija_list_provider.dart';
+import 'package:fitness_centar_mobile/utils/util.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -18,19 +21,35 @@ class RezervacijaListScreen extends StatefulWidget {
 class _RezervacijaListScreenState extends State<RezervacijaListScreen> {
   RezervacijaListProvider? _rezervacijaProvider;
 
-  List<Rezervacija> data = [];
+  List<Rezervacija> rezervacija = [];
+  ClanarinaProvider? _clanarinaProvider;
 
+  List<Clanarina> clanarina = [];
   @override
   void initState() {
     super.initState();
     _rezervacijaProvider = context.read<RezervacijaListProvider>();
-    loadData();
+    _clanarinaProvider = context.read<ClanarinaProvider>();
+    _loadData();
   }
 
-  Future loadData() async {
-    var tmpData = await _rezervacijaProvider!.get();
+  Future<void> _loadData() async {
+    var data = await _rezervacijaProvider!.get(filter: {
+      'KorisnikId': Authorization.korisnik!.korisnikId,
+      'Datum': null,
+      'Status': null,
+      'Page': 0,
+      'PageSize': 100,
+    });
+    var dataClanarina = await _clanarinaProvider!.get(filter: {
+      'KorisnikId': Authorization.korisnik!.korisnikId,
+      'Page': 0,
+      'PageSize': 100,
+    });
+
     setState(() {
-      data = tmpData;
+      rezervacija = data.result;
+      clanarina = dataClanarina.result;
     });
   }
 
@@ -53,7 +72,9 @@ class _RezervacijaListScreenState extends State<RezervacijaListScreen> {
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: _buildListRezervacija(),
+            children: rezervacija.isEmpty
+                ? [const Center(child: Text('Nema rezervacija'))]
+                : _buildListRezervacija(),
           ),
         )),
       ),
@@ -61,7 +82,7 @@ class _RezervacijaListScreenState extends State<RezervacijaListScreen> {
   }
 
   List<Widget> _buildListRezervacija() {
-    var list = data
+    var list = rezervacija
         .map((e) => Column(children: [
               Padding(
                 padding: const EdgeInsets.all(20.0),

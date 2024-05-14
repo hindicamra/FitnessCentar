@@ -6,6 +6,7 @@ import 'package:http/http.dart';
 import 'package:http/io_client.dart';
 import 'package:flutter/foundation.dart';
 
+import '../models/search_result.dart';
 import '../utils/util.dart';
 
 abstract class BaseProvider<T> with ChangeNotifier {
@@ -48,29 +49,34 @@ abstract class BaseProvider<T> with ChangeNotifier {
     }
   }
 
-  Future<List<T>> get({dynamic search}) async {
+  Future<SearchResult<T>> get({dynamic filter}) async {
     var url = "$_baseUrl$_endpoint";
 
-    if (search != null) {
-      String queryString = getQueryString(search);
+    if (filter != null) {
+      var queryString = getQueryString(filter);
       url = "$url?$queryString";
     }
 
     var uri = Uri.parse(url);
+    var headers = createHeaders();
 
-    Map<String, String> headers = createHeaders();
-    if (kDebugMode) {
-      print("get me");
-    }
     var response = await http!.get(uri, headers: headers);
-    if (kDebugMode) {
-      print("done $response");
-    }
+    print("${response.body}, $response");
+    print("$url");
     if (isValidResponse(response)) {
       var data = jsonDecode(response.body);
-      return data['result'].map((x) => fromJson(x)).cast<T>().toList();
+
+      var result = SearchResult<T>();
+
+      result.count = data['count'];
+
+      for (var item in data['result']) {
+        result.result.add(fromJson(item));
+      }
+
+      return result;
     } else {
-      throw Exception("Exception... handle this gracefully");
+      throw Exception("Unknown error");
     }
   }
 

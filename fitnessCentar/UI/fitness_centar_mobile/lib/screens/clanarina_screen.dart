@@ -27,7 +27,7 @@ class _ClanarinaListScreenState extends State<ClanarinaListScreen> {
   Future loadData() async {
     var tmpData = await _clanarinaProvider!.get();
     setState(() {
-      data = tmpData;
+      data = tmpData.result;
     });
   }
 

@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 import '../models/placanja.dart';
 import '../providers/korisnik_provider.dart';
 import '../utils/util.dart';
+import 'home_screen.dart';
 import 'profil_aktiviraj_clanarinu.dart';
 
 class ProfilScreen extends StatefulWidget {
@@ -35,14 +36,14 @@ class _ProfilScreenState extends State<ProfilScreen> {
   }
 
   Future loadData() async {
-    var tmpData = await _clanarinaProvider!.get(search: {
+    var tmpData = await _clanarinaProvider!.get(filter: {
       'korisnikId': Authorization.korisnik!.korisnikId,
       'Page': 0,
       'PageSize': 10,
     });
 
     setState(() {
-      data = tmpData;
+      data = tmpData.result;
     });
   }
 
@@ -328,7 +329,6 @@ class _ProfilScreenState extends State<ProfilScreen> {
           ),
           TextFormField(
               controller: _adresaController,
-              obscureText: true,
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.only(left: 14.0, top: 0.0),
                 border: UnderlineInputBorder(
@@ -385,6 +385,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
             ),
           ),
           TextFormField(
+              obscureText: true,
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.only(left: 14.0, top: 0.0),
                 border: UnderlineInputBorder(
@@ -410,9 +411,23 @@ class _ProfilScreenState extends State<ProfilScreen> {
   List<Widget> _buildClanarinaByUser() {
     if (data.isEmpty) {
       return [
-        const Center(
-          child: Text("Nema podataka za prikaz"),
-        )
+        Center(
+            child: ElevatedButton(
+                onPressed: () async {
+                  BottomNavigationBar navigationBar =
+                      glbKey.currentWidget as BottomNavigationBar;
+                  navigationBar.onTap!(2);
+                },
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  )),
+                  backgroundColor: MaterialStateProperty.all(
+                      const Color.fromARGB(255, 46, 92, 232)),
+                ),
+                child: const Text("Aktiviraj/produži",
+                    style: TextStyle(color: Colors.white))))
       ];
     }
 

@@ -1,8 +1,10 @@
 import 'package:fitness_centar_mobile/models/plan_ishrane.dart';
+import 'package:fitness_centar_mobile/providers/korisnik_provider.dart';
 import 'package:fitness_centar_mobile/providers/plan_ishrane_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../models/search_result.dart';
 import '../utils/util.dart';
 import 'home_screen.dart';
 
@@ -14,20 +16,25 @@ class PlanIshraneScreen extends StatefulWidget {
 }
 
 class _GalerijaListScreenState extends State<PlanIshraneScreen> {
-  PlanIshraneProvider? _galerijaProvider;
+  KorisnikProvider? _galerijaProvider;
   List<PlanIshrane> data = [];
 
   @override
   void initState() {
     super.initState();
-    _galerijaProvider = context.read<PlanIshraneProvider>();
+    _galerijaProvider = context.read<KorisnikProvider>();
     loadData();
   }
 
   Future loadData() async {
-    var tmpData = await _galerijaProvider!.get();
+    var tmpData = await _galerijaProvider!.get(filter: {
+      'ImePrezime': Authorization.korisnik!.korisnickoIme,
+      'UlogaId': null,
+      'Page': 0,
+      'PageSize': 100,
+    });
     setState(() {
-      data = tmpData;
+      data = tmpData.result[0].planoviIshrane!;
     });
   }
 
@@ -50,14 +57,16 @@ class _GalerijaListScreenState extends State<PlanIshraneScreen> {
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: _buildPlanIshrane(),
+            children: data.isEmpty
+                ? [const Center(child: Text('Nema plana ishrane'))]
+                : _buildGallery(),
           ),
         )),
       ),
     );
   }
 
-  List<Widget> _buildPlanIshrane() {
+  List<Widget> _buildGallery() {
     var list = data
         .map((e) => Column(children: [
               Padding(

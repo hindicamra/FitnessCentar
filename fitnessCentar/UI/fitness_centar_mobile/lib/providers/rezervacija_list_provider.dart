@@ -29,4 +29,24 @@ class RezervacijaListProvider extends BaseProvider<Rezervacija> {
       throw Exception("Error");
     }
   }
+
+  Future<Rezervacija> getRezervacija(int id) async {
+    var url = "$fullUrl/$id";
+    var uri = Uri.parse(url);
+
+    var headers = createHeaders();
+    var response = await http!.get(
+      uri,
+      headers: headers,
+    );
+
+    if (isValidResponse(response)) {
+      var data = jsonDecode(response.body);
+      Rezervacija list = fromJson(data);
+
+      return list;
+    } else {
+      throw Exception("Error");
+    }
+  }
 }

@@ -83,19 +83,20 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
                                   "password": _passwordController.text,
                                   "passwordPotvrda":
                                       _potvrdaPasswordaController.text,
-                                  "ulogaId": Authorization.korisnik!.ulogaId!,
+                                  "ulogaId": 3,
                                   "addresa": _adresaController.text,
                                   "status": true
                                 };
 
                                 await _korisnikProvider.registar(korisnik);
-                                Navigator.pop(context, true);
+
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(const SnackBar(
-                                  content: Text("Profil uspješno uređen"),
+                                  content: Text("Uspješno ste se registrovali"),
                                   backgroundColor:
                                       Color.fromARGB(255, 46, 92, 232),
                                 ));
+                                Navigator.pop(context);
                               }
                             },
                             style: ButtonStyle(
@@ -240,6 +241,15 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
               style: const TextStyle(fontSize: 14)),
           const SizedBox(height: 16),
           TextFormField(
+              validator: (value) {
+                if (value == null ||
+                    value.isEmpty ||
+                    value.length < 8 ||
+                    value.length > 11) {
+                  return "Broj telefona je obavezan, mora imati minimalno 8 karaktera";
+                }
+                return null;
+              },
               controller: _telefonController,
               decoration: InputDecoration(
                 hintText: 'Telefon',
@@ -284,8 +294,7 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
           TextFormField(
               validator: (value) {
                 if (!_validateLozinkuRegExp(value)) {
-                  "Lozinka je obavezna, treba sadrzavati minimalno 4 karaktera,  veliko i malo slovo, broj i specijalan karakter ";
-                  return;
+                  return "Lozinka je obavezna, treba sadrzavati minimalno 4 karaktera,  veliko i malo slovo, broj i specijalan karakter ";
                 }
                 return null;
               },
@@ -314,8 +323,7 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
               validator: (value) {
                 if (!_validatePasswordAndConfirmPassword(
                     value, _passwordController.text)) {
-                  "Lozinka i potvrda lozinke se ne podudaraju. Molimo unesite iste vrijednosti u oba polja.";
-                  return;
+                  return "Lozinka i potvrda lozinke se ne podudaraju. Molimo unesite iste vrijednosti u oba polja.";
                 }
                 return null;
               },
@@ -347,12 +355,11 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
   bool _validateLozinkuRegExp(String? lozinka) {
     RegExp regex =
         RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{5,}$');
-    return lozinka != null && regex.hasMatch(lozinka);
+    return regex.hasMatch(lozinka!);
   }
 
   bool _validatePasswordAndConfirmPassword(
       String? lozinka, String? potvrdaLozinke) {
-    return (lozinka != null && potvrdaLozinke != null) &&
-        lozinka == potvrdaLozinke;
+    return lozinka == potvrdaLozinke;
   }
 }

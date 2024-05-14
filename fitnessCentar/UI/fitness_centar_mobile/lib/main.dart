@@ -12,6 +12,7 @@ import 'package:fitness_centar_mobile/screens/profil_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/korisnik_provider.dart';
+import 'providers/plan_ishrane_korisnika_provider.dart';
 import 'providers/recenzija_provider.dart';
 import 'providers/tip_clanarine_provider.dart';
 import 'screens/home_screen.dart';
@@ -38,6 +39,7 @@ void main() {
       ChangeNotifierProvider(create: (_) => ClanarinaProvider()),
       ChangeNotifierProvider(create: (_) => PlacanjaProvider()),
       ChangeNotifierProvider(create: (_) => TipClanarineProvider()),
+      ChangeNotifierProvider(create: (_) => PlanIshraneKorisnikaProvider())
     ],
     child: MaterialApp(
       theme: ThemeData(primaryColor: Color.fromARGB(255, 255, 253, 253)),
@@ -235,8 +237,8 @@ class MyApp extends StatelessWidget {
                                             await _korisnikProvider
                                                 .authenticate();
 
-                                        if (Authorization.korisnik!.ulogaId !=
-                                            4) {
+                                        if (Authorization.korisnik!.ulogaId ==
+                                            3) {
                                           Navigator.of(context)
                                               .pushNamedAndRemoveUntil(
                                                   HomeScreen.routeName,
@@ -305,10 +307,9 @@ class MyApp extends StatelessWidget {
                               Expanded(
                                 child: ElevatedButton(
                                   onPressed: () async {
-                                    Navigator.of(context)
-                                        .pushNamedAndRemoveUntil(
-                                            RegistracijaScreen.routeName,
-                                            (route) => false);
+                                    Navigator.of(context).pushNamed(
+                                      RegistracijaScreen.routeName,
+                                    );
                                   },
                                   style: ButtonStyle(
                                     shape: MaterialStateProperty.all<

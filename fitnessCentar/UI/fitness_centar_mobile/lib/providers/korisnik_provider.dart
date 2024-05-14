@@ -3,6 +3,7 @@ import 'dart:convert';
 import '../models/korisnik.dart';
 import '../utils/util.dart';
 import 'base_provider.dart';
+import 'package:http/http.dart' as http;
 
 class KorisnikProvider extends BaseProvider<Korisnik> {
   KorisnikProvider() : super("Korisnik");
@@ -21,7 +22,7 @@ class KorisnikProvider extends BaseProvider<Korisnik> {
     var headers = {
       "Content-Type": "application/json",
     };
-    var response = await http!.post(uri, headers: headers);
+    var response = await http.post(uri, headers: headers);
 
     if (isValidResponse(response)) {
       var data = jsonDecode(response.body);
@@ -39,11 +40,11 @@ class KorisnikProvider extends BaseProvider<Korisnik> {
     var headers = {
       "Content-Type": "application/json",
     };
-    var response = await http!.post(uri, headers: headers, body: jsonRequest);
+    var response = await http.post(uri, headers: headers, body: jsonRequest);
 
     if (isValidResponse(response)) {
       var data = jsonDecode(response.body);
-      Korisnik list = data.map((x) => fromJson(x)).cast<Korisnik>();
+      Korisnik list = fromJson(data);
       return list;
     } else {
       throw Exception("Error");
@@ -56,7 +57,7 @@ class KorisnikProvider extends BaseProvider<Korisnik> {
     var uri = Uri.parse(url);
     var jsonRequest = jsonEncode(korisnik);
     var headers = createHeaders();
-    var response = await http!.put(uri, headers: headers, body: jsonRequest);
+    var response = await http.put(uri, headers: headers, body: jsonRequest);
 
     if (isValidResponse(response)) {
       var data = jsonDecode(response.body);
