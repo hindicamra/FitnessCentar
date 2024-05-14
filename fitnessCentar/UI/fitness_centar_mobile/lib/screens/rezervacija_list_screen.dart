@@ -2,6 +2,7 @@ import 'package:fitness_centar_mobile/models/rezervacija.dart';
 
 import 'package:fitness_centar_mobile/providers/rezervacija_list_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import 'recenzija_dodaj_screen.dart';
@@ -86,10 +87,11 @@ class _RezervacijaListScreenState extends State<RezervacijaListScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
-                                    "Status: ",
+                                    "Datum: ",
                                   ),
                                   Text(
-                                    e.status!,
+                                    DateFormat('dd-MM-yyyy')
+                                        .format(DateTime.parse(e.datum!)),
                                   )
                                 ]),
                             Row(
@@ -98,7 +100,7 @@ class _RezervacijaListScreenState extends State<RezervacijaListScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   const Text(
-                                    "Datum: ",
+                                    "Status: ",
                                   ),
                                   Text(
                                     e.status!,

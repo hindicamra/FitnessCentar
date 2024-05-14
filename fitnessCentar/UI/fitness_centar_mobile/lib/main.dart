@@ -183,6 +183,7 @@ class MyApp extends StatelessWidget {
                             style: const TextStyle(fontSize: 14),
                           ),
                           TextFormField(
+                            obscureText: true,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return "Lozinka ne moze biti prazno polje";
@@ -224,6 +225,7 @@ class MyApp extends StatelessWidget {
                               Expanded(
                                 child: ElevatedButton(
                                   onPressed: () async {
+                                    Authorization.korisnik = null;
                                     if (_formKey.currentState!.validate()) {
                                       try {
                                         Authorization.username = _username.text;
@@ -232,13 +234,32 @@ class MyApp extends StatelessWidget {
                                         Authorization.korisnik =
                                             await _korisnikProvider
                                                 .authenticate();
-                                        print(
-                                            Authorization.korisnik.toString());
 
-                                        Navigator.of(context)
-                                            .pushNamedAndRemoveUntil(
-                                                HomeScreen.routeName,
-                                                (route) => false);
+                                        if (Authorization.korisnik!.ulogaId !=
+                                            4) {
+                                          Navigator.of(context)
+                                              .pushNamedAndRemoveUntil(
+                                                  HomeScreen.routeName,
+                                                  (route) => false);
+                                        } else {
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                AlertDialog(
+                                              title: const Text('Upozorenje'),
+                                              content: const Text(
+                                                  "Neispravno korisničko ime ili lozinka!"),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: const Text('OK'),
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                        }
                                       } catch (e) {
                                         showDialog(
                                             context: context,

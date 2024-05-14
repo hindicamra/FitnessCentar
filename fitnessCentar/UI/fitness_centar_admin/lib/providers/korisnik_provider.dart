@@ -33,8 +33,9 @@ class KorisnikProvider extends BaseProvider<Korisnik> {
     }
   }
 
-  Future<Korisnik> registar(Map<dynamic, dynamic> korisnik) async {
-    var url = "$fullUrl/korisnik";
+  Future<Korisnik> registar(
+      Map<dynamic, dynamic> korisnik, String uloga) async {
+    var url = "$fullUrl/$uloga";
     var uri = Uri.parse(url);
     var jsonRequest = jsonEncode(korisnik);
     var headers = {
@@ -52,8 +53,8 @@ class KorisnikProvider extends BaseProvider<Korisnik> {
   }
 
   Future<Korisnik> updateKorisnika(
-      Map<dynamic, dynamic> korisnik, int id) async {
-    var url = "$fullUrl/korisnik?id=$id";
+      Map<dynamic, dynamic> korisnik, int id, String uloga) async {
+    var url = "$fullUrl/$uloga?id=$id";
     var uri = Uri.parse(url);
     var jsonRequest = jsonEncode(korisnik);
     var headers = createHeaders();

@@ -328,6 +328,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
           ),
           TextFormField(
               controller: _adresaController,
+              obscureText: true,
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.only(left: 14.0, top: 0.0),
                 border: UnderlineInputBorder(
@@ -356,6 +357,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
           ),
           TextFormField(
               controller: _passwordController,
+              obscureText: true,
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.only(left: 14.0, top: 0.0),
                 border: UnderlineInputBorder(

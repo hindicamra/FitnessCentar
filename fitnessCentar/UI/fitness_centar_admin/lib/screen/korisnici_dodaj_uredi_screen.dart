@@ -113,10 +113,7 @@ class _KorisniciDodajUrediScreenState extends State<KorisniciDodajUrediScreen> {
                                   _showKorisnickoImeWarning();
                                   return;
                                 }
-                                if (!_validateLozinka(request['lozinka'])) {
-                                  _showLozinkaWarning();
-                                  return;
-                                }
+
                                 if (!_validateIme(request['ime'])) {
                                   _showImeWarning();
                                   return;
@@ -134,7 +131,17 @@ class _KorisniciDodajUrediScreenState extends State<KorisniciDodajUrediScreen> {
                                   _showEmailWarning();
                                   return;
                                 }
-
+                                if (!_validateLozinkuRegExp(
+                                    request['lozinka'])) {
+                                  _showLozinkaRegExpWarning();
+                                  return;
+                                }
+                                if (!_validatePasswordAndConfirmPassword(
+                                    request['lozinka'],
+                                    request['potvrdaLozinke'])) {
+                                  _showCompareLozinkeiPotvrduLozinkeWarning();
+                                  return;
+                                }
                                 if (_formKey.currentState?.fields['ulogaId']
                                         ?.value ==
                                     null) {
@@ -155,6 +162,26 @@ class _KorisniciDodajUrediScreenState extends State<KorisniciDodajUrediScreen> {
                                   );
                                   return;
                                 }
+                                if (_formKey.currentState?.fields['status']
+                                        ?.value ==
+                                    null) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        AlertDialog(
+                                      title: Text("Upozorenje"),
+                                      content: Text("Status je obavezan!"),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          child: Text("OK"),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                  return;
+                                }
                                 Map korisnik = {
                                   "ime": request['ime'],
                                   "prezime": request['prezime'],
@@ -163,8 +190,7 @@ class _KorisniciDodajUrediScreenState extends State<KorisniciDodajUrediScreen> {
                                   "telefon": request['telefon'],
                                   "password": request['lozinka'],
                                   "passwordPotvrda": request['potvrdaLozinke'],
-                                  "ulogaId": int.tryParse(
-                                      _formKey.currentState?.value['ulogaId']),
+                                  "ulogaId": 3,
                                   "addresa": request['addresa'],
                                   "status": bool.parse(request['status'],
                                       caseSensitive: false)
@@ -172,9 +198,12 @@ class _KorisniciDodajUrediScreenState extends State<KorisniciDodajUrediScreen> {
                                 try {
                                   if (widget.korisnik != null) {
                                     await _korisnikProvider.updateKorisnika(
-                                        korisnik, widget.korisnik!.korisnikId!);
+                                        korisnik,
+                                        widget.korisnik!.korisnikId!,
+                                        "korisnik");
                                   } else {
-                                    await _korisnikProvider.registar(korisnik);
+                                    await _korisnikProvider.registar(
+                                        korisnik, "korisnik");
                                   }
                                   KorisnikData.korisnik = null;
                                   _formKey.currentState!.reset();
@@ -327,6 +356,7 @@ class _KorisniciDodajUrediScreenState extends State<KorisniciDodajUrediScreen> {
                   children: [
                     Expanded(
                       child: FormBuilderTextField(
+                        obscureText: true,
                         decoration: InputDecoration(
                             labelText: "Lozinka", hintText: "Unesite password"),
                         name: "lozinka",
@@ -338,6 +368,7 @@ class _KorisniciDodajUrediScreenState extends State<KorisniciDodajUrediScreen> {
                   children: [
                     Expanded(
                       child: FormBuilderTextField(
+                        obscureText: true,
                         decoration: InputDecoration(
                             labelText: "Potvrda lozinke",
                             hintText: "Unesite kopotvrdu passworda"),
@@ -433,23 +464,31 @@ class _KorisniciDodajUrediScreenState extends State<KorisniciDodajUrediScreen> {
     return email != null && email.isNotEmpty;
   }
 
+  bool _validateLozinkuRegExp(String? lozinka) {
+    RegExp regex =
+        RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{5,}$');
+    return lozinka != null && regex.hasMatch(lozinka);
+  }
+
+  bool _validatePasswordAndConfirmPassword(
+      String? lozinka, String? potvrdaLozinke) {
+    return (lozinka != null && potvrdaLozinke != null) &&
+        lozinka == potvrdaLozinke;
+  }
+
   bool _validateTelefon(String? telefon) {
     if (telefon == null ||
         telefon.isEmpty ||
         telefon.length < 8 ||
-        telefon.length > 8) {
+        telefon.length > 11) {
       return false;
     }
     try {
       int.parse(telefon);
-      return true; // Successfully parsed as an integer.
+      return true;
     } catch (e) {
-      return false; // Not a valid integer.
+      return false;
     }
-  }
-
-  bool _validateLozinka(String? lozinka) {
-    return lozinka != null && lozinka.isNotEmpty && lozinka.length >= 4;
   }
 
   void _showKorisnickoImeWarning() {
@@ -535,13 +574,30 @@ class _KorisniciDodajUrediScreenState extends State<KorisniciDodajUrediScreen> {
     );
   }
 
-  void _showLozinkaWarning() {
+  void _showCompareLozinkeiPotvrduLozinkeWarning() {
     showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
         title: Text("Upozorenje"),
-        content:
-            Text("Lozinka je obavezna i mora imati minimalno 4 karaktera!"),
+        content: Text(
+            "Lozinka i potvrda lozinke se ne podudaraju. Molimo unesite iste vrijednosti u oba polja."),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text("OK"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showLozinkaRegExpWarning() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Text("Upozorenje"),
+        content: Text(
+            "Lozinka je obavezna, treba sadrzavati minimalno 4 karaktera,  veliko i malo slovo, broj i specijalan karakter "),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),

@@ -193,8 +193,7 @@ class LoginPage extends StatelessWidget {
                       Authorization.korisnik =
                           await _korisnikProvider.authenticate();
 
-                      if (Authorization.korisnik!.ulogaId != 5) {
-                        //treba promjeniti 4 u 3
+                      if (Authorization.korisnik!.ulogaId != 3) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => const MenuScreen(),

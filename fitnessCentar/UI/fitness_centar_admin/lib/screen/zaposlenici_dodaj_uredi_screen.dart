@@ -114,10 +114,7 @@ class _ZaposleniciDetaljiScreenState
                                   _showKorisnickoImeWarning();
                                   return;
                                 }
-                                if (!_validateLozinka(request['lozinka'])) {
-                                  _showLozinkaWarning();
-                                  return;
-                                }
+
                                 if (!_validateIme(request['ime'])) {
                                   _showImeWarning();
                                   return;
@@ -135,6 +132,17 @@ class _ZaposleniciDetaljiScreenState
                                   _showEmailWarning();
                                   return;
                                 }
+                                if (!_validateLozinkuRegExp(
+                                    request['lozinka'])) {
+                                  _showLozinkaRegExpWarning();
+                                  return;
+                                }
+                                if (!_validatePasswordAndConfirmPassword(
+                                    request['lozinka'],
+                                    request['potvrdaLozinke'])) {
+                                  _showCompareLozinkeiPotvrduLozinkeWarning();
+                                  return;
+                                }
 
                                 if (_formKey.currentState?.fields['ulogaId']
                                         ?.value ==
@@ -145,6 +153,26 @@ class _ZaposleniciDetaljiScreenState
                                         AlertDialog(
                                       title: Text("Upozorenje"),
                                       content: Text("Uloga je obavezna!"),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          child: Text("OK"),
+                                        )
+                                      ],
+                                    ),
+                                  );
+                                  return;
+                                }
+                                if (_formKey.currentState?.fields['status']
+                                        ?.value ==
+                                    null) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        AlertDialog(
+                                      title: Text("Upozorenje"),
+                                      content: Text("Status je obavezan!"),
                                       actions: [
                                         TextButton(
                                           onPressed: () =>
@@ -174,15 +202,16 @@ class _ZaposleniciDetaljiScreenState
                                   Korisnik updatedEmployee;
                                   if (widget.korisnik != null) {
                                     updatedEmployee = (await _korisnikProvider
-                                        .updateKorisnika(korisnik,
-                                            widget.korisnik!.korisnikId!));
+                                        .updateKorisnika(
+                                            korisnik,
+                                            widget.korisnik!.korisnikId!,
+                                            "uposlenik"));
                                   } else {
                                     updatedEmployee = (await _korisnikProvider
-                                        .registar(korisnik));
+                                        .registar(korisnik, "uposlenik"));
                                   }
                                   KorisnikData.korisnik = null;
                                   _formKey.currentState!.reset();
-                                  // Navigator.pop(context, updatedEmployee);
                                 } on Exception catch (e) {
                                   showDialog(
                                       context: context,
@@ -333,6 +362,7 @@ class _ZaposleniciDetaljiScreenState
                   children: [
                     Expanded(
                       child: FormBuilderTextField(
+                        obscureText: true,
                         decoration: InputDecoration(
                             labelText: "Lozinka", hintText: "Unesite password"),
                         name: "lozinka",
@@ -344,6 +374,7 @@ class _ZaposleniciDetaljiScreenState
                   children: [
                     Expanded(
                       child: FormBuilderTextField(
+                        obscureText: true,
                         decoration: InputDecoration(
                             labelText: "Potvrda lozinke",
                             hintText: "Unesite kopotvrdu passworda"),
@@ -443,7 +474,7 @@ class _ZaposleniciDetaljiScreenState
     if (telefon == null ||
         telefon.isEmpty ||
         telefon.length < 8 ||
-        telefon.length > 8) {
+        telefon.length > 11) {
       return false;
     }
     try {
@@ -454,8 +485,16 @@ class _ZaposleniciDetaljiScreenState
     }
   }
 
-  bool _validateLozinka(String? lozinka) {
-    return lozinka != null && lozinka.isNotEmpty && lozinka.length >= 4;
+  bool _validateLozinkuRegExp(String? lozinka) {
+    RegExp regex =
+        RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{5,}$');
+    return lozinka != null && regex.hasMatch(lozinka);
+  }
+
+  bool _validatePasswordAndConfirmPassword(
+      String? lozinka, String? potvrdaLozinke) {
+    return (lozinka != null && potvrdaLozinke != null) &&
+        lozinka == potvrdaLozinke;
   }
 
   void _showKorisnickoImeWarning() {
@@ -541,13 +580,30 @@ class _ZaposleniciDetaljiScreenState
     );
   }
 
-  void _showLozinkaWarning() {
+  void _showCompareLozinkeiPotvrduLozinkeWarning() {
     showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
         title: Text("Upozorenje"),
-        content:
-            Text("Lozinka je obavezna i mora imati minimalno 4 karaktera!"),
+        content: Text(
+            "Lozinka i potvrda lozinke se ne podudaraju. Molimo unesite iste vrijednosti u oba polja."),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text("OK"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showLozinkaRegExpWarning() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Text("Upozorenje"),
+        content: Text(
+            "Lozinka je obavezna, treba sadrzavati minimalno 4 karaktera,  veliko i malo slovo, broj i specijalan karakter "),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),

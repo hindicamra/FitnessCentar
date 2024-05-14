@@ -126,7 +126,7 @@ class _KorisniciScreenState extends State<KorisniciScreen> {
               onPressed: () async {
                 var data = await _korisnikProvider.get(filter: {
                   'ImePrezime': _imePrezimeController.text,
-                  'UlogaId': 2,
+                  'UlogaId': 3,
                   'Page': 0,
                   'PageSize': 10,
                 });

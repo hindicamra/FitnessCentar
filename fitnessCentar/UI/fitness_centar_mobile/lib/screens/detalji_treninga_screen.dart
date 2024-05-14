@@ -94,7 +94,6 @@ class _DetaljiTreningaScreenState extends State<DetaljiTreningaScreen> {
         var response =
             await _rezervacijaProvider!.rezervacijaTreninga(rezervacijaData);
         if (response == "[Već ste rezervisali za ovaj datum]") {
-          // Show a warning dialog for empty content
           showDialog(
             context: context,
             builder: (BuildContext context) => AlertDialog(

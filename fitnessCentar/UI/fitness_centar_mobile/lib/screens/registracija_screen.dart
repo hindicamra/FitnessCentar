@@ -282,6 +282,14 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
               style: const TextStyle(fontSize: 14)),
           const SizedBox(height: 16),
           TextFormField(
+              validator: (value) {
+                if (!_validateLozinkuRegExp(value)) {
+                  "Lozinka je obavezna, treba sadrzavati minimalno 4 karaktera,  veliko i malo slovo, broj i specijalan karakter ";
+                  return;
+                }
+                return null;
+              },
+              obscureText: true,
               controller: _passwordController,
               decoration: InputDecoration(
                 hintText: 'Password',
@@ -303,6 +311,15 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
               style: const TextStyle(fontSize: 14)),
           const SizedBox(height: 16),
           TextFormField(
+              validator: (value) {
+                if (!_validatePasswordAndConfirmPassword(
+                    value, _passwordController.text)) {
+                  "Lozinka i potvrda lozinke se ne podudaraju. Molimo unesite iste vrijednosti u oba polja.";
+                  return;
+                }
+                return null;
+              },
+              obscureText: true,
               decoration: InputDecoration(
                 hintText: 'Potvrda passworda',
                 hintStyle: const TextStyle(fontSize: 14),
@@ -325,5 +342,17 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
         ],
       ),
     );
+  }
+
+  bool _validateLozinkuRegExp(String? lozinka) {
+    RegExp regex =
+        RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{5,}$');
+    return lozinka != null && regex.hasMatch(lozinka);
+  }
+
+  bool _validatePasswordAndConfirmPassword(
+      String? lozinka, String? potvrdaLozinke) {
+    return (lozinka != null && potvrdaLozinke != null) &&
+        lozinka == potvrdaLozinke;
   }
 }
