@@ -75,6 +75,7 @@ class _NovostiListScreenState extends State<TreningListsScreen> {
                 InkWell(
                   onTap: () {
                     TreningIdRouteData.id = e.treningId;
+
                     Navigator.pushNamed(
                       context,
                       DetaljiTreningaScreen.routeName,

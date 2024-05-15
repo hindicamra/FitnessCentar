@@ -2,6 +2,7 @@
 
 import 'package:fitness_centar_mobile/models/clanarina.dart';
 import 'package:fitness_centar_mobile/providers/clanarina_provider.dart';
+import 'package:fitness_centar_mobile/screens/clanarina_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/korisnik.dart';

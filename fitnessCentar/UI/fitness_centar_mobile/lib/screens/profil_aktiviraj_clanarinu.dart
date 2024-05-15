@@ -54,10 +54,6 @@ class _ProfilAktivirajClanarinuState extends State<ProfilAktivirajClanarinu> {
     return ElevatedButton(
         onPressed: () async {
           makePayment(data!.cijena!);
-
-          BottomNavigationBar navigationBar =
-              glbKey.currentWidget as BottomNavigationBar;
-          navigationBar.onTap!(2);
         },
         style: ButtonStyle(
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -104,6 +100,9 @@ class _ProfilAktivirajClanarinuState extends State<ProfilAktivirajClanarinu> {
           content: Text("Uspjesno placeno, Aktivirano/produzeno"),
           backgroundColor: Color.fromARGB(255, 46, 92, 232),
         ));
+        BottomNavigationBar navigationBar =
+            glbKey.currentWidget as BottomNavigationBar;
+        navigationBar.onTap!(2);
       } catch (e) {
         print(e);
       }

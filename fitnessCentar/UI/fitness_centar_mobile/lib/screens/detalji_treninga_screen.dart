@@ -84,35 +84,37 @@ class _DetaljiTreningaScreenState extends State<DetaljiTreningaScreen> {
         setState(() {
           selectedDate = picked;
         });
+      }
+      setState(() {
+        selectedDate = selectedDate;
+      });
+      Map rezervacijaData = {
+        "treningId": TreningIdRouteData.id!,
+        "korisnikId": Authorization.korisnik!.korisnikId!,
+        "datum": selectedDate.toIso8601String(),
+      };
 
-        Map rezervacijaData = {
-          "treningId": TreningIdRouteData.id!,
-          "korisnikId": Authorization.korisnik!.korisnikId!,
-          "datum": selectedDate.toIso8601String(),
-        };
-
-        var response =
-            await _rezervacijaProvider!.rezervacijaTreninga(rezervacijaData);
-        if (response == "[Već ste rezervisali za ovaj datum]") {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) => AlertDialog(
-              title: const Text("Upozorenje"),
-              content: const Text("Već ste rezervisali za ovaj datum"),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text("OK"),
-                ),
-              ],
-            ),
-          );
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text("Trening rezervisan"),
-            backgroundColor: Color.fromARGB(255, 46, 92, 232),
-          ));
-        }
+      var response =
+          await _rezervacijaProvider!.rezervacijaTreninga(rezervacijaData);
+      if (response == "[Već ste rezervisali za ovaj datum]") {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            title: const Text("Upozorenje"),
+            content: const Text("Već ste rezervisali za ovaj datum"),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("OK"),
+              ),
+            ],
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Trening rezervisan"),
+          backgroundColor: Color.fromARGB(255, 46, 92, 232),
+        ));
       }
     }
 

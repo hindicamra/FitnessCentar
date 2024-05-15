@@ -88,8 +88,26 @@ class _RezervacijaListScreenState extends State<RezervacijaListScreen> {
                 padding: const EdgeInsets.all(20.0),
                 child: InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, RecenzijaDodajScreen.routeName,
-                        arguments: e.treningId);
+                    if (DateTime.tryParse(e.datum!)!.isAfter(DateTime.now())) {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text("Upozorenje"),
+                          content: const Text(
+                              "Recenzija nije moguca za buduce datume"),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text("OK"),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      Navigator.pushNamed(
+                          context, RecenzijaDodajScreen.routeName,
+                          arguments: e.treningId);
+                    }
                   },
                   child: Card(
                     color: Colors.white,
