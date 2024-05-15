@@ -19,7 +19,7 @@ namespace fitnessCentar.Controllers
         }
 
         [HttpPost("uposlenik")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public virtual async Task<Model.Korisnik> InsertUposlenik([FromBody] KorisnikInsertRequest request)
         {
             request.UlogaId = (int)Model.Status.Uloga.Uposlenik;
@@ -35,7 +35,7 @@ namespace fitnessCentar.Controllers
         }
 
         [HttpPut("uposlenik")]
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public virtual async Task<Model.Korisnik> UpdateUposlenik(int id, [FromBody] KorisnikUpdateRequest request)
         {
             request.UlogaId = (int)Model.Status.Uloga.Uposlenik;

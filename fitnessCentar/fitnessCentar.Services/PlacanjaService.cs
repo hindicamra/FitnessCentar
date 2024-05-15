@@ -57,7 +57,7 @@ namespace fitnessCentar.Services
                     KorisnikId = insert.KorisnikId,
                     TipClanarineId = insert.TipClanarineId,
                 };
-               
+               await _clanarinaService.Insert(insertRequest);
             }
 
 

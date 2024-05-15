@@ -2,6 +2,7 @@
 using AutoMapper;
 using fitnessCentar.Model.Requests;
 using fitnessCentar.Model.SearchObjects;
+using fitnessCentar.Model.Status;
 using fitnessCentar.Services.Database;
 using fitnessCentar.Services.Exceptions;
 using Microsoft.EntityFrameworkCore;
@@ -33,17 +34,29 @@ namespace fitnessCentar.Services
             return base.AddFilter(query, search);
         }
 
-        public override Task BeforeInsert(Recenzija entity, RecenzijaInsertRequest insert)
+        public override async Task BeforeInsert(Recenzija entity, RecenzijaInsertRequest insert)
         {
+            
+            var existingRecenzija =  await _context.Recenzijas.FirstOrDefaultAsync(r => r.KorisnikId == insert.KorisnikId && r.TreningId == insert.TreningId);
 
-            var existingRecenzija =  _context.Recenzijas.FirstOrDefaultAsync(r => r.KorisnikId == insert.KorisnikId && r.TreningId == insert.TreningId);
+            var rezervacija = await _context.Rezervacijas.FindAsync(insert.RezervacijaId)??throw new UserException("Rezervacija ne postoji");
 
-            if (existingRecenzija.Result != null)
+            if (rezervacija.Datum>DateTime.Now || rezervacija.Status!=Enum.GetName(typeof(StatusRezervacije), StatusRezervacije.Odobrena))
+            {
+                throw new UserException("Nažalost, ne možete ostaviti recenziju za trening kojem niste prisustvovali");
+            }
+
+
+            if (existingRecenzija != null)
             {
                 throw new UserException("Ne mozete ocijeniti isti trening vise puta");
             }
 
-            return base.BeforeInsert(entity, insert);
+
+
+
+
+            await base.BeforeInsert(entity, insert);
         }
     }
 }

@@ -44,15 +44,22 @@ namespace fitnessCentar.Services
                 {
                     query = query.Where(r => r.KorisnikId == search.KorisnikId.Value);
                 }
-
                 if (search.Datum.HasValue)
                 {
                     query = query.Where(r => r.Datum.Date == search.Datum.Value.Date);
+                }
+
+                if (search.ImePrezime!=null)
+                {
+                    query=query.Where(r=>r.Korisnik!.Ime.Contains(search.ImePrezime) || r.Korisnik.Prezime.Contains(search.ImePrezime));
                 }
                 if (search.Status.HasValue)
                 {
                     query=query.Where(r=>r.Status==search.Status.ToString());
                 }
+
+                
+                
             }
 
             return base.AddFilter(query, search);
@@ -84,6 +91,10 @@ namespace fitnessCentar.Services
             {
                 throw new UserException("Clanarina nije validna");
             }
+            if (insert.Datum<DateTime.Now)
+            {
+                throw new UserException("Rezervacija nije moguća za trenutnti datum ili datume iz prošlosti");
+            }
 
 
             
@@ -111,6 +122,26 @@ namespace fitnessCentar.Services
             };
 
             _emailService.SendingObject(reservation);
+        }
+
+        public override async Task<Model.Rezervacija> Update(int id, RezervacijaUpdateRequest update)
+        {
+            var rezervacija= await _context.Rezervacijas.FindAsync(id);
+            if (rezervacija==null)
+            {
+                throw new UserException("Rezervacija ne postoji");
+            }
+
+            if (rezervacija!=null)
+            {
+                if (rezervacija.Datum<=DateTime.Now)
+                {
+                    throw new UserException("Rezervacija je završena");
+                }
+            }
+
+
+                return await base.Update(id, update);
         }
 
 

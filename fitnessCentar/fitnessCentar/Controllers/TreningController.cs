@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace fitnessCentar.Controllers
 {
 	[ApiController]
-    //[Authorize(Roles = "Korisnik, Admin,Zaposlenik")]
+    [Authorize(Roles = "Korisnik, Admin,Zaposlenik")]
     public class TreningController : BaseCRUDController<Model.Trening, Model.SearchObjects.TreningSearchObject, TreningInsertRequest, TreningUpdateRequest>
 	{
 		public TreningController(ILogger<BaseController<Model.Trening, Model.SearchObjects.TreningSearchObject>> logger, ITreningService service)

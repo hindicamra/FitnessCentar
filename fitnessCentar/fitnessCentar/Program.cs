@@ -55,6 +55,7 @@ builder.Services.AddTransient<IPlacanjaService, PlacanjaService>();
 builder.Services.AddTransient<IUlogaService, UlogaService>();
 builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddTransient<IIzvjestajService, IzvjestajService>();
+builder.Services.AddTransient<IPreporukaService, PreporukaService>();
 
 
 builder.Services.AddAutoMapper(typeof(IKorisnikService));

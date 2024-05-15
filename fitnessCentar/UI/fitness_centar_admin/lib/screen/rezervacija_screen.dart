@@ -21,6 +21,7 @@ class _RezervacijaScreenState extends State<RezervacijaScreen> {
   late RezervacijaListProvider _rezervacijaListProvider;
   List<Rezervacija>? result;
   final TextEditingController _datumController = TextEditingController();
+  final TextEditingController _imePrezimeController = TextEditingController();
 
   @override
   void initState() {
@@ -31,7 +32,7 @@ class _RezervacijaScreenState extends State<RezervacijaScreen> {
 
   Future<void> _loadData() async {
     var data = await _rezervacijaListProvider.get(filter: {
-      'Datum': null,
+      'ImePrezime': null,
       'Page': 0,
       'PageSize': 100,
     });
@@ -102,15 +103,15 @@ class _RezervacijaScreenState extends State<RezervacijaScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text("Unesite datum"),
+          const Text("Unesite Ime/Prezime"),
           const SizedBox(
             width: 20,
           ),
           SizedBox(
             width: 300,
             child: TextField(
-              decoration: const InputDecoration(labelText: "datum"),
-              controller: _datumController,
+              decoration: const InputDecoration(labelText: "Ime i prezime"),
+              controller: _imePrezimeController,
             ),
           ),
           const SizedBox(
@@ -119,7 +120,7 @@ class _RezervacijaScreenState extends State<RezervacijaScreen> {
           ElevatedButton(
               onPressed: () async {
                 var data = await _rezervacijaListProvider.get(filter: {
-                  'Datum': _datumController.text,
+                  'ImePrezime': _imePrezimeController.text,
                   'Page': 0,
                   'PageSize': 100,
                 });
@@ -148,7 +149,7 @@ class _RezervacijaScreenState extends State<RezervacijaScreen> {
                 }, KorisnikData.rezervacijaStatus!.rezervacijaId!);
 
                 var data = await _rezervacijaListProvider.get(filter: {
-                  'Datum': _datumController.text,
+                  'ImePrezime': _imePrezimeController.text,
                   'Page': 0,
                   'PageSize': 100,
                 });
@@ -177,7 +178,7 @@ class _RezervacijaScreenState extends State<RezervacijaScreen> {
                 }, KorisnikData.rezervacijaStatus!.rezervacijaId!);
 
                 var data = await _rezervacijaListProvider.get(filter: {
-                  'Datum': _datumController.text,
+                  'ImePrezime': _imePrezimeController.text,
                   'Page': 0,
                   'PageSize': 100,
                 });
