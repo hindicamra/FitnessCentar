@@ -42,45 +42,6 @@ class _PlacanjaScreenState extends State<PlacanjaScreen> {
     });
   }
 
-  Widget clanarina(int tipClanarine) {
-    if (data != null) {
-      if (tipClanarine == 7) {
-        return const Text(
-          "Sedmična",
-          style: TextStyle(
-            fontSize: 24,
-            color: Color.fromARGB(255, 0, 0, 0),
-          ),
-        );
-      } else if (tipClanarine == 30) {
-        return const Text(
-          "Mjesečna",
-          style: TextStyle(
-            fontSize: 24,
-            color: Color.fromARGB(255, 0, 0, 0),
-          ),
-        );
-      } else if (tipClanarine == 180) {
-        return const Text(
-          "Polugodišnja",
-          style: TextStyle(
-            fontSize: 24,
-            color: Color.fromARGB(255, 0, 0, 0),
-          ),
-        );
-      } else {
-        return const Text(
-          "Godišnja",
-          style: TextStyle(
-            fontSize: 24,
-            color: Color.fromARGB(255, 0, 0, 0),
-          ),
-        );
-      }
-    }
-    return Container();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -165,7 +126,14 @@ class _PlacanjaScreenState extends State<PlacanjaScreen> {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Center(child: clanarina(data!.trajanje!)),
+                  Center(
+                      child: Text(
+                    data!.naziv!,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
+                  )),
                   Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
