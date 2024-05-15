@@ -118,7 +118,7 @@ namespace fitnessCentar.Services
                 Trening = trening.Naziv,
                 Email = korisnik.Email,
                 Datum = insert.Datum,
-                Vrijeme = insert.Datum
+                
             };
 
             _emailService.SendingObject(reservation);

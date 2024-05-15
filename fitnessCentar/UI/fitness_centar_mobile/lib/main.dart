@@ -240,11 +240,33 @@ class MyApp extends StatelessWidget {
                                                 .authenticate();
 
                                         if (Authorization.korisnik!.ulogaId ==
-                                            3) {
+                                                3 &&
+                                            Authorization.korisnik!.status ==
+                                                true) {
                                           Navigator.of(context)
                                               .pushNamedAndRemoveUntil(
                                                   HomeScreen.routeName,
                                                   (route) => false);
+                                        } else if (Authorization
+                                                .korisnik!.status ==
+                                            false) {
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                AlertDialog(
+                                              title: const Text('Upozorenje'),
+                                              content: const Text(
+                                                  "Korisnik je neaktivan"),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: const Text('OK'),
+                                                )
+                                              ],
+                                            ),
+                                          );
                                         } else {
                                           showDialog(
                                             context: context,

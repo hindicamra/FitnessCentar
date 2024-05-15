@@ -79,7 +79,7 @@ public class ConsumeRabbitMQHostedService : BackgroundService
     {
         // we just print this message   
         //_logger.LogInformation($"Reservation received: {reservation.Id}");
-        await _emailSender.SendEmailAsync(reservation.Email, "Uspješno ste napravili rezervaciju!", $"Vaša rezervacija za {reservation.Trening} na datum {reservation.Datum.ToShortDateString()} / {reservation.Vrijeme.ToShortTimeString()}.");
+        await _emailSender.SendEmailAsync(reservation.Email, "Uspješno ste napravili rezervaciju!", $"Vaša rezervacija za {reservation.Trening} na datum {reservation.Datum.ToShortDateString()} .");
 
     }
 

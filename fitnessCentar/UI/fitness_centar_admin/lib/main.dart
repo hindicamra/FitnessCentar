@@ -193,10 +193,27 @@ class LoginPage extends StatelessWidget {
                       Authorization.korisnik =
                           await _korisnikProvider.authenticate();
 
-                      if (Authorization.korisnik!.ulogaId != 3) {
+                      if (Authorization.korisnik!.ulogaId != 3 &&
+                          Authorization.korisnik!.status == true) {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => const MenuScreen(),
+                          ),
+                        );
+                      } else if (Authorization.korisnik!.status == false) {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: const Text('Upozorenje'),
+                            content: const Text("Uposlenik je neaktivan"),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'),
+                              )
+                            ],
                           ),
                         );
                       } else {

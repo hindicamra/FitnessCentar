@@ -15,5 +15,11 @@ namespace fitnessCentar.Services
         public UlogaService(FitnessCentarContext context, IMapper mapper) : base(context, mapper)
         {
         }
+
+        public override IQueryable<Database.Uloga> AddFilter(IQueryable<Database.Uloga> query, UlogaSearchObject? search = null)
+        {
+            query=query.Where(r => r.UlogaId!=1);
+            return base.AddFilter(query, search);
+        }
     }
 }

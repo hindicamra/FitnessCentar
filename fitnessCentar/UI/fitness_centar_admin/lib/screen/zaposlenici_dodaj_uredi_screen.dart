@@ -316,7 +316,6 @@ class _ZaposleniciDetaljiScreenState
                   children: [
                     Expanded(
                       child: FormBuilderTextField(
-                        readOnly: widget.korisnik != null ? true : false,
                         decoration: InputDecoration(
                             labelText: "Korisničko ime",
                             hintText: "Unesite korisničko ime"),
