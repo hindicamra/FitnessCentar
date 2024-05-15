@@ -167,9 +167,9 @@ class _DetaljiTreningaScreenState extends State<DetaljiTreningaScreen> {
             )
           : SafeArea(
               child: SingleChildScrollView(
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height - 100,
-                  width: MediaQuery.of(context).size.width,
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -178,52 +178,59 @@ class _DetaljiTreningaScreenState extends State<DetaljiTreningaScreen> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         clipBehavior: Clip.antiAliasWithSaveLayer,
-                        child: Column(
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                padding:
-                                    const EdgeInsets.fromLTRB(15, 15, 15, 15),
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        naziv!,
-                                        style: const TextStyle(
-                                          fontSize: 24,
-                                          color: Color.fromARGB(255, 0, 0, 0),
-                                        ),
-                                      ),
-                                      Container(
-                                        height: 20,
-                                      ),
-                                      Text(
-                                        opis!,
-                                        style: const TextStyle(
-                                            fontSize: 15,
-                                            color:
-                                                Color.fromARGB(255, 0, 0, 0)),
-                                      )
-                                    ]),
-                              )
-                            ]),
+                            children: [
+                              Text(
+                                naziv!,
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              Text(
+                                opis!,
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
                         child: ElevatedButton(
                           onPressed: () => _selectDate(context),
-                          child: const Text('Izaberi datum',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 23, 121, 251),
-                              )),
+                          child: const Text(
+                            'Izaberi datum',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 23, 121, 251),
+                            ),
+                          ),
                         ),
                       ),
-                      Expanded(
-                          child: Column(
+                      const SizedBox(height: 8),
+                      const Divider(),
+                      const Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            'Preporuke',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Column(
                         children: buildPreporukeWidget(),
-                      ))
+                      ),
                     ],
                   ),
                 ),
@@ -244,18 +251,6 @@ class _DetaljiTreningaScreenState extends State<DetaljiTreningaScreen> {
     List<Widget> list = preporuka!
         .map((e) => Column(
               children: [
-                const SizedBox(
-                  height: 8,
-                ),
-                const Divider(),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Center(
-                      child: Text(
-                    'Preporuke',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  )),
-                ),
                 InkWell(
                   onTap: () {
                     setState(() {
