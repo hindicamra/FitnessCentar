@@ -110,6 +110,20 @@ class _DetaljiTreningaScreenState extends State<DetaljiTreningaScreen> {
             ],
           ),
         );
+      } else if (response == "[Rezervacija nije moguća za prošle datume]") {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            title: const Text("Upozorenje"),
+            content: const Text("Rezervacija nije moguća za prošle datume"),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("OK"),
+              ),
+            ],
+          ),
+        );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text("Trening rezervisan"),
