@@ -104,6 +104,7 @@ class _RezervacijaListScreenState extends State<RezervacijaListScreen> {
                         ),
                       );
                     } else {
+                      RecenzijaTreningIdRouteData.id = e.treningId;
                       Navigator.pushNamed(
                           context, RecenzijaDodajScreen.routeName,
                           arguments: e.treningId);

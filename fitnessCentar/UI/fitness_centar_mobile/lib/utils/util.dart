@@ -20,6 +20,10 @@ class TipClanarineId {
   static int? id;
 }
 
+class RecenzijaTreningIdRouteData {
+  static int? id;
+}
+
 Image imageFromBase64String(String base64String) {
   return Image.memory(base64Decode(base64String));
 }

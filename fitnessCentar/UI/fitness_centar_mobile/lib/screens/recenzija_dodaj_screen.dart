@@ -113,7 +113,8 @@ class _RecenzijaDodajScreenState extends State<RecenzijaDodajScreen> {
                                     Map recenzija = {
                                       "korisnikID":
                                           Authorization.korisnik!.korisnikId,
-                                      "treningId": 2,
+                                      "treningId":
+                                          RecenzijaTreningIdRouteData.id,
                                       "tekst": sadrzajRecenzije,
                                       "ocjena": rating
                                     };
