@@ -21,7 +21,7 @@
 
 ## Broj kartice za plaćanje korištenjem Stripe
 - **Broj kartice:** 4242 4242 4242 4242
-- **CVC:** bilo koja 3 broja
+- **CCV:** bilo koja 3 broja
 - **EXP:** bilo koji datum u buducnosti
 
 ### Napomena
