@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace fitnessCentar.Controllers
 {
 	[ApiController]
-    [Authorize(Roles = "Korisnik, Admin,Zaposlenik")]
+    [Authorize(Roles = "Korisnik, Admin,Uposlenik")]
     public class RezervacijaController : BaseCRUDController<Model.Rezervacija, Model.SearchObjects.RezervacijaSearchObject, RezervacijaInsertRequest, RezervacijaUpdateRequest>
 	{
 		public RezervacijaController(ILogger<BaseController<Model.Rezervacija, Model.SearchObjects.RezervacijaSearchObject>> logger, IRezervacijaService service)

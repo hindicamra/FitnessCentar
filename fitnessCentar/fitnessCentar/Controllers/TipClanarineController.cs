@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace fitnessCentar.Controllers
 {
     [ApiController]
-    [Authorize(Roles = "Korisnik, Admin,Zaposlenik")]
+    [Authorize(Roles = "Korisnik, Admin,Uposlenik")]
     public class TipClanarineController : BaseCRUDController<Model.TipClanarina, Model.SearchObjects.TipClanarineSearchObject, TipClanarinaInsertRequest, TipClanarinaUpdateRequest>
     {
         public TipClanarineController(ILogger<BaseController<Model.TipClanarina, Model.SearchObjects.TipClanarineSearchObject>> logger, ITipClanarineService service)

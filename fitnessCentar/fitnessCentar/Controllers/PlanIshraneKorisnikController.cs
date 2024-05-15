@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace fitnessCentar.Controllers
 {
     [ApiController]
-    [Authorize(Roles = "Korisnik, Admin,Zaposlenik")]
+    [Authorize(Roles = "Korisnik, Admin,Uposlenik")]
     public class PlanIshraneKorisnikController: BaseCRUDController<Model.PlanIshraneKorisnik, Model.SearchObjects.PlanIshraneKorisnikSearchObject, PlanIshraneKorisnikInsertRequest, PlanIshraneKorisnikUpdateRequest>
     {
         
