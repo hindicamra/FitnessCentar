@@ -230,8 +230,16 @@ namespace fitnessCentar.Services.Migrations
                 columns: new[] { "PlanIshraneId", "Naziv", "Opis" },
                 values: new object[,]
                 {
-                    { 1, "Ananas dijeta", "Konzumacija svega osim ananasa" },
-                    { 2, "Avokado dijeta", "Konzumacija svega osim avokada" }
+                    { 1, "Proteinska dijeta", "Visok unos proteina, niskokaloricni obroci" },
+                    { 2, "Keto dijeta", "Visok unos masti, vrlo nizak unos ugljenih hidrata" },
+                    { 3, "Mediteranska dijeta", "Obilje voca, povrca, ribe i maslinovog ulja" },
+                    { 4, "Veganska dijeta", "Ishrana bez proizvoda zivotinjskog porekla" },
+                    { 5, "Paleo dijeta", "Ishrana bazirana na namirnicama iz paleolitskog doba" },
+                    { 6, "Bezglutenska dijeta", "Izbjegavanje glutena u ishrani" },
+                    { 7, "DASH dijeta", "Dijeta usmerena na smanjenje krvnog pritiska" },
+                    { 8, "Dijeta sa niskim unosom ugljenih hidrata", "Smanjen unos ugljenih hidrata za mrsavljenje" },
+                    { 9, "Sirova hrana dijeta", "Konzumacija sirovih i minimalno obradjenih namirnica" },
+                    { 10, "Zone dijeta", "Izbalansiran unos proteina, masti i ugljenih hidrata" }
                 });
 
             migrationBuilder.InsertData(
@@ -241,7 +249,12 @@ namespace fitnessCentar.Services.Migrations
                 {
                     { 1, 7f, "7-dnevna", 7 },
                     { 2, 30f, "30-dnevna", 30 },
-                    { 3, 60f, "60-dnevna", 60 }
+                    { 3, 60f, "60-dnevna", 60 },
+                    { 4, 15f, "Vikend paket", 8 },
+                    { 5, 25f, "Student", 30 },
+                    { 6, 100f, "Porodicna", 30 },
+                    { 7, 20f, "Seniorska", 30 },
+                    { 8, 5f, "Proba-7-dnevna", 7 }
                 });
 
             migrationBuilder.InsertData(
@@ -251,7 +264,14 @@ namespace fitnessCentar.Services.Migrations
                 {
                     { 1, "Trening ruku", "Opis treninga ruku" },
                     { 2, "Trening nogu", "Opis treninga nogu" },
-                    { 3, "Trening ledja", "Opis treninga ledja" }
+                    { 3, "Trening ledja", "Opis treninga ledja" },
+                    { 4, "Trening ramena", "Opis treninga ramena" },
+                    { 5, "Kardio trening", "Opis kardio treninga" },
+                    { 6, "Trening za cjelokupno tijelo", "Opis treninga za cjelokupno tijelo" },
+                    { 7, "Pilates", "Opis pilates treninga" },
+                    { 8, "Yoga", "Opis yoga treninga" },
+                    { 9, "Trening za snagu", "Opis treninga za snagu" },
+                    { 10, "Trening ledja", "Opis treninga ledja" }
                 });
 
             migrationBuilder.InsertData(
@@ -269,20 +289,53 @@ namespace fitnessCentar.Services.Migrations
                 columns: new[] { "KorisnikId", "Addresa", "Email", "Ime", "KorisnickoIme", "PasswordHash", "PasswordSalt", "Prezime", "Slika", "Status", "Telefon", "UlogaId" },
                 values: new object[,]
                 {
-                    { 1, "Adresa", "admin@gmail.com", "Admin", "admin", "C5fuEDcAxNxDuUXqOJCU9DYfLpM=", "qQ0nSvQ4rOy3pP/Zi95wIw==", "Admin", null, true, "060000000", 1 },
-                    { 2, "Adresa", "uposlenik@gmail.com", "Uposlenik", "uposlenik", "C5fuEDcAxNxDuUXqOJCU9DYfLpM=", "qQ0nSvQ4rOy3pP/Zi95wIw==", "Uposlenik", null, true, "060000001", 2 },
-                    { 3, "Adresa", "korisnik@gmail.com", "Korisnik", "korisnik", "C5fuEDcAxNxDuUXqOJCU9DYfLpM=", "qQ0nSvQ4rOy3pP/Zi95wIw==", "Korisnik", null, true, "060000002", 3 }
+                    { 1, "Ulica 1", "admin@gmail.com", "Admin", "admin", "C5fuEDcAxNxDuUXqOJCU9DYfLpM=", "qQ0nSvQ4rOy3pP/Zi95wIw==", "Admin", null, true, "060000000", 1 },
+                    { 2, "Ulica 2", "uposlenik@gmail.com", "Uposlenik", "uposlenik", "C5fuEDcAxNxDuUXqOJCU9DYfLpM=", "qQ0nSvQ4rOy3pP/Zi95wIw==", "Uposlenik", null, true, "060000001", 2 },
+                    { 3, "Ulica 3", "korisnik@gmail.com", "Korisnik", "korisnik", "C5fuEDcAxNxDuUXqOJCU9DYfLpM=", "qQ0nSvQ4rOy3pP/Zi95wIw==", "Korisnik", null, true, "060000002", 3 },
+                    { 4, "Ulica 4", "nejlahindic@gmail.com", "Nejla", "nejlahindic", "C5fuEDcAxNxDuUXqOJCU9DYfLpM=", "qQ0nSvQ4rOy3pP/Zi95wIw==", "Hindic", null, true, "060000003", 3 },
+                    { 5, "Ulica 5", "edincilic@gmail.com", "Edin", "edincilic", "C5fuEDcAxNxDuUXqOJCU9DYfLpM=", "qQ0nSvQ4rOy3pP/Zi95wIw==", "Cilic", null, true, "060000004", 3 },
+                    { 6, "Ulica 6", "darisjahic@gmail.com", "Daris", "darisjahic", "C5fuEDcAxNxDuUXqOJCU9DYfLpM=", "qQ0nSvQ4rOy3pP/Zi95wIw==", "Jahic", null, true, "060000005", 3 },
+                    { 7, "Ulica 7", "saracilic@gmail.com", "Sara", "saracilic", "C5fuEDcAxNxDuUXqOJCU9DYfLpM=", "qQ0nSvQ4rOy3pP/Zi95wIw==", "Cilic", null, true, "060000006", 3 },
+                    { 8, "Ulica 8", "selmabehrem@gmail.com", "Selma", "selmabehrem", "C5fuEDcAxNxDuUXqOJCU9DYfLpM=", "qQ0nSvQ4rOy3pP/Zi95wIw==", "Behrem", null, true, "060000007", 3 },
+                    { 9, "Ulica 9", "kenanmacic@gmail.com", "Kenan", "kenanmacic", "C5fuEDcAxNxDuUXqOJCU9DYfLpM=", "qQ0nSvQ4rOy3pP/Zi95wIw==", "Macic", null, true, "060000008", 3 },
+                    { 10, "Ulica 10", "aldijanadjelmo@gmail.com", "Aldijana", "aldijanadjelmo", "C5fuEDcAxNxDuUXqOJCU9DYfLpM=", "qQ0nSvQ4rOy3pP/Zi95wIw==", "Djelmo", null, true, "060000009", 3 },
+                    { 11, "Ulica 11", "lanasefer@gmail.com", "Lana", "lanasefer", "C5fuEDcAxNxDuUXqOJCU9DYfLpM=", "qQ0nSvQ4rOy3pP/Zi95wIw==", "Sefer", null, true, "060000010", 3 },
+                    { 12, "Ulica 12", "adnanlulic@gmail.com", "Adnan", "adnanlulic", "C5fuEDcAxNxDuUXqOJCU9DYfLpM=", "qQ0nSvQ4rOy3pP/Zi95wIw==", "Lulic", null, true, "060000011", 3 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Placanjas",
                 columns: new[] { "PlacanjeId", "Datum", "Iznos", "TipClanarineId" },
-                values: new object[] { 1, new DateTime(2024, 4, 13, 21, 21, 17, 231, DateTimeKind.Local).AddTicks(4411), 60f, 3 });
+                values: new object[,]
+                {
+                    { 1, new DateTime(2024, 5, 15, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(39), 60f, 3 },
+                    { 2, new DateTime(2024, 5, 15, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(132), 7f, 1 },
+                    { 3, new DateTime(2024, 5, 15, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(138), 30f, 2 },
+                    { 4, new DateTime(2024, 5, 15, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(143), 15f, 4 },
+                    { 5, new DateTime(2024, 5, 15, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(148), 25f, 5 },
+                    { 6, new DateTime(2024, 5, 15, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(169), 100f, 6 },
+                    { 7, new DateTime(2024, 5, 15, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(181), 20f, 7 },
+                    { 8, new DateTime(2024, 5, 15, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(186), 5f, 8 },
+                    { 9, new DateTime(2024, 5, 15, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(191), 60f, 3 },
+                    { 10, new DateTime(2024, 5, 15, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(197), 30f, 2 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Clanarinas",
                 columns: new[] { "ClanarinaId", "KorisnikId", "TipClanarineId", "VaziDo" },
-                values: new object[] { 1, 3, 3, new DateTime(2024, 6, 12, 21, 21, 17, 231, DateTimeKind.Local).AddTicks(4462) });
+                values: new object[,]
+                {
+                    { 1, 3, 3, new DateTime(2024, 7, 14, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(250) },
+                    { 2, 4, 1, new DateTime(2024, 5, 22, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(258) },
+                    { 3, 5, 2, new DateTime(2024, 6, 14, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(263) },
+                    { 4, 6, 3, new DateTime(2024, 7, 14, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(269) },
+                    { 5, 7, 4, new DateTime(2024, 5, 23, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(273) },
+                    { 6, 8, 5, new DateTime(2024, 6, 14, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(319) },
+                    { 7, 9, 6, new DateTime(2024, 6, 14, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(325) },
+                    { 8, 10, 7, new DateTime(2024, 6, 14, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(330) },
+                    { 9, 11, 8, new DateTime(2024, 5, 22, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(335) },
+                    { 10, 12, 1, new DateTime(2024, 5, 22, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(339) }
+                });
 
             migrationBuilder.InsertData(
                 table: "PlanIshraneKorisniks",
@@ -290,22 +343,47 @@ namespace fitnessCentar.Services.Migrations
                 values: new object[,]
                 {
                     { 1, 3, 1 },
-                    { 2, 3, 2 }
+                    { 2, 3, 2 },
+                    { 3, 4, 1 },
+                    { 4, 5, 2 },
+                    { 5, 6, 3 },
+                    { 6, 7, 1 },
+                    { 7, 8, 2 },
+                    { 8, 9, 3 },
+                    { 9, 10, 1 },
+                    { 10, 11, 2 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Recenzijas",
                 columns: new[] { "RecenzijaId", "KorisnikId", "Ocjena", "Tekst", "TreningId" },
-                values: new object[] { 1, 3, 5, "Al'a sam se odradio/la", 1 });
+                values: new object[,]
+                {
+                    { 1, 3, 5, "Odlican trening", 1 },
+                    { 2, 4, 4, "Odlican trening, bas mi je prijalo!", 2 },
+                    { 3, 5, 5, "Bilo je naporno, ali vrijedilo je.", 3 },
+                    { 4, 6, 3, "Solidan trening, moglo bi biti bolje.", 1 },
+                    { 5, 7, 5, "Fantasticna energija i atmosfera!", 2 },
+                    { 6, 8, 2, "Bilo je previse intenzivno za mene.", 3 },
+                    { 7, 9, 4, "Svidja mi se kako je trening strukturisan.", 1 },
+                    { 8, 10, 3, "Nisam bas zadovoljan, ocekivala sam vise.", 2 },
+                    { 9, 11, 5, "Vrhunski trening, osjecam se sjajno!", 3 },
+                    { 10, 12, 4, "Trener je bio odlican, trening je bio izazovan.", 1 },
+                    { 11, 3, 3, "Prosjecan trening, nista posebno.", 2 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Rezervacijas",
                 columns: new[] { "RezervacijaId", "Datum", "KorisnikId", "Status", "TreningId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 4, 13, 21, 21, 17, 231, DateTimeKind.Local).AddTicks(4501), 3, "Odobrena", 1 },
-                    { 2, new DateTime(2024, 4, 15, 21, 21, 17, 231, DateTimeKind.Local).AddTicks(4503), 3, "NaCekanju", 1 },
-                    { 3, new DateTime(2024, 4, 16, 21, 21, 17, 231, DateTimeKind.Local).AddTicks(4505), 3, "Odbijena", 1 }
+                    { 1, new DateTime(2024, 4, 15, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(1150), 3, "Odobrena", 1 },
+                    { 2, new DateTime(2024, 4, 17, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(1172), 3, "NaCekanju", 1 },
+                    { 3, new DateTime(2024, 4, 18, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(1179), 3, "Odbijena", 1 },
+                    { 4, new DateTime(2024, 5, 16, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(1185), 4, "Odobrena", 2 },
+                    { 5, new DateTime(2024, 5, 17, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(1191), 5, "NaCekanju", 2 },
+                    { 6, new DateTime(2024, 5, 18, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(1196), 6, "Odbijena", 2 },
+                    { 7, new DateTime(2024, 5, 16, 16, 31, 25, 995, DateTimeKind.Local).AddTicks(1201), 7, "Odobrena", 3 }
                 });
 
             migrationBuilder.CreateIndex(
