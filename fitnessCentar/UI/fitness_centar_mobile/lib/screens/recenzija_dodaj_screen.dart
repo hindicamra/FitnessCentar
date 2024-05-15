@@ -31,8 +31,20 @@ class _RecenzijaDodajScreenState extends State<RecenzijaDodajScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Dodaj recenziju"),
-        backgroundColor: Color.fromARGB(255, 23, 121, 251),
+        title: const Text(
+          "Dodaj recenziju",
+          style: TextStyle(color: Colors.white),
+        ),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        backgroundColor: const Color.fromARGB(255, 23, 121, 251),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -116,7 +128,10 @@ class _RecenzijaDodajScreenState extends State<RecenzijaDodajScreen> {
                                       "treningId":
                                           RecenzijaTreningIdRouteData.id,
                                       "tekst": sadrzajRecenzije,
-                                      "ocjena": rating
+                                      "ocjena": rating,
+                                      "rezervacijaId":
+                                          RecenzijaTreningIdRouteData
+                                              .rezervacijaId,
                                     };
 
                                     var response = await _recenzijaProvider!
@@ -130,6 +145,42 @@ class _RecenzijaDodajScreenState extends State<RecenzijaDodajScreen> {
                                           title: const Text("Upozorenje"),
                                           content: const Text(
                                               "Ne mozete ocijeniti isti trening vise puta"),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () =>
+                                                  Navigator.pop(context),
+                                              child: const Text("OK"),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    } else if (response ==
+                                        "[Rezervacija ne postoji]") {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            AlertDialog(
+                                          title: const Text("Upozorenje"),
+                                          content: const Text(
+                                              "Rezervacija ne postoji"),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () =>
+                                                  Navigator.pop(context),
+                                              child: const Text("OK"),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    } else if (response ==
+                                        "[Nažalost, ne možete ostaviti recenziju za trening kojem niste prisustvovali]") {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            AlertDialog(
+                                          title: const Text("Upozorenje"),
+                                          content: const Text(
+                                              "Nažalost, ne možete ostaviti recenziju za trening kojem niste prisustvovali"),
                                           actions: [
                                             TextButton(
                                               onPressed: () =>

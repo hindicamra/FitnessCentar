@@ -8,10 +8,12 @@ part of 'preporuka.dart';
 
 Preporuka _$PreporukaFromJson(Map<String, dynamic> json) => Preporuka(
       json['korisnik'] as String?,
-      (json['treningId'] as num?)?.toInt(),
+      json['trening'] == null
+          ? null
+          : Trening.fromJson(json['trening'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$PreporukaToJson(Preporuka instance) => <String, dynamic>{
       'korisnik': instance.korisnik,
-      'treningId': instance.treningId,
+      'trening': instance.trening,
     };

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '../models/response_data.dart';
 import '../models/rezervacija.dart';
 import 'base_provider.dart';
 import 'package:http/http.dart' as http;
@@ -31,18 +32,23 @@ class RezervacijaListProvider extends BaseProvider<Rezervacija> {
     }
   }
 
-  Future<Rezervacija> updateRezervacija(
+  Future<dynamic> updateRezervacija(
       Map<dynamic, dynamic> korisnik, int id) async {
     var url = "$fullUrl/$id";
     var uri = Uri.parse(url);
     var jsonRequest = jsonEncode(korisnik);
     var headers = createHeaders();
     var response = await http.put(uri, headers: headers, body: jsonRequest);
+    if (response.statusCode == 400) {
+      var data = jsonDecode(response.body);
 
-    if (isValidResponse(response)) {
+      ResponseData.statusCode = 400;
+      ResponseData.message = data["errors"]["ERROR"].join("");
+      return ResponseData.message;
+    } else if (isValidResponse(response)) {
       var data = jsonDecode(response.body);
       Rezervacija list = fromJson(data);
-
+      ResponseData.statusCode = 200;
       return list;
     } else {
       throw Exception("Error");

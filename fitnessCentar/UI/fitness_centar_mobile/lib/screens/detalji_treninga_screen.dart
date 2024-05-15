@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../models/preporuka.dart';
 import '../models/trening.dart';
+import '../providers/preporuka_provider.dart';
 import '../providers/rezervacija_list_provider.dart';
 import '../providers/treninzi_list_provider.dart';
 import '../utils/util.dart';
@@ -17,12 +19,17 @@ class _DetaljiTreningaScreenState extends State<DetaljiTreningaScreen> {
   TreninziListProvider? _treningListProvider;
   Trening? data;
   RezervacijaListProvider? _rezervacijaProvider;
+  PreporukaProvider? _preporukaProvider;
 
+  List<Preporuka>? preporuka;
+  String? naziv;
+  String? opis;
   @override
   void initState() {
     super.initState();
     _treningListProvider = context.read<TreninziListProvider>();
     _rezervacijaProvider = context.read<RezervacijaListProvider>();
+    _preporukaProvider = context.read<PreporukaProvider>();
     TreningIdRouteData.id;
 
     loadData(TreningIdRouteData.id!);
@@ -30,8 +37,13 @@ class _DetaljiTreningaScreenState extends State<DetaljiTreningaScreen> {
 
   Future loadData(int args) async {
     var tmpData = await _treningListProvider!.getById(args);
+    var tmpDataPreporuka = await _preporukaProvider!
+        .getPreporuka(Authorization.korisnik!.korisnikId!);
     setState(() {
       data = tmpData;
+      preporuka = tmpDataPreporuka;
+      naziv = data?.naziv;
+      opis = data?.opis;
     });
   }
 
@@ -178,7 +190,7 @@ class _DetaljiTreningaScreenState extends State<DetaljiTreningaScreen> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        data!.naziv!,
+                                        naziv!,
                                         style: const TextStyle(
                                           fontSize: 24,
                                           color: Color.fromARGB(255, 0, 0, 0),
@@ -188,7 +200,7 @@ class _DetaljiTreningaScreenState extends State<DetaljiTreningaScreen> {
                                         height: 20,
                                       ),
                                       Text(
-                                        data!.opis!,
+                                        opis!,
                                         style: const TextStyle(
                                             fontSize: 15,
                                             color:
@@ -208,11 +220,91 @@ class _DetaljiTreningaScreenState extends State<DetaljiTreningaScreen> {
                               )),
                         ),
                       ),
+                      Expanded(
+                          child: Column(
+                        children: buildPreporukeWidget(),
+                      ))
                     ],
                   ),
                 ),
               ),
             ),
     );
+  }
+
+  List<Widget> buildPreporukeWidget() {
+    if (preporuka!.isEmpty) {
+      return [
+        const Center(
+          child: Text("Nema podataka za prikaz"),
+        )
+      ];
+    }
+
+    List<Widget> list = preporuka!
+        .map((e) => Column(
+              children: [
+                const SizedBox(
+                  height: 8,
+                ),
+                const Divider(),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Center(
+                      child: Text(
+                    'Preporuke',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  )),
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      TreningIdRouteData.id = e.trening!.treningId!;
+                      naziv = e.trening!.naziv;
+                      opis = e.trening!.opis;
+                    });
+                  },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(15, 15, 15, 15),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    e.trening!.naziv!,
+                                    style: const TextStyle(
+                                      fontSize: 24,
+                                      color: Color.fromARGB(255, 0, 0, 0),
+                                    ),
+                                  ),
+                                  Container(
+                                    height: 20,
+                                  ),
+                                  Text(
+                                    e.trening!.opis!,
+                                    style: const TextStyle(
+                                        fontSize: 15,
+                                        color: Color.fromARGB(255, 0, 0, 0)),
+                                  )
+                                ]),
+                          )
+                        ]),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                )
+              ],
+            ))
+        .cast<Widget>()
+        .toList();
+    return list;
   }
 }
