@@ -1,4 +1,5 @@
 import 'package:fitness_centar_mobile/models/trening.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';

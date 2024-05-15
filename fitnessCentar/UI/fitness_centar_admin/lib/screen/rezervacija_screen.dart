@@ -3,6 +3,7 @@ import 'package:fitness_centar_web/providers/rezervacija_list_provider.dart';
 import 'package:fitness_centar_web/screen/menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../models/response_data.dart';
 import '../utils/util.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
@@ -147,16 +148,31 @@ class _RezervacijaScreenState extends State<RezervacijaScreen> {
                 await _rezervacijaListProvider.updateRezervacija({
                   "status": 1,
                 }, KorisnikData.rezervacijaStatus!.rezervacijaId!);
+                if (ResponseData.statusCode == 400) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      title: const Text("Upozorenje"),
+                      content: Text(ResponseData.message!),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text("OK"),
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  var data = await _rezervacijaListProvider.get(filter: {
+                    'ImePrezime': _imePrezimeController.text,
+                    'Page': 0,
+                    'PageSize': 100,
+                  });
 
-                var data = await _rezervacijaListProvider.get(filter: {
-                  'ImePrezime': _imePrezimeController.text,
-                  'Page': 0,
-                  'PageSize': 100,
-                });
-
-                setState(() {
-                  result = data.result;
-                });
+                  setState(() {
+                    result = data.result;
+                  });
+                }
               },
               style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -176,16 +192,31 @@ class _RezervacijaScreenState extends State<RezervacijaScreen> {
                 await _rezervacijaListProvider.updateRezervacija({
                   "status": 2,
                 }, KorisnikData.rezervacijaStatus!.rezervacijaId!);
+                if (ResponseData.statusCode == 400) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      title: const Text("Upozorenje"),
+                      content: Text(ResponseData.message!),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text("OK"),
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  var data = await _rezervacijaListProvider.get(filter: {
+                    'ImePrezime': _imePrezimeController.text,
+                    'Page': 0,
+                    'PageSize': 100,
+                  });
 
-                var data = await _rezervacijaListProvider.get(filter: {
-                  'ImePrezime': _imePrezimeController.text,
-                  'Page': 0,
-                  'PageSize': 100,
-                });
-
-                setState(() {
-                  result = data.result;
-                });
+                  setState(() {
+                    result = data.result;
+                  });
+                }
               },
               style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(

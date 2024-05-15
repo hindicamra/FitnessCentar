@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'trening.dart';
+
 /// This allows the `User` class to access private members in
 /// the generated file. The value for this is *.g.dart, where
 /// the star denotes the source file name.
@@ -8,11 +10,11 @@ part 'preporuka.g.dart';
 @JsonSerializable()
 class Preporuka {
   String? korisnik;
-  int? treningId;
+  Trening? trening;
 
   Preporuka(
     this.korisnik,
-    this.treningId,
+    this.trening,
   );
 
   /// A necessary factory constructor for creating a new User instance

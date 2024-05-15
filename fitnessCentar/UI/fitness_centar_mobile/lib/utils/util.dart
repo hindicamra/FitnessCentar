@@ -22,6 +22,7 @@ class TipClanarineId {
 
 class RecenzijaTreningIdRouteData {
   static int? id;
+  static int? rezervacijaId;
 }
 
 Image imageFromBase64String(String base64String) {

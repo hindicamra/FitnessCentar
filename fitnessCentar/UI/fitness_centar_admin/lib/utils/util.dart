@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:fitness_centar_web/models/plan_ishrane.dart';
+import 'package:fitness_centar_web/models/response_data.dart';
 import 'package:fitness_centar_web/models/tip_clanarina.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
@@ -29,6 +30,7 @@ class KorisnikData {
   static Izvjestaj? izvjestaj;
   static Rezervacija? rezervacijaStatus;
   static PlanIshraneKorisnika? planIshraneKorisnika;
+  static ResponseData? responseData;
 }
 
 Image imageFromBase64String(String base64Image) {
