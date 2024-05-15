@@ -21,11 +21,12 @@
 
 ## Broj kartice za plaćanje korištenjem Stripe
 - **Broj kartice:** 4242 4242 4242 4242
-- **CCV:** bilo koja 3 broja
+- **CVC:** bilo koja 3 broja
 - **EXP:** bilo koji datum u buducnosti
 
 ### Napomena
 Za "Notifikacije preko Rabbitmq" potrebno je napraviti rezervaciju u mobilnoj aplikaciji sa korisnikom koji ima validan mail, nakon čega servis šalje mail potvrde rezervacije.
+Za desktop aplikaciju može biti potrebno omogućiti "developer mode"(start ms-settings:developers).
 
 ### Email za provjeru rada mikroservisa i slanja e-maila korisniku
 - **Email:** fitnesscentar@outlook.com
