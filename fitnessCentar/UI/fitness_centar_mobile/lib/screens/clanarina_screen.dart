@@ -31,45 +31,6 @@ class _ClanarinaListScreenState extends State<ClanarinaListScreen> {
     });
   }
 
-  Widget clanarina(int tipClanarine) {
-    if (data.isNotEmpty) {
-      if (tipClanarine == 7) {
-        return const Text(
-          "Sedmična",
-          style: TextStyle(
-            fontSize: 24,
-            color: Color.fromARGB(255, 0, 0, 0),
-          ),
-        );
-      } else if (tipClanarine == 30) {
-        return const Text(
-          "Mjesečna",
-          style: TextStyle(
-            fontSize: 24,
-            color: Color.fromARGB(255, 0, 0, 0),
-          ),
-        );
-      } else if (tipClanarine == 180) {
-        return const Text(
-          "Polugodišnja",
-          style: TextStyle(
-            fontSize: 24,
-            color: Color.fromARGB(255, 0, 0, 0),
-          ),
-        );
-      } else {
-        return const Text(
-          "Godišnja",
-          style: TextStyle(
-            fontSize: 24,
-            color: Color.fromARGB(255, 0, 0, 0),
-          ),
-        );
-      }
-    }
-    return Container();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -128,7 +89,14 @@ class _ClanarinaListScreenState extends State<ClanarinaListScreen> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Center(child: clanarina(e.trajanje!)),
+                            Center(
+                                child: Text(
+                              e.naziv!,
+                              style: const TextStyle(
+                                fontSize: 24,
+                                color: Color.fromARGB(255, 0, 0, 0),
+                              ),
+                            )),
                             Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment:
